@@ -1,0 +1,118 @@
+	<section id="refresh_section" class="active" data-transition="slideDown">
+	    <header class="bar bar-nav">
+	      	<a class="icon icon-left-nav pull-left" data-target="back" href="#"></a>
+	      	<h1 class="title">列表刷新</h1>
+	    </header>
+	
+	    <nav class="bar bar-tab">
+		  	<a class="tab-item active" href="#pull_article" data-target="article">
+		    	<span class="icon icon-download"></span>
+		    	<span class="tab-label">下拉</span>
+		  	</a>
+		  	<a class="tab-item" href="#up_article" data-target="article">
+		    	<span class="icon icon-share"></span>
+		    	<span class="tab-label">上拉</span>
+		  	</a>
+		</nav>
+	    <article id="up_article" data-articleload="showUp()">
+			<div class="scroller">
+		      <ul class="table-view">
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-pages pull-left"></span>
+		            <div class="media-body">
+		              	layout
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-person pull-left"></span>
+		            <div class="media-body">
+		              Personal email
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-star-filled pull-left"></span>
+		            <div class="media-body">
+		              Starred
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-trash pull-left"></span>
+		            <div class="media-body">
+		              Trash
+		            </div>
+		          </a>
+		        </li>
+		      </ul>
+		
+		      <h5 class="content-padded">Other accounts</h5>
+		      <ul class="table-view" id="up_ul">
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		      </ul>
+	      </div>
+	    </article>
+	
+	    <article id="pull_article" class="active"  data-articleload="showPull()">
+			<div class="scroller">
+		      <ul class="table-view">
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-pages pull-left"></span>
+		            <div class="media-body">
+		              	layout
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-person pull-left"></span>
+		            <div class="media-body">
+		              Personal email
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-star-filled pull-left"></span>
+		            <div class="media-body">
+		              Starred
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-trash pull-left"></span>
+		            <div class="media-body">
+		              Trash
+		            </div>
+		          </a>
+		        </li>
+		      </ul>
+		
+		      <h5 class="content-padded">Other accounts</h5>
+		      <ul class="table-view" id="pull_ul">
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		      </ul>
+	      </div>
+	    </article>
+	</section>

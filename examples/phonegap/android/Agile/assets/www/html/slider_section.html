@@ -1,0 +1,56 @@
+	<section id="slider_section" class="active" data-pageload="doBtnHide()">
+	    <header class="bar bar-nav">
+	      	<a class="icon icon-left-nav pull-left" data-target="back" href="#"></a>
+	      
+		  	<a href="#" class="icon icon-right pull-right" id="slider_next"></a>
+		  	<a href="#" class="icon icon-left pull-right" id="slider_prev"></a>
+	      	<h1 class="title">slider组件</h1>
+	    </header>
+	    <nav class="bar bar-tab">
+		  	<a class="tab-item active" href="#normal_article" data-target="article">
+		    	<span class="icon icomoon-stack"></span>
+		    	<span class="tab-label">普通</span>
+		  	</a>
+		  	<a class="tab-item" href="#banner_article" data-target="article">
+		    	<span class="icon icomoon-file3"></span>
+		    	<span class="tab-label">广告</span>
+		  	</a>
+		</nav>
+	
+	    <article id="normal_article" class="active" data-scroll="true" data-articleload="doNormalArticleLoad()">    
+		    <div class="scroller">
+			    <div id="slider_normal" class="sliding_container">
+			    	<div style="height:200px;overflow:hidden;">
+			        	<div style="text-align: center"><img src="img/1.jpg" onclick="A.showToast(1)" class="full-width"></div>
+			            <div style="text-align: center"><img src="img/2.jpg" onclick="A.showToast(2)" class="full-width"></div>
+			            <div style="text-align: center"><img src="img/3.jpg" onclick="A.showToast(3)" class="full-width"></div>
+			        </div>
+			    </div>
+				<ul class="table-view">
+					<li class="table-view-divider">section的三个事件</li>
+		            <li class="table-view-cell">pageload：当section第一次显示的时候触发，标签写法data-pageload</li>
+		            <li class="table-view-cell">pageshow：每次section显示的时候触发，标签写法data-pageshow</li>
+		            <li class="table-view-cell">pagehide：每次section隐藏的时候触发，标签写法data-pagehide</li>
+		  		</ul>
+		    </div>
+	    </article>
+	    
+	    <article id="banner_article" data-scroll="true" data-articleload="doBannerArticleLoad()" data-articleshow="doBtnShow()" data-articlehide="doBtnHide()">    
+	    	<div class="scroller">
+		    	<div id="slider_banner" class="sliding_container" data-role="banner">
+			    	<div style="height:200px;overflow:hidden;">
+			        	<div style="text-align: center"><img src="img/1.jpg" onclick="A.showToast(1)" class="full-width"></div>
+			            <div style="text-align: center"><img src="img/2.jpg" onclick="A.showToast(2)" class="full-width"></div>
+			            <div style="text-align: center"><img src="img/3.jpg" onclick="A.showToast(3)" class="full-width"></div>
+			        </div>
+			    </div>
+			    <ul class="table-view">
+		            <li class="table-view-divider">article的三个事件</li>
+		            <li class="table-view-cell">articleload：当article第一次显示的时候触发，标签写法data-articleload</li>
+		            <li class="table-view-cell">articleshow：每次article显示的时候触发，标签写法data-articleshow</li>
+		            <li class="table-view-cell">articlehide：每次article隐藏的时候触发，标签写法data-articlehide</li>
+		  		</ul>
+		    </div>
+		
+	    </article>
+	</section>

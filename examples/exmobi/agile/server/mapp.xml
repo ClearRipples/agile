@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<maxml version="2.0" xmlns="http://www.nj.fiberhome.com.cn/map"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.nj.fiberhome.com.cn/map maxml-2.0.xsd">
+  <config>
+    <htmlformat wellformat="true" />
+    <filepreviewconfig wordtohtml="true"/>
+     <httppushrsp restrainrsp="false"/>
+  </config>
+  <services>
+  	<http-service>
+  		<!-- section页面动态注入json数据 -->
+  		<forward pattern="/section/json" path="section/json.jsp"/>
+  		<!-- aticle内容动态注入json数据 -->
+  		<forward pattern="/article/json" path="article/json.jsp"/>
+  		<!-- modal内容动态注入json数据 -->
+  		<forward pattern="/modal/json" path="modal/json.jsp"/>
+  		<!-- page内容动态注入json数据 -->
+  		<forward pattern="/page/json" path="page/json.jsp"/>
+  		
+  		<forward pattern="/mail_interface_section" path="mail_interface_section.jsp"/>
+  	</http-service>
+  </services>
+</maxml>

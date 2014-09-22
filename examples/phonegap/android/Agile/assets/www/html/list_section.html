@@ -1,0 +1,187 @@
+	<section id="list_section" data-transition="slideUp" class="active">
+	    <header class="bar bar-nav">
+	      	<a class="icon icon-left-nav pull-left" data-target="back" href="#"></a>
+	      	<h1 class="title">列表</h1>
+	    </header>
+    
+	    <nav class="bar bar-tab">
+			<a class="tab-item active" href="#normal_article" data-target="article">普通</a>
+			<a class="tab-item" href="#arrow_article" data-target="article">带箭头</a>
+			<a class="tab-item" href="#badges_article" data-target="article">带气泡</a>
+			<a class="tab-item" href="#media_article" data-target="article">富文本</a>
+			<a class="tab-item" href="#toggle_article" data-target="article">带开关</a>
+		</nav>
+	    
+	    <article id="toggle_article" data-scroll="true">
+			<div class="scroller">
+				<ul class="table-view">
+				  <li class="table-view-cell">
+				    Item 1
+				    <div class="toggle active" data-on="开" data-on-value="on" data-off="关" data-off-value="off"></div>
+				  </li>
+				  <li class="table-view-cell">
+				    Item 2
+				    <div class="active toggle"></div>
+				  </li>
+				  <li class="table-view-cell">
+				    Item 3
+				    <div class="active toggle"></div>
+				  </li>
+				
+				  <li class="table-view-divider">Divider</li>
+				  <li class="table-view-cell">
+					<a href="#" data-role="checkbox">
+						<label for="cb1" class="checkbox-label">篮球</label><input type="checkbox" id="cb1"/>
+				    </a>
+				  </li>
+				  <li class="table-view-cell">
+					<a href="#" data-role="checkbox">
+						<label for="cb2" class="checkbox-label">足球</label><input type="checkbox" id="cb2"/>
+					</a>
+				  </li>
+				</ul>
+			</div>
+		</article>
+		
+		<article id="media_article" data-scroll="true">
+			<div class="scroller">
+				<ul class="table-view">
+				  <li class="table-view-cell media">
+				    <a class="navigate-right">
+				      <img class="media-object pull-left" src="img/42x42.gif">
+				      <div class="media-body">
+				        Item 1
+				        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor sit amet.</p>
+				      </div>
+				    </a>
+				  </li>
+				  <li class="table-view-cell media">
+				    <a class="navigate-right">
+				      <img class="media-object pull-left" src="img/42x42.gif">
+				      <div class="media-body">
+				        Item 1
+				        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor sit amet.</p>
+				      </div>
+				    </a>
+				  </li>
+				  <li class="table-view-cell media">
+				    <a class="navigate-right">
+				      <img class="media-object pull-left" src="img/42x42.gif">
+				      <div class="media-body">
+				        Item 1
+				        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor sit amet.</p>
+				      </div>
+				    </a>
+				  </li>
+				</ul>
+			</div>
+		</article>
+		
+		<article id="badges_article" data-scroll="true">
+			<div class="scroller">
+				<ul class="table-view">
+				  <li class="table-view-cell">Item 1 <span class="badge">4</span></li>
+				  <li class="table-view-cell">Item 2 <span class="badge">1</span></li>
+				  <li class="table-view-cell">Item 3 <span class="badge">5</span></li>
+				  
+				  <li class="table-view-divider">Divider</li>
+				  
+				  <li class="table-view-cell">
+				    <a class="navigate-right">
+				      <span class="badge">5</span>
+				      Item 1
+				    </a>
+				  </li>
+				  <li class="table-view-cell">
+				    <a class="navigate-right">
+				      <span class="badge">5</span>
+				      Item 2
+				    </a>
+				  </li>
+				  <li class="table-view-cell">
+				    <a class="navigate-right">
+				      <span class="badge">5</span>
+				      Item 3
+				    </a>
+				  </li>
+				  
+				  <li class="table-view-divider">Divider</li>
+				  
+				  <li class="table-view-cell">Item 1 <button class="btn">Button</button></li>
+				  <li class="table-view-cell">Item 2 <button class="btn btn-primary">Button</button></li>
+				  <li class="table-view-cell">Item 3 <button class="btn btn-positive">Button</button></li>
+				  <li class="table-view-cell">Item 4 <button class="btn btn-negative">Button</button></li>
+				</ul>
+			</div>
+		</article>
+		
+		<article id="arrow_article" data-scroll="true">
+			<div class="scroller">
+				<ul class="table-view">
+				  <li class="table-view-cell">
+				    <a class="navigate-right">
+				      Item 1
+				    </a>
+				  </li>
+				  <li class="table-view-cell">
+				    <a class="navigate-right">
+				      Item 2
+				    </a>
+				  </li>
+				  <li class="table-view-cell">
+				    <a class="navigate-right">
+				      Item 3
+				    </a>
+				  </li>
+				  
+				  <li class="table-view-divider">Divider</li>
+				  
+				  <li class="table-view-cell media">
+				    <a class="navigate-right">
+				      <span class="media-object pull-left icon icon-trash"></span>
+				      <div class="media-body">
+				        Item 1
+				      </div>
+				    </a>
+				  </li>
+				  <li class="table-view-cell media">
+				    <a class="navigate-right">
+				      <span class="media-object pull-left icon icon-gear"></span>
+				      <div class="media-body">
+				        Item 2
+				      </div>
+				    </a>
+				  </li>
+				  <li class="table-view-cell media">
+				    <a class="navigate-right">
+				      <span class="media-object pull-left icon icon-pages"></span>
+				      <div class="media-body">
+				        Item 3
+				      </div>
+				    </a>
+				  </li>
+				  
+				</ul>
+			</div>
+			
+	    </article>
+	    <article id="normal_article" class="active" data-scroll="true">
+	    	<div class="scroller demo-btn">
+				<div class="card" style="margin:0px;">
+				  <ul class="table-view">
+				    <li class="table-view-cell">Item 1</li>
+				    <li class="table-view-cell">Item 2</li>
+				    <li class="table-view-cell table-view-divider">附件</li>
+				    <li class="table-view-cell"><a href="javascript:$util.openFile({type:'pdf',server:'exmobi',url:'/resource/download/info/f941ea00-9483-11e3-a740-d55aa0e0e58f.do'})" data-role="file-word"><label>word文档</label></a></li>
+				    <li class="table-view-cell"><a href="#" data-role="file-powerpoint">ppt文档</a></li>
+				    <li class="table-view-cell"><a href="#" data-role="file-excel">excel文档</a></li>
+				    <li class="table-view-cell"><a href="#" data-role="file-pdf">pdf文档</a></li>
+				    <li class="table-view-cell"><a href="#" data-role="file-zip">压缩文档</a></li>
+				    <li class="table-view-cell"><a href="#" data-role="file-xml">xml文档</a></li>
+				    <li class="table-view-cell"><a href="#" data-role="file-unknown">未知格式文档</a></li>
+				  </ul>
+				</div>
+			</div>
+	    </article>
+	    
+	</section>

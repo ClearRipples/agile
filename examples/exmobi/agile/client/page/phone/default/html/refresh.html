@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>webapp</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet-theme-ios.css">
+    <link rel="stylesheet" href="../../script/agile/css/agile.css">
+    <link rel="stylesheet" href="../../script/app/app.css">
+    <link rel="stylesheet" href="../../script/icomoon/icomoon.css">
+</head>
+<body>
+
+<div id="section_container">
+	<section id="refresh_section" class="active">
+	    <header class="bar bar-nav">
+	      	<a class="icon icon-left-nav pull-left" data-target="close" href="#"></a>
+	      	<h1 class="title">列表刷新</h1>
+	    </header>
+	
+	    <nav class="bar bar-tab">
+		  	<a class="tab-item active" href="#pull_article" data-target="article">
+		    	<span class="icon icon-download"></span>
+		    	<span class="tab-label">下拉</span>
+		  	</a>
+		  	<a class="tab-item" href="#up_article" data-target="article">
+		    	<span class="icon icon-share"></span>
+		    	<span class="tab-label">上拉</span>
+		  	</a>
+		</nav>
+	    <article id="up_article" data-articleload="showUp()">
+			<div class="scroller">
+		      <ul class="table-view">
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-pages pull-left"></span>
+		            <div class="media-body">
+		              	layout
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-person pull-left"></span>
+		            <div class="media-body">
+		              Personal email
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-star-filled pull-left"></span>
+		            <div class="media-body">
+		              Starred
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-trash pull-left"></span>
+		            <div class="media-body">
+		              Trash
+		            </div>
+		          </a>
+		        </li>
+		      </ul>
+		
+		      <h5 class="content-padded">Other accounts</h5>
+		      <ul class="table-view" id="up_ul">
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		      </ul>
+	      </div>
+	    </article>
+	
+	    <article id="pull_article" class="active"  data-articleload="showPull()">
+			<div class="scroller">
+		      <ul class="table-view">
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-pages pull-left"></span>
+		            <div class="media-body">
+		              	layout
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-person pull-left"></span>
+		            <div class="media-body">
+		              Personal email
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-star-filled pull-left"></span>
+		            <div class="media-body">
+		              Starred
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-trash pull-left"></span>
+		            <div class="media-body">
+		              Trash
+		            </div>
+		          </a>
+		        </li>
+		      </ul>
+		
+		      <h5 class="content-padded">Other accounts</h5>
+		      <ul class="table-view" id="pull_ul">
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		      </ul>
+	      </div>
+	    </article>
+	</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+<script>
+var li = '<li class="table-view-cell media"><a class="navigate-right"><span class="media-object icon icon-more pull-left"></span><div class="media-body">新数据</div></a></li>';
+function showPull(){
+    A.Refresh({
+        selector : '#pull_article',
+        type : 'pullDown',
+        refreshTip : '<span id="refresh_time" class="sliver">更新于：从未更新</span>',
+        callback : function(){
+            var scroll = this;
+            setTimeout(function () {
+                $('#pull_ul').append(li);
+                $('#refresh_time').html('更新于：'+A.Util.formatDate(new Date(),'MM-dd hh:mm'));
+                scroll.refresh();
+                $native.toast('更新成功');
+            }, 2000);
+        }
+    });
+}
+
+function showUp(){
+
+    A.Refresh('#up_article','pullUp', function(){
+        var scroll = this;
+        setTimeout(function () {
+            var html = '';
+            for(var i=0;i<10;i++){
+                html += li;
+            }
+            $('#up_ul').append(html);
+            scroll.refresh();
+            $native.toast('加载成功');
+        }, 2000);
+    });
+    
+}
+
+
+</script>
+</body>
+</html>

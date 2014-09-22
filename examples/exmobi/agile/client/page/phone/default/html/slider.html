@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>webapp</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet-theme-ios.css">
+    <link rel="stylesheet" href="../../script/agile/css/agile.css">
+    <link rel="stylesheet" href="../../script/app/app.css">
+    <link rel="stylesheet" href="../../script/icomoon/icomoon.css">
+<style>
+
+
+</style>
+</head>
+<body>
+
+<div id="section_container">
+	<section id="slider_section" class="active" data-pageload="doBtnHide()">
+	    <header class="bar bar-nav">
+	      	<a class="icon icon-left-nav pull-left" data-target="close" href="#"></a>
+	      
+		  	<a href="#" class="icon icon-right pull-right" id="slider_next"></a>
+		  	<a href="#" class="icon icon-left pull-right" id="slider_prev"></a>
+	      	<h1 class="title">slider组件</h1>
+	    </header>
+	    <nav class="bar bar-tab">
+		  	<a class="tab-item active" href="#normal_article" data-target="article">
+		    	<span class="icon icomoon-stack"></span>
+		    	<span class="tab-label">普通</span>
+		  	</a>
+		  	<a class="tab-item" href="#banner_article" data-target="article">
+		    	<span class="icon icomoon-file3"></span>
+		    	<span class="tab-label">广告</span>
+		  	</a>
+		</nav>
+	
+	    <article id="normal_article" class="active" data-scroll="true" data-articleload="doNormalArticleLoad()">    
+		    <div class="scroller">
+			    <div id="slider_normal" class="sliding_container">
+			    	<div style="height:200px;overflow:hidden;">
+			        	<div style="text-align: center"><img src="../../image/1.jpg" onclick="$native.toast(1)" class="full-width"></div>
+			            <div style="text-align: center"><img src="../../image/2.jpg" onclick="$native.toast(2)" class="full-width"></div>
+			            <div style="text-align: center"><img src="../../image/3.jpg" onclick="$native.toast(3)" class="full-width"></div>
+			        </div>
+			    </div>
+				<ul class="table-view">
+					<li class="table-view-divider">section的三个事件</li>
+		            <li class="table-view-cell">pageload：当section第一次显示的时候触发，标签写法data-pageload</li>
+		            <li class="table-view-cell">pageshow：每次section显示的时候触发，标签写法data-pageshow</li>
+		            <li class="table-view-cell">pagehide：每次section隐藏的时候触发，标签写法data-pagehide</li>
+		  		</ul>
+		    </div>
+	    </article>
+	    
+	    <article id="banner_article" data-scroll="true" data-articleload="doBannerArticleLoad()" data-articleshow="doBtnShow()" data-articlehide="doBtnHide()">    
+	    	<div class="scroller">
+		    	<div id="slider_banner" class="sliding_container" data-role="banner">
+			    	<div style="height:200px;overflow:hidden;">
+			        	<div style="text-align: center"><img src="../../image/1.jpg" onclick="$native.toast(1)" class="full-width"></div>
+			            <div style="text-align: center"><img src="../../image/2.jpg" onclick="$native.toast(2)" class="full-width"></div>
+			            <div style="text-align: center"><img src="../../image/3.jpg" onclick="$native.toast(3)" class="full-width"></div>
+			        </div>
+			    </div>
+			    <ul class="table-view">
+		            <li class="table-view-divider">article的三个事件</li>
+		            <li class="table-view-cell">articleload：当article第一次显示的时候触发，标签写法data-articleload</li>
+		            <li class="table-view-cell">articleshow：每次article显示的时候触发，标签写法data-articleshow</li>
+		            <li class="table-view-cell">articlehide：每次article隐藏的时候触发，标签写法data-articlehide</li>
+		  		</ul>
+		    </div>
+		
+	    </article>
+	</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+<script>
+function doBtnHide(){
+	$('#slider_prev').hide();
+	$('#slider_next').hide();
+}
+
+function doBtnShow(){
+	$('#slider_prev').show();
+	$('#slider_next').show();
+}
+
+function doNormalArticleLoad(){
+
+    new A.Slider({
+        selector : '#slider_normal',
+        onBeforeSlide : function(){
+            return true;
+        },
+        onAfterSlide : function(i){
+        	
+        	return true;
+        }
+    });
+}
+
+function doBannerArticleLoad(){
+	
+	var label;
+	var bannerSlider = new A.Slider({
+		                selector : '#slider_banner',
+		                onBeforeSlide : function(){
+		                    return true;
+		                },
+		                onAfterSlide : function(i){
+		                	
+		                	if(!label){
+		                		label = $('#slider_banner').append('<div class="slider_label"></div>').find('div.slider_label');
+		                	}
+		                	//alert(label.html());
+		                	label.html('这是第'+i+'条新闻');
+		                }
+		            });
+    $('#slider_prev').click(function(){bannerSlider.prev(); return false;});
+    $('#slider_next').click(function(){bannerSlider.next(); return false;});
+}
+</script>
+</body>
+</html>

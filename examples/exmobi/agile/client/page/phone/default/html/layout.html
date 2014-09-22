@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>webapp</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet-theme-ios.css">
+    <link rel="stylesheet" href="../../script/agile/css/agile.css">
+    <link rel="stylesheet" href="../../script/app/app.css">
+    <link rel="stylesheet" href="../../script/icomoon/icomoon.css">
+	<style>
+	.scroller p{
+		word-break:break-all;
+	}
+	</style>
+</head>
+<body>
+<div id="section_container">
+    <section id="layout_section" class="active">
+        <header class="bar bar-nav">
+	      <a class="icon icon-left-nav pull-left" data-target="close" href="#"></a>
+	      <a class="icon icon-more pull-right" href="#layout_modal" data-target="modal"></a>
+	      <div class="segmented-control col-w7">
+		    <a class="control-item active" href="#list_article" data-target="article">List</a>
+		    <a class="control-item" href="#grid_article" data-target="article">Grid</a>
+		    <a class="control-item" href="#layout_article" data-target="article">Layout</a>
+		  </div>
+	    </header>
+	    
+	    <nav class="bar bar-tab">
+		  <a class="tab-item active" href="#list_article" data-target="article">
+		    <span class="icon icon-list"></span>
+		    <span class="tab-label">List</span>
+		  </a>
+		  <a class="tab-item" href="#grid_article" data-target="article">
+		    <span class="icon icon-stop"></span>
+		    <span class="tab-label">Grid</span>
+		  </a>
+		  <a class="tab-item" href="#layout_article" data-target="article">
+		    <span class="icon icon-pages"></span>
+		    <span class="tab-label">Layout</span>
+		  </a>
+		</nav>
+		
+		
+		<article id="list_article" class="active" data-scroll="true" data-transition="slide">
+			<div class="scroller">
+		      <ul class="table-view">
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-pages pull-left"></span>
+		            <div class="media-body">
+		              	layout
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-person pull-left"></span>
+		            <div class="media-body">
+		              Personal email
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-star-filled pull-left"></span>
+		            <div class="media-body">
+		              Starred
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-trash pull-left"></span>
+		            <div class="media-body">
+		              Trash
+		            </div>
+		          </a>
+		        </li>
+		      </ul>
+		
+		      <h5 class="content-padded">Other accounts</h5>
+		      <ul class="table-view" id="content">
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		      </ul>
+	      </div>
+	    </article><!-- /.content -->
+    </section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+</body>
+</html>

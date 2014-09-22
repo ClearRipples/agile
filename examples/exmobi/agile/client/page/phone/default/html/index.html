@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>webapp</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet-theme-ios.css">
+    <link rel="stylesheet" href="../../script/agile/css/agile.css">
+    <link rel="stylesheet" href="../../script/app/app.css">
+    <link rel="stylesheet" href="../../script/icomoon/icomoon.css">
+</head>
+<body>
+<div id="section_container">
+    <section id="index_section" class="active" data-transition="slideDown">
+        <header class="bar bar-nav">
+	      	<a data-target="close" href="#"><font class="icon icon-left-nav"></font><font class="icon">返回</font></a>
+	      	<a class="pull-right" data-target="exit" href="#"><font class="icon">退出</font></a>
+	      	<h1 class="title">首页</h1>
+	    </header>
+	
+	    <div class="bar bar-footer">
+	      	<a class="icon icon-compose pull-right" href="${$native.app.getAppSetting().domain}/process/notify/agile/mail_interface_section?to=hn@126.com" data-target="section"></a>
+	      	<small class="updated-text">有话要说</small>
+	    </div>
+        <article class="active" data-scroll="true">
+            <div class="scroller">
+		      	<ul class="table-view">
+		        	<li class="table-view-cell media">
+		          		<a class="navigate-right" href="#layout" data-target="native" data-transition="slideleft">
+		            		<span class="media-object icon icomoon-profile pull-left"></span>
+		            		<div class="media-body">布局方式</div>
+		          		</a>
+		        	</li>
+		        	<li class="table-view-cell media">
+		          		<a class="navigate-right" href="#button" data-target="native" data-transition="slideup">
+		            		<span class="media-object icon icomoon-progress-3 pull-left"></span>
+		            		<div class="media-body">按钮组件</div>
+		          		</a>
+		        	</li>
+		        	<li class="table-view-cell media">
+		          		<a class="navigate-right" href="#list" data-target="native" data-transition="slidedown">
+		            		<span class="media-object icon icomoon-list pull-left"></span>
+		            		<div class="media-body">列表展示</div>
+		          		</a>
+		        	</li>
+		        	<li class="table-view-cell media">
+		          		<a class="navigate-right" href="#refresh" data-target="native" data-transition="zoom">
+		            		<span class="media-object icon icomoon-spinner5 pull-left"></span>
+		            		<div class="media-body">列表刷新</div>
+		          		</a>
+		        	</li>
+			        <li class="table-view-cell media">
+			          	<a class="navigate-right" href="#form" data-target="native" data-transition="slideright">
+				            <span class="media-object icon icomoon-file pull-left"></span>
+				            <div class="media-body">表单组件</div>
+			          	</a>
+			        </li>
+			        <li class="table-view-cell media">
+			          	<a class="navigate-right" href="#scroll" data-target="native" data-transition="fade">
+				            <span class="media-object icon icomoon-point-up pull-left"></span>
+				            <div class="media-body">滚动组件</div>
+			          	</a>
+			        </li>
+			        <li class="table-view-cell media">
+			          	<a class="navigate-right" href="#slider" data-target="native" data-transition="curldown">
+				            <span class="media-object icon icon-more pull-left"></span>
+				            <div class="media-body">Slider组件</div>
+			          	</a>
+			        </li>
+			        <li class="table-view-cell media">
+			          	<a class="navigate-right" href="#popup" data-target="native">
+				            <span class="media-object icon icomoon-tablet pull-left"></span>
+				            <div class="media-body">弹出窗组件</div>
+			          	</a>
+			        </li>
+			        <li class="table-view-cell media">
+			          	<a class="navigate-right" href="#aside" data-target="native">
+				            <span class="media-object icon icomoon-menu2 pull-left"></span>
+				            <div class="media-body">侧边栏组件</div>
+			          	</a>
+			        </li>
+			        <li class="table-view-cell media">
+			          	<a class="navigate-right" href="#calendar" data-target="native">
+				            <span class="media-object icon icomoon-calendar pull-left"></span>
+				            <div class="media-body">日历组件</div>
+			          	</a>
+			        </li>
+		      	</ul>
+		
+		      	<h5 class="content-padded">Other Component</h5>
+		      	<ul class="table-view">
+			        <li class="table-view-cell media">
+			          	<a class="navigate-right" href="#color" data-target="native">
+				            <span class="media-object icon icomoon-wand pull-left"></span>
+				            <div class="media-body">颜色值</div>
+			          	</a>
+			        </li>
+			        <li class="table-view-cell media">
+			          	<a class="navigate-right" href="#icon" data-target="native">
+				            <span class="media-object icon icomoon-IcoMoon pull-left"></span>
+				            <div class="media-body">字体图标</div>
+			          	</a>
+			        </li>
+			        <li class="table-view-cell media">
+			         	<a class="navigate-right" href="#jqmform" data-target="native">
+				            <span class="media-object icon icomoon-dribbble3 pull-left"></span>
+				            <div class="media-body">jQuey Mobile表单</div>
+			          	</a>
+			        </li>
+		      </ul>
+	      </div>
+        </article>
+    </section>
+
+</div>
+<script>
+document.addEventListener("plusready", function() {
+	alert(1);
+}, false );
+</script>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+<script>
+
+(function(){
+	$(document).on('tap','a#sendBtn',function(){
+		if($('#to').val()==''){
+			$native.toast('请填写接收人');
+			return;
+		}
+		var opts = {
+				to : $('#to').val(),
+				subject : $('#subject').val(),
+				content : $('#content').val()
+			};
+		$util.sendMail(opts);
+		A.Router.goTo('#index_section');
+	});
+	/*
+	$util.form({
+		url : '${$native.app.getAppSetting().domain}/process/notify/agile/section/json',
+		type : 'post',
+		fileElementId : '',//fileElementId : [],//多个文件时
+		data : 'username=huangnan',
+		success : function(html){
+			alert(html);
+		}
+	});
+	*/
+
+})();
+
+</script>
+</body>
+</html>

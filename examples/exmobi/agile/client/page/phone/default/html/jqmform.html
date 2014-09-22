@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JQM表单</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="../../script/ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet-theme-ios.css">
+    <link rel="stylesheet" href="../../script/agile/css/agile.css">
+    <link rel="stylesheet" href="../../script/app/app.css">
+    <link rel="stylesheet" href="../../script/icomoon/icomoon.css">
+	<link rel="stylesheet" href="../../script/jquery/jquery.mobile.min.css" />
+
+</head>
+<body>
+<div id="section_container">
+	<section id="jqmform_section" class="active">
+		<header class="bar bar-nav">
+			<a class="icon icon-left-nav pull-left" data-target="close" href="#"></a>
+	      	<h1 class="title">JQM表单</h1>
+	    </header>
+	
+		<article class="active" data-scroll="true">
+			<div class="scroller demo-btn">
+				<label for="slider2">Flip switch:</label>
+				<select name="slider2" id="slider2" data-role="slider">
+				    <option value="off">Off</option>
+				    <option value="on">On</option>
+				</select>
+				
+				<fieldset data-role="controlgroup">
+				    <legend>Checkboxes, vertical controlgroup:</legend>
+				    <input name="checkbox-1a" id="checkbox-1a" checked="" type="checkbox">
+				    <label for="checkbox-1a">Cheetos</label>
+				    <input name="checkbox-2a" id="checkbox-2a" type="checkbox">
+				    <label for="checkbox-2a">Doritos</label>
+				    <input name="checkbox-3a" id="checkbox-3a" type="checkbox">
+				    <label for="checkbox-3a">Fritos</label>
+				    <input name="checkbox-4a" id="checkbox-4a" type="checkbox">
+				    <label for="checkbox-4a">Sun Chips</label>
+				</fieldset>
+				
+				<fieldset data-role="controlgroup">
+				    <legend>Radio buttons, vertical controlgroup:</legend>
+				        <input name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" type="radio">
+				        <label for="radio-choice-1">Cat</label>
+				        <input name="radio-choice-1" id="radio-choice-2" value="choice-2" type="radio">
+				        <label for="radio-choice-2">Dog</label>
+				        <input name="radio-choice-1" id="radio-choice-3" value="choice-3" type="radio">
+				        <label for="radio-choice-3">Hamster</label>
+				        <input name="radio-choice-1" id="radio-choice-4" value="choice-4" type="radio">
+				        <label for="radio-choice-4">Lizard</label>
+				</fieldset>
+				
+			　　　 <label for="name">Text Input:</label>
+			    <input type="text" name="name" id="name" value=""  />	
+			    
+			    <label for="textarea">Textarea:</label>
+				<textarea cols="40" rows="4" name="textarea" id="textarea"></textarea>
+	
+			    <div data-role="fieldcontain">
+					<label for="select-choice-1" class="select">Choose shipping method:</label>
+				　 	<select name="select-choice-1" id="select-choice-1">
+				　　		<option value="standard">Standard: 7 day</option>
+				　　 		<option value="rush">Rush: 3 days</option>
+				　　 		<option value="express">Express: next day</option>
+				　　 		<option value="overnight">Overnight</option>
+				　	</select>
+				</div>
+				
+				<label for="date">Date:</label>
+				<input name="date" id="date" value="" type="date">
+				
+				<label for="file">File:</label>
+				<input name="file" id="file" value="" type="file">
+				
+				<label for="password">Password:</label>
+				<input name="password" id="password" value="" autocomplete="off" type="password">
+	
+				
+			</div>
+		</article>
+	</section>
+</div>
+<!--- exmobijs --->
+<script src="../../script/exmobijs/bridge.js"></script>
+<!-- jquery -->
+<script type="text/javascript" src="../../script/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../script/jquery/jquery.mobile.min.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+</body>
+</html>

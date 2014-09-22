@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>webapp</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet-theme-ios.css">
+    <link rel="stylesheet" href="../../script/agile/css/agile.css">
+    <link rel="stylesheet" href="../../script/app/app.css">
+    <link rel="stylesheet" href="../../script/icomoon/icomoon.css">
+</head>
+<body>
+
+<div id="section_container">
+	<section id="scroll_section" class="active">
+	    <header class="bar bar-nav">
+	      	<a class="icon icon-left-nav pull-left" data-target="close" href="#"></a>
+	      	<h1 class="title">滚动组件</h1>
+	    </header>
+	
+	    <nav class="bar bar-tab">
+		  	<a class="tab-item active" href="#vertical_article" data-target="article">
+		    	<span class="icon icon-more-vertical"></span>
+		    	<span class="tab-label">垂直</span>
+		  	</a>
+		  	<a class="tab-item" href="#horizontal_article" data-target="article">
+			    <span class="icon icon-more"></span>
+			    <span class="tab-label">横向</span>
+		  	</a>
+		</nav>
+		
+		<article id="vertical_article" class="active" data-scroll="true">
+			<div class="scroller">
+		      <ul class="table-view">
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-pages pull-left"></span>
+		            <div class="media-body">
+		              	layout
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-person pull-left"></span>
+		            <div class="media-body">
+		              Personal email
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-star-filled pull-left"></span>
+		            <div class="media-body">
+		              Starred
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-trash pull-left"></span>
+		            <div class="media-body">
+		              Trash
+		            </div>
+		          </a>
+		        </li>
+		      </ul>
+		
+		      <h5 class="content-padded">Other accounts</h5>
+		      <ul class="table-view">
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		        <li class="table-view-cell media">
+		          <a class="navigate-right" href="#">
+		            <span class="media-object icon icon-more pull-left"></span>
+		            <div class="media-body">
+		              Misc
+		            </div>
+		          </a>
+		        </li>
+		      </ul>
+	      </div>
+	    </article>
+	
+	    <article id="horizontal_article" data-articleload="doArticleLoad()">
+			<div class="scroller demo-btn">
+		    	
+		    	<h4>左右滑动试试</h4>
+		    	
+		        <div style="overflow:hidden;" id="h_scroll_demo">
+		        	<div class="segmented-control" style="width:700px;">
+						<a class="control-item active" href="#article_home" data-target="article">List</a>
+						<a class="control-item" href="#article_grid" data-target="article">Grid</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+					</div>
+		        </div>
+			</div>
+	    </article>
+	</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+<script>
+function doArticleLoad(){
+	A.Scroll('#h_scroll_demo',{hScroll:true,hScrollbar : false});
+}
+</script>
+</body>
+</html>

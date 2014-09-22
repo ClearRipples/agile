@@ -1,0 +1,41 @@
+<html isbridge="true">
+	<head>
+		<meta charset="UTF-8"/>
+		<title show="false">webapp</title>
+		<script type="text/javascript" src="res:script/exmobijs/base.js"></script>
+		<script type="text/javascript" src="res:script/exmobijs/app.js"></script>
+		<script type="text/javascript" src="res:script/exmobijs/utility.js"></script>
+		<script type="text/javascript" src="res:script/exmobijs/browser.js"></script>
+		<script type="text/javascript" src="res:script/exmobijs/bridge.js"></script>
+		<script>
+		<![CDATA[
+		function doLoad(){
+			if(!$a.isShowIntroductoryPages()){
+				$browser.open('res:page/html/index.html');
+			}else{
+				$('body').show();
+			}
+		}
+		
+		]]>
+		</script>
+	</head>
+	<body id="body" style="margin:0px;padding:0px;display:none;" onload="doLoad()">
+		<slidingcontainer >
+			<slidingitem>
+				<div style="background-image:url(res:image/1.jpg);width:100%;height:100%;"></div>
+			</slidingitem>
+			<slidingitem>
+				<div style="background-image:url(res:image/2.jpg);width:100%;height:100%;"></div>
+			</slidingitem>
+			<slidingitem>
+				<div style="background-image:url(res:image/3.jpg);width:100%;height:100%;"></div>
+			</slidingitem>
+			<slidingitem>
+				<div style="background-image:url(res:image/4.jpg);width:100%;height:100%;line-height:100%;text-align:center;text-valign:middle">
+					<div href="doLoad()" style="width:100;height:100;border-radius:50;font-size:20;background-color:#cccccc; background-click-color:#eeeeee;background-opacity:0.3;text-align:center;text-valign:middle">开始体验</div>
+				</div>
+			</slidingitem>
+		</slidingcontainer>
+	</body>
+</html>

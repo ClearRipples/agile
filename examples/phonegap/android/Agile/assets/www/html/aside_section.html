@@ -1,0 +1,48 @@
+	<section id="aside_section" class="active" data-aside-left="#left_reveal_aside" data-aside-right="#right_reveal_aside" data-pageload="doAsidePageLoad()">
+	    <header class="bar bar-nav">
+	        <a class="icon icon-left-nav pull-left" data-target="back" href="#"></a>
+	        <a class="icon icon-bars pull-right" data-target="aside" href="#right_push_aside"></a>
+		    <h1 class="title">侧边栏组件</h1>
+	    </header>
+	    <article class="active" id="aside_article"  data-scroll="true">
+	        <div class="scroller demo-btn">
+	            <h4>左侧菜单栏:右滑可以唤起</h4>
+	            <div class="demo-btn-group">
+	                <a class="button block bg-turquoise white" href="#left_push_aside" data-target="aside">push</a>
+	                <a class="button block bg-peter-river white" href="#left_overlay_aside" data-target="aside">overlay</a>
+	                <a class="button block bg-alizarin white" href="#left_reveal_aside" data-target="aside">reveal</a>
+	                <a class="button block bg-orange white" href="#show_close_aside" data-target="aside">show close</a>
+	            </div>
+	            <h4>右侧菜单栏:左滑可以唤起</h4>
+	            <div class="demo-btn-group">
+	                <a class="button block bg-turquoise white" href="#right_push_aside" data-target="aside">push</a>
+	                <a class="button block bg-peter-river white" href="#right_overlay_aside" data-target="aside">overlay</a>
+	                <a class="button block bg-alizarin white" href="#right_reveal_aside" data-target="aside">reveal</a>
+	                <a class="button block bg-orange white" href="#custom_width_aside" data-target="aside">自定义宽度</a>
+	            </div>
+	
+	            <div class="content-padded">
+	                <div class="card" style="margin:0px;">
+						<ul class="table-view">
+							<li class="table-view-divider">aside上的配置</li>
+		                    <li class="table-view-cell">默认宽度为264px</li>
+		                    <li class="table-view-cell">data-position="left | right"</li>
+		                    <li class="table-view-cell">data-transition="push | overlay | reveal"</li>
+		                    <li class="table-view-cell">data-show-close="true | false"</li>
+		                    <li class="table-view-divider">push</li>
+		                    <li class="table-view-cell">侧边栏与页面同时滑动</li>
+		                    <li class="table-view-divider">overlay</li>
+		                    <li class="table-view-cell">侧边栏从页面上层划出</li>
+		                    <li class="table-view-divider">reveal</li>
+		                    <li class="table-view-cell">侧边栏在底部，页面其上方划出</li>
+		                    <li class="table-view-divider">section上的配置</li>
+		                    <li class="table-view-cell">默认在section上滑动操作不唤起左右侧菜单，通过设置data-aside-left和data-aside-right可以唤起</li>
+		                    <li class="table-view-divider">data-aside-left</li>
+		                    <li class="table-view-cell">data-aside-left="#aside id"右滑唤起左侧aside</li>
+		                    <li class="table-view-divider">data-aside-right</li>
+		                    <li class="table-view-cell">data-aside-right="#aside id"左滑唤起右侧aside</li>
+	                	</ul>
+	            	</div>
+	        	</div>
+	    </article>
+	</section>

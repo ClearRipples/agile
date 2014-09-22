@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config clientversion="4" scope="client" devicetype="all">
+    <appid>agile</appid>
+    <appname>agile前端框架</appname>
+    <description>基于zepto和ratchet的移动应用开发框架</description>
+    <version>1.0</version>
+    <date>2014-07-26</date>
+    <homepage src="res:page/index.xhtml"/>
+    <faultconfig src=""/>
+    <vendor url="" email=""></vendor>
+    <access orientation="port" land="false" network="true" gps="true" camera="true" certificate="true"/>
+    <icon selectedlogo="res:image/selectedlogo.png" main="res:image/main.png" logo="res:image/logo.png"/>
+</config>
