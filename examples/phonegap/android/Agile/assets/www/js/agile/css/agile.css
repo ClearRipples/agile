@@ -17,7 +17,7 @@ font.icon{
 font.icon:before{
 	font-size:24px;
 }
-[data-scroll="true"]{
+[data-scroll]{
 	overflow:hidden;
 }
 .scroller {
@@ -395,7 +395,9 @@ input[type="search"]{
 [data-role="select"],
 [data-role="file"],
 [data-role="date"],
-[data-role="time"]
+[data-role="time"],
+[data-role="barcode"],
+[data-role="qrcode"]
 {
 	position: relative;
 	height:42px;
@@ -406,7 +408,9 @@ input[type="search"]{
 }
 [data-role="file"] input,
 [data-role="date"] input,
-[data-role="time"] input
+[data-role="time"] input,
+[data-role="barcode"] input,
+[data-role="qrcode"] input
 {
 	border:none;
 }
@@ -415,7 +419,9 @@ input[type="search"]{
 [data-role="file"]:after,
 [data-role*="file-"]:after,
 [data-role="date"]:after,
-[data-role="time"]:after
+[data-role="time"]:after,
+[data-role="barcode"]:after,
+[data-role="qrcode"]:after
 {
 	position: absolute;
 	clear:both;
@@ -451,7 +457,9 @@ input[type="search"]{
 .input-row [data-role="select"],
 .input-row [data-role="file"],
 .input-row [data-role="date"],
-.input-row [data-role="time"]
+.input-row [data-role="time"],
+.input-row [data-role="barcode"],
+.input-row [data-role="qrcode"]
 {
 	width:65%;
 	float:right;
@@ -524,13 +532,11 @@ input[type="radio"]:checked::after{
 	margin-right:4px;
 }
 
-[data-role="file"]:after{
-	font-family: icomoon;
-	content:'\e62e';
-}
 [data-role="file"] > label,
 [data-role="date"] > label,
-[data-role="time"] > label
+[data-role="time"] > label,
+[data-role="barcode"] > label,
+[data-role="qrcode"] > label
 {
 	display:block;
 	width:100%;
@@ -542,6 +548,10 @@ input[type="radio"]:checked::after{
 	overflow:hidden;
 }
 
+[data-role="file"]:after{
+	font-family: icomoon;
+	content:'\e62e';
+}
 [data-role="date"]:after{
 	font-family: icomoon;
 	content:'\e64e';
@@ -549,6 +559,14 @@ input[type="radio"]:checked::after{
 [data-role="time"]:after{
 	font-family: icomoon;
 	content:'\e64f';
+}
+[data-role="barcode"]:after{
+	font-family: icomoon;
+	content:'\e632';
+}
+[data-role="qrcode"]:after{
+	font-family: icomoon;
+	content:'\e633';
 }
 
 .text-select{
@@ -1192,3 +1210,4 @@ aside ul.menu li.anchor{
     -webkit-animation: spinner .8s infinite linear;
     animation: spinner .8s infinite linear;
 }
+.injecting{ display:none; }

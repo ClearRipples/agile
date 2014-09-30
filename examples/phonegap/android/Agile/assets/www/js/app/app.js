@@ -205,6 +205,6 @@ function doIconPageLoad(){
 $(function(){
 	A.launch({
 		basePagePath : 'html/',
-        showPageLoading : true
+        showPageLoading : false
     });
 });
