@@ -1,5 +1,5 @@
 ﻿var Agile = A = {
-    version : '2.0.1',
+    version : '2.0.2',
     $ : window.Zepto||jQuery,
     //参数设置
     settings : {
@@ -17,7 +17,9 @@
         basePagePath : './',
         basePageSuffix : '.html',
         //ajax跨域请求默认处理函数，可以使用其他跨平台方法避免原生ajax的jsonp麻烦
-        crossDomainHandler : null
+        crossDomainHandler : null,
+        //是否默认渲染模板
+        isAutoRender : false
     },
     //手机或者平板
     mode : window.innerWidth < 800 ? "phone" : "tablet",
@@ -52,10 +54,15 @@ A.Element = (function($){
      * @param {String} 父元素的css选择器
      * @param {Object} 父元素或者父元素的zepto实例
      */
-    var init = function(){
-        _init_section();
-        _init_article();
-        _init_modal();
+    var init = function(selector){
+        if(selector){
+        	_initFormElement(selector);
+        	_init_scroll(selector.parents('article[data-scroll="true"]'));
+        }else{
+        	_init_section();
+            _init_article();
+            _init_modal();
+        }
     };
     
     /**
@@ -91,15 +98,16 @@ A.Element = (function($){
     	//初始化data-pageload事件
     	$(document).on('pageload','section',function(e){
     		var $el = $(this);
-    		if($el.data('__pageload_tag__')) return;
     		$el.data('__pageload_tag__',true);
         	var func = $el.data('pageload');
-        	if(func) eval(func);  
+        	if(func) eval(func);
+        	//初始化inject
+        	if(A.settings.isAutoRender) _init_inject($el);
         });
     	//初始化data-pageshow事件
     	$(document).on('pageshow','section',function(e){
     		var $el = $(this);
-    		$el.trigger('pageload');
+    		if(!$el.data('__pageload_tag__')) $el.trigger('pageload');
         	var func = $el.data('pageshow');
         	if(func) eval(func);
         });
@@ -129,7 +137,6 @@ A.Element = (function($){
     	//初始化data-articleload事件
     	$(document).on('articleload','article',function(e){   		
     		var $el = $(this);
-    		if($el.data('__articleload_tag__')) return;
     		$el.data('__articleload_tag__',true);
     		_initFormElement($el);
         	var func = $el.data('articleload');
@@ -138,7 +145,7 @@ A.Element = (function($){
     	//初始化data-articleshow事件
     	$(document).on('articleshow','article',function(e){
     		var $el = $(this);
-    		$el.trigger('articleload');
+    		if(!$el.data('__articleload_tag__')) $el.trigger('articleload');
         	var func = $el.data('articleshow');
         	if(func) eval(func);
         });
@@ -192,6 +199,23 @@ A.Element = (function($){
         $.map(_getMatchElements($(selector),SELECTOR.scroll.selector),SELECTOR.scroll.handler);
     };
     
+    /**
+     * 初始化数据注入组件
+     */
+    var _init_inject = function(el){
+    	var $el = $(el);
+    	
+    	if(!$el.data('inject')){
+    		$.map(_getMatchElements($el,SELECTOR.inject.selector),SELECTOR.inject.handler);
+        	return;
+    	} 	
+    	var tag = '#'+$el.attr('id'); 	
+    	if($el.attr('__inject_cache__')){
+    		return;
+    	}
+    	$el.render();
+    };
+    
 
     /**
      * 构造toggle切换组件
@@ -208,7 +232,7 @@ A.Element = (function($){
         offValue = typeof offValue=='undefined'?'':offValue;
         //添加隐藏域，方便获取值
         if(name){
-            $el.append('<input style="display: none;" name="'+name+'" value="'+$el.hasClass('active')?onValue:offValue+'"/>');
+            $el.append('<input type="hidden" name="'+name+'" value="'+($el.hasClass('active')?onValue:offValue)+'"/>');
         }
         $el.append('<div class="toggle-handle"></div>');
         $el.tap(function(){
@@ -216,6 +240,7 @@ A.Element = (function($){
             $t.toggleClass('active').trigger('toggle',[v]);//定义toggle事件
             $t.find('input').val(v);
         });
+        
     };
  
     /**
@@ -235,7 +260,14 @@ A.Element = (function($){
     var SELECTOR = {
     		section : {selector:'section', handler:_init_section},
     		article : {selector:'article', handler:_init_article},
-    		scroll : {selector:'[data-scroll="true"]', handler:function(el){A.Scroll(el);}}
+    		scroll : {selector:'[data-scroll="true"]', handler:function(el){
+    				var zoom = $(el).data('zoom');
+    				var tag = zoom==true?true:false;
+    				A.Scroll(el,{zoom:tag,hScroll:tag});
+    			}
+    		},
+    		inject : {selector:'[data-inject="true"]', handler:_init_inject}
+    		
     };
     var FORM_SELECTOR = {
     		toggle : {selector:'.toggle', handler:_init_toggle},
@@ -246,12 +278,13 @@ A.Element = (function($){
     var _addFormSelector = function(type,selector,handler){
     	FORM_SELECTOR[type] = {selector:selector, handler:handler};
     };
-    
+
     return {
         init : init,
         initForm : _initFormElement,
         scroll : _init_scroll,
-        addFormSelector : _addFormSelector
+        addFormSelector : _addFormSelector,
+        initInject : _init_inject
     };
 })(A.$);
 
@@ -522,7 +555,6 @@ A.Router = (function($){
         	
         	if(_history.length==0){
         		//初始化section
-
         		$section.trigger('pageinit').trigger('pageshow').data('init',true).find('article.active').trigger('articleshow');	  
         	}else{
         		var current = _history[0];
@@ -544,12 +576,17 @@ A.Router = (function($){
         
         var $section = $(href);
         if($section.length==0){
+        	if (A.settings.showPageLoading) A.showMask();
         	A.Page.loadContent(hashObj,function(html){
         		var source = $('<div>'+html+'</div>').find(href).data('source');
-            	A.Page.loadContent(source,function(data){  
-            		data = A.Util.formatJSON(data);
-            		var render = template.compile(html);
-                	html = render(data);
+            	A.Page.loadContent(source,function(data){
+            		if (A.settings.showPageLoading) A.hideMask();
+            		if(source){
+            			data = A.Util.formatJSON(data);
+                		var render = template.compile(html);
+                    	html = render(data);
+            		}
+            		
             		if($(href).length==0) $('#section_container').append(html);
             		$section = $(href);
                 	_commonHandle();
@@ -568,11 +605,8 @@ A.Router = (function($){
     	var current = _history.shift().tag;
     	var target = _history[0].tag;
         _changePage(current,target,true);
-        //Log.i('back',target+'|'+target);
     };
     var _changePage = function(current,target,isBack){
-    	//$(current).removeClass('active').trigger('pagehide');
-    	//$(target).addClass('active').trigger('pageshow').find('article.active').trigger('ariticleshow');
         A.Transition.run(current,target,isBack);
     };
     /**
@@ -642,12 +676,16 @@ A.Router = (function($){
        };
     	
         if(article.length==0){
+        	if (A.settings.showPageLoading) A.showMask();
         	A.Page.loadContent(hashObj,function(html){
         		var source = $('<div>'+html+'</div>').find(href).data('source');
-            	A.Page.loadContent(source,function(data){       		
-            		data = A.Util.formatJSON(data);
-            		var render = template.compile(html);
-                	html = render(data);
+            	A.Page.loadContent(source,function(data){   
+            		if (A.settings.showPageLoading) A.hideMask();
+            		if(source){
+	            		data = A.Util.formatJSON(data);
+	            		var render = template.compile(html);
+	                	html = render(data);
+            		}
             		if(_section.find(href).length==0) _section.append(html);
                 	article = _section.find(href);
                 	_commonHandle();
@@ -682,12 +720,16 @@ A.Router = (function($){
     	};
     	
     	if($(href).length==0){
+    		if (A.settings.showPageLoading) A.showMask();
     		A.Page.loadContent(hashObj,function(html){
     			var source = $('<div>'+html+'</div>').find(href).data('source');
-            	A.Page.loadContent(source,function(data){       		
-            		data = A.Util.formatJSON(data);
-            		var render = template.compile(html);
-                	html = render(data);
+            	A.Page.loadContent(source,function(data){   
+            		if (A.settings.showPageLoading) A.hideMask();
+            		if(source){
+	            		data = A.Util.formatJSON(data);
+	            		var render = template.compile(html);
+	                	html = render(data);
+            		}
                 	$('body').append(html);
         			_doToggle(href);
                 });
@@ -717,7 +759,10 @@ A.Router = (function($){
         showArticle : _showArticle,
         back : back,
         showModal :_showModal,
-        add : _addRouter
+        add : _addRouter,
+        history : function(){
+        	return _history;
+        }
     };
 })(A.$);
 /**
@@ -771,6 +816,7 @@ A.Template = (function($){
             A.Element.init(html);
         }
     };
+    
     return {
         render : render,
         background : background,
@@ -1083,9 +1129,24 @@ A.Util = (function($){
     };
     
     var _script = function(str){
-    	return str?str.replace(/\$\{([^\}]*)\}/g, function(s, s1){		
-    		return eval(s1);
+    	return str?str.trim().replace(/\$\{([^\}]*)\}/g, function(s, s1){
+    		try{
+    			return eval(s1.trim());
+    		}catch(e){
+    			return '';
+    		}
+    		
     	}):'';
+    };
+    
+    var _eval = function(str){
+    	str = (str||'').trim();
+    	var obj = {};   	
+    	str.replace(/\$\{(.*]*)\}/g, function(s, s1){    		
+    		obj = eval('('+s1.trim()+')');    		
+    		return '';
+    	});
+    	return obj;
     };
     
     /*
@@ -1094,7 +1155,6 @@ A.Util = (function($){
      * */
     var _ajax = function(opts){
     	if(!opts||!opts.url) return;
-    	if (A.settings.showPageLoading) A.showMask();
     	opts.url = _script(opts.url);
     	var random = '__ajax_random__='+Math.random();
     	opts.url += (opts.url.split(/\?|&/i).length==1?'?':'&')+random;
@@ -1104,11 +1164,9 @@ A.Util = (function($){
                 type : opts.type||'get',
                 dataType : opts.dataType||'text',
                 success : function(html){
-                	if (A.settings.showPageLoading) A.hideMask();
                     opts.success && opts.success(html);
                 },
                 error : function(html){
-                	if (A.settings.showPageLoading) A.hideMask();
                 	opts.error && opts.error(null);
                 }
            };
@@ -1138,10 +1196,28 @@ A.Util = (function($){
         },
         isCrossDomain : _isCrossDomain,
         script :　_script,
+        eval :　_eval,
         ajax : _ajax
     };
 
 })(A.$);
+/*
+ * cache操作
+ * */
+(function(){
+	//通用缓存
+	A.cache = {};
+	A.cache.set = function(k, v){
+		window.localStorage.setItem(k, JSON.stringify(v));
+	};
+	A.cache.get = function(k){
+		return JSON.parse(window.localStorage.getItem(k));
+	};
+	A.cache.remove = function(k){
+		window.localStorage.removeItem(k);
+	};
+
+})();
 (function($){
     /*
      * alias func
@@ -1234,6 +1310,120 @@ A.Util = (function($){
      * @param ajax json对象，进行简单统一处理，如果需要完整功能请使用$.ajax
      * */
     A.ajax = A.Util.ajax;
+    
+    /*
+     * 数据注入增强版，opts为选择项 tmpl、tmplSource、tmplId必有一个，data、dataSource必有一个
+     * @param container   显示注入数据的容器#id，或者不写，如果不写，则必须在模板的script标签增加data-replace="container"、data-after="container"、data-before="container"，以注明要在哪个容器替换或者添加注入的数据
+     * @param tmpl        模板的html片段，包含script本身，若不包含script，则必须指明container
+     * @param tmplSource  能够请求道模板文件的url地址
+     * @param tmplId      模板的id
+     * @param data        要注入的json数据，支持自定义表达式如${data.list}，但是如果是自定义表达式则必须为字符串
+     * @param dataSource  能够请求道要注入的json数据的url地址
+     * @param type        注入的类型，在显示注入的容器中是直接覆盖（replace）、尾部追加（after）还是顶部追加（before）数据
+     * @param callback    回调函数，当找不到container的时候最终渲染后的html片段会通过callbacl传回 
+     * */
+    A.render = function(opts){
+    	var options = {
+    			container : null,
+    			tmpl : null,
+    			tmplSource : null,
+    			tmplId : null,
+    			data : null,
+    			dataSource : null,
+    			type : 'after',//replace|after|before
+    			callback : function(){}
+    			
+    	};    	
+    	$.extend(options,opts);   
+    	
+    	var handleHTML = function(opts,callback){
+    		
+    		if(opts.tmpl){
+    			callback(opts.tmpl);
+    		}else{
+    			var url = opts.tmplId||opts.tmplSource;
+    			if(!url){
+    				callback('');
+    				return;
+    			}
+    			var html = '';
+    			var hashObj = A.Util.parseHash(url);
+        		var $script = $(hashObj.tag);
+        		var scriptKey = '__TEMPLATE_'+hashObj.tag+'__';
+        		if(A.cache[scriptKey]){
+        			callback(A.cache[scriptKey]);
+        		}else if($script.length==0){       			
+                	A.Page.loadContent(hashObj,function(h){
+                		html = h||'';
+                		callback(html);
+                		A.cache[scriptKey] = html;
+                	});                	
+                }else{     
+                	html = $script;
+                	callback(html);
+                	A.cache[scriptKey] = html;
+                }
+    		}
+    	};
+    	
+    	var handleData = function(opts,callback){
+    		if(opts.data){
+    			callback(typeof opts.data=='string'?A.Util.eval(opts.data):opts.data);
+    		}else if(opts.dataSource){   	
+    			var hashObj = A.Util.parseHash(opts.dataSource);
+    			A.Page.loadContent(hashObj,function(data){   
+            		data = A.Util.formatJSON(data);
+            		callback(data);
+            	});
+    		}else{
+    			callback({});
+    		}
+    	};
+    	
+    	handleHTML(options, function(html){
+    		var $target,type = options.type||'after'; 
+    		var $html = $(html);
+    		if(!$html.is('script')){
+    			options.container = $html;
+    			$html = $('<script type="text/html"></script>').append($html.html()); 	
+    		}
+    		var typeMap = {
+    				replace : 'html' ,
+    				after : 'append',
+    				before : 'prepend'
+    		};
+    		if(options.container&&options.container.length>0){
+    			var $target = $(options.container);
+    		}else{
+    			for(var k in typeMap){
+    				var container = $html.data(k);
+        			if(container){   				
+        				$target = $(container);
+        				type = k;
+        				break;
+        			}
+        		}
+    		}
+
+    		handleData(options, function(o){
+    			if(!o||o=={}||o==[]){
+    				options.callback('');
+    				return;
+    			}
+    			try{
+    				html = $(template.compile($html.html())(o));
+    			}catch(e){
+    				html = '';
+    			}
+    			if($target&&$target.length>0){    	
+    				$target[typeMap[type]](html);
+    				A.Element.init(html);
+    			}
+    			options.callback(html);
+    		})
+    	});
+    	
+    };
     
 })(A.$);
 /**
@@ -1728,6 +1918,7 @@ A.Popup = (function($){
                checkDOMChanges: false,
                hideScrollbar: true,
                fadeScrollbar: true,
+               zoom: false,
                onBeforeScrollStart: function (e) {
                     var target = e.target;
                     while (target.nodeType != 1) target = target.parentNode;
@@ -1787,6 +1978,7 @@ A.Popup = (function($){
             afterSlide = selector.onAfterSlide || afterSlide;
             autoPlay = selector.autoPlay;
             interval = selector.interval || 3000;
+            speed = selector.speed||speed;
         }else{
             wrapper = $(selector);
         }
@@ -2089,3 +2281,106 @@ A.Popup = (function($){
         }
     };
 })(A.$);
+
+/**
+ * 扩展$的注入
+ */
+(function ($) {
+	/*
+     * 数据注入对象扩展
+     * @param data        要注入的json数据，支持自定义表达式如${data.list}，但是如果是自定义表达式则必须为字符串
+     * @param dataSource  能够请求道要注入的json数据的url地址
+     * @param type        注入的类型，在显示注入的容器中是直接覆盖（replace）还是追加（add）数据
+     * @param callback    回调函数
+     * */
+	$.fn.render = function (opts) {
+		var $el = $(this);		
+		if(!$el.data('inject')){
+			return;
+		}
+		var options = {
+				data : null,
+				dataSource : $el.data('source')
+		};
+		$.extend(options, opts);
+		delete options.container;
+		
+		if(!(options.data||options.dataSource)) return;
+		
+		var tag = '#'+$el.attr('id');
+		
+		options.tmplId = tag;
+		options.callback = function(html){	
+			var $referObj = $el;
+			var $oldObj = $('[__inject_dependence__="'+tag+'"]');
+			if(options.type=='replace'){
+				$('[__inject_dependence__="'+tag+'"]').remove();
+				//$referObj = $el;
+			}else if(options.type=='after'){
+				$referObj = $oldObj.length==0?$el:$oldObj.last();
+			}else if(options.type=='before'){
+				//$referObj = $el;
+			}
+			$el.attr('__inject_cache__',true);
+			$referObj.after($(html).attr('__inject_dependence__',tag));
+			A.Element.init($el);
+			if(opts&&opts.callback){			
+				opts.callback(html);
+			}
+		};
+  	
+    	A.render(options);
+	};
+
+	$.fn.renderReplace = function (data, callback) {
+		_render(this, 'replace', data, callback);
+	};
+	$.fn.renderAfter = function (data, callback) {
+		_render(this, 'after', data, callback);
+	};
+	$.fn.renderBefore = function (data, callback) {
+		_render(this, 'before', data, callback);
+	};
+
+	function _render(el, type, data, callback){
+		if(typeof data=='function'&&callback==null){
+			callback = data;
+			data = null;			
+		}
+		var opts = {};
+		opts.type = type;
+		if(typeof data=='string'){
+			opts.dataSource = data;
+		}else if(typeof data=='object'){
+			opts.data = data;
+		}
+		opts.callback = callback;
+		$(el).render(opts);
+	}
+})(A.$);
+/*
+ * 扩展JSON
+ * */
+(function(){
+	if(JSON){
+		JSON.stringify = function(o){
+			var r = [];   
+			if(typeof o =="string") return "\""+o.replace(/([\'\"\\])/g,"\\$1").replace(/(\n)/g,"\\n").replace(/(\r)/g,"\\r").replace(/(\t)/g,"\\t")+"\"";   
+		    if(typeof o =="undefined") return "";
+			if(typeof o != "object") return o.toString();
+			if(o===null) return null;
+	        if(o instanceof Array){
+	        	for(var i =0;i<o.length;i++){
+	            	r.push(this.stringify(o[i]));
+	            }
+	            r="["+r.join()+"]"; 
+	        }else{              
+	            for(var i in o){
+	            	r.push('"'+i+'":'+this.stringify(o[i]));
+	            }
+	            r="{"+r.join()+"}";
+	        }   
+	        return r; 
+		};
+	}
+})();
