@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>webapp</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet-theme-ios.css">
+    <link rel="stylesheet" href="../../script/agile/css/agile.css">
+    <link rel="stylesheet" href="../../script/app/app.css">
+    <link rel="stylesheet" href="../../script/icomoon/icomoon.css">
+	<style>
+	.scroller p{
+		word-break:break-all;
+	}
+	</style>
+</head>
+<body>
+<div id="section_container">
+    <section id="layout_section" class="active">
+        <header class="bar bar-nav">
+	      <a class="icon icon-left-nav pull-left" data-target="close" href="#"></a>
+	      <a class="pull-right" href="#inject_modal" data-target="modal"><font class="icon">Modal</font></a>
+	      <h1 class="title">容器注入</h1>
+	    </header>
+	    
+	    <nav class="bar bar-tab">
+		  <a class="tab-item active" href="#introduce_article" data-target="article">
+		    <span class="icon icon-list"></span>
+		    <span class="tab-label">说明</span>
+		  </a>
+		  <a class="tab-item" href="#inject_article" data-target="article">
+		    <span class="icon icon-stop"></span>
+		    <span class="tab-label">Article</span>
+		  </a>
+		  <a class="tab-item" href="#inject_section" data-target="section">
+		    <span class="icon icon-pages"></span>
+		    <span class="tab-label">Section</span>
+		  </a>
+		</nav>
+		
+		
+		<article id="introduce_article" class="active" data-scroll="true">
+			<div class="scroller">
+		      	<div class="card">
+					<ul class="table-view">
+						<li class="table-view-divider">支持的容器</li>
+				        <li class="table-view-cell">Section、Article、Modal</li>
+				        <li class="table-view-divider">用法</li>
+				        <li class="table-view-cell">1、需要确保要注入的容器在当前页面中不存在，即需要进行异步加载</li>
+				        <li class="table-view-cell">2、在容器中可以使用artTemplate的Native语法</li>
+				       	<li class="table-view-cell">3、容器的属性必须包含data-source="url"</li>
+				       	<li class="table-view-divider">原理</li>
+				       	<li class="table-view-cell">原理即是把容器内部作为模板，容器的data-source指定的url响应为数据源进行数据注入</li>
+				       	<li class="table-view-cell">所以要求容器内使用的变量必须在data-source中都具备，否则会报错</li>
+				       	<li class="table-view-divider">示例</li>
+				       	<li class="table-view-cell">点击此页面中Section、Article和Modal按钮即为对应容器的注入示例</li>
+			        </ul>
+	        	</div>
+	    	</div>
+	    </article><!-- /.content -->
+    </section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+</body>
+</html>

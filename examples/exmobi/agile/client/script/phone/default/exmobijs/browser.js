@@ -2,7 +2,6 @@ $browser = {};
 $browser.cacheMap = {};
 
 $browser.bridgeLoad = function(url){
-
 	var ps = $browser._handleParameter(arguments);	
 	var funcStr = '$native._bridgeActivity("exmobiload","'+ps+'")';
 	setTimeout("$browser._executeScript('"+funcStr+"');",500);

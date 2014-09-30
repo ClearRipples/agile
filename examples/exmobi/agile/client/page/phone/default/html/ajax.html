@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>webapp</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet-theme-ios.css">
+    <link rel="stylesheet" href="../../script/agile/css/agile.css">
+    <link rel="stylesheet" href="../../script/app/app.css">
+    <link rel="stylesheet" href="../../script/icomoon/icomoon.css">
+</head>
+<body>
+
+<div id="section_container">
+	<section id="list_section" data-transition="slideUp" class="active">
+	    <header class="bar bar-nav">
+	      	<a class="icon icon-left-nav pull-left" data-target="close" href="#"></a>
+	      	<h1 class="title">Ajax</h1>
+	    </header>
+    
+	    <nav class="bar bar-tab">
+			<a class="tab-item active" href="#native_article" data-target="article">原生</a>
+			<a class="tab-item" href="#server_article" data-target="article">走服务端</a>
+			<a class="tab-item" href="#direct_article" data-target="article">直连</a>
+			<a class="tab-item" href="#file_article" data-target="article">带附件</a>
+		</nav>
+		
+		<article id="file_article" data-scroll="true">
+	    	<div class="scroller">
+	    		<div class="card">
+					<ul class="table-view">
+						<li class="table-view-divider">用法</li>
+			            <li class="table-view-cell">$util.form(options)</li>
+			            <li class="table-view-cell">options的参数请参考原生ajax</li>
+			            <li class="table-view-divider">重要说明</li>
+			            <li class="table-view-cell">
+			            	options比其他ajax多一个属性：fileElementId<br>
+			            	此属性指明存储文件地址的控件id，其值可以是一个字符串（仅一个文件需要提交），也可以是一个数组（多个文件需要提交）
+			            </li>
+			            <li class="table-view-divider">说明</li>
+			            <li class="table-view-cell">1、url地址必须是完整路径http|https地址</li>
+			            <li class="table-view-cell">2、此请求直接与url对应的服务器连接，不经过ExMobi服务端，所以不会维持于第三方session</li>
+			            <li class="table-view-cell">3、具体功能请看ExMobi的DirectFormSubmit对象</li>
+			            <li class="table-view-cell">4、如果不需要提交附件，仅有参数建议使用$util.ajax</li>
+		            </ul>
+	            </div>
+			</div>
+	    </article>
+		
+		<article id="direct_article" data-scroll="true">
+	    	<div class="scroller">
+	    		<div class="card">
+					<ul class="table-view">
+						<li class="table-view-divider">用法</li>
+			            <li class="table-view-cell">$util.ajax(options)</li>
+			            <li class="table-view-cell">options的参数请参考原生ajax</li>
+			            <li class="table-view-divider">说明</li>
+			            <li class="table-view-cell">1、url地址必须是完整路径http|https地址</li>
+			            <li class="table-view-cell">2、此请求直接与url对应的服务器连接，不经过ExMobi服务端，所以不会维持于第三方session</li>
+			            <li class="table-view-cell">3、具体功能请看ExMobi的DirectAjax对象</li>
+		            </ul>
+	            </div>
+			</div>
+	    </article>
+		
+		<article id="server_article" data-scroll="true">
+	    	<div class="scroller">
+	    		<div class="card">
+					<ul class="table-view">
+						<li class="table-view-divider">用法</li>
+			            <li class="table-view-cell">$util.server(options)</li>
+			            <li class="table-view-cell">options的参数请参考原生ajax</li>
+			            <li class="table-view-divider">说明</li>
+			            <li class="table-view-cell">1、url地址必须是完整路径http|https地址</li>
+			            <li class="table-view-cell">2、此请求会经过ExMobi服务端，所以会维持于第三方session</li>
+			            <li class="table-view-cell">3、具体功能请看ExMobi的Ajax对象描述</li>
+		            </ul>
+	            </div>
+			</div>
+	    </article>
+
+	    <article id="native_article" class="active" data-scroll="true">
+	    	<div class="scroller">
+	    		<div class="card">
+					<ul class="table-view">
+						<li class="table-view-divider">Zepto|jQuery</li>
+			            <li class="table-view-cell">采用的是Zepto或jQuery</li>
+			            <li class="table-view-cell">用法：$.ajax(options)</li>
+			            <li class="table-view-divider">Agile</li>
+			            <li class="table-view-cell">Agile也封装建议Ajax调用</li>
+			            <li class="table-view-cell">用法：A.ajax(options)</li>
+			            <li class="table-view-divider">options参数</li>
+			            <li class="table-view-cell">options为一个json对象，包含：url、type、data、dataType、jsonp、success、error</li>
+			            <li class="table-view-divider">url</li>
+			            <li class="table-view-cell">要请求的url地址</li>
+			            <li class="table-view-divider">type</li>
+			            <li class="table-view-cell">请求的方法，get|post</li>
+			            <li class="table-view-divider">data</li>
+			            <li class="table-view-cell">提交的参数，可以是键值对，也可以是xml或者json</li>
+			            <li class="table-view-divider">dataType</li>
+			            <li class="table-view-cell">相应数据类型，text|json|jsonp</li>
+			            <li class="table-view-divider">jsonp</li>
+			            <li class="table-view-cell">设定jsonp提交的函数获取参数名</li>
+			            <li class="table-view-divider">success</li>
+			            <li class="table-view-cell">请求成功回调函数</li>
+			            <li class="table-view-divider">error</li>
+			            <li class="table-view-cell">请求失败回调函数</li>
+		            </ul>
+	            </div>
+			</div>
+	    </article>
+	    
+	</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+
+</body>
+</html>

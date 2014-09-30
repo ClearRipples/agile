@@ -13,6 +13,57 @@ $native.exit = function(msg){
 
 };
 
+$native.openExMobiPage = function(href, el){
+	if(!href) return;
+	
+	var _this = $(el);
+	var isNew = _this.attr('target')!="_self";
+	
+	if(href.indexOf("#")==0){
+		href = "res:page/"+href.replace("#","")+".xhtml";
+	}
+	
+	if(href.indexOf("res")==0){	    			    	
+    	
+    	var urlOpt = $util.parseResURL(href);
+
+    	var opt = {
+    			url:urlOpt.href,
+    			id:urlOpt.fileName,
+    			isNew:isNew,
+    			query:urlOpt.query
+    	};
+    	
+    	ExMobiWindow.open(opt.url,isNew,false,'',opt.query);
+	}else{
+		ExMobiWindow.open(href,isNew);
+	}
+};
+
+$native.openWebView = function(href, el){
+	if(!href) return;
+	var _this = $(el);
+	var isNew = _this.attr('target')!="_self";
+    var transition = _this.data('transition'); 
+	
+	if(href.indexOf("#")==0){
+		href = 'res:page/html/'+href.replace("#","")+'.html';
+	}else if(href.indexOf('res')<0){
+		href = 'res:page/html/'+href;
+	}
+	var urlOpt = $util.parseResURL(href);
+
+	var opt = {
+			url:urlOpt.href,
+			id:urlOpt.fileName,
+			isNew:isNew,
+			query:urlOpt.query,
+			transition:transition
+	};
+
+	$native.open(opt);
+};
+
 $native.open = function(opt){//opt={url:'',id:''}
 	var html = $util.htmlTemplate(opt);	
 	ExMobiWindow.openData(html);
@@ -26,13 +77,9 @@ $native.toast = function(msg){
 	nativePage.executeScript("$a.toast('"+msg+"')");
 };
 
-$native.alert = function(msg){
-	if(typeof nativePage=='undefined'){
-		A.alert('提示',msg);
-		return;
-	}
+$native.alert = function(msg,callback){
 	var funStr = "alert('"+msg+"')";	
-	nativePage.executeScript(funStr);;
+	nativePage.executeScript(funStr);
 };
 
 
@@ -198,7 +245,7 @@ $util.htmlTemplate = function(opt){//opt={url:'',id:''}
 	html.push('</head>');
 	//html.push('<body style="margin:0px;padding:0px;" onload="$browser.bridgeLoad(&apos;'+url+'&apos;)" onstart="$browser.bridgeStart()" onstop="$browser.bridgeStop()" ondestroy="$browser.bridgeDestroy()">');
 	html.push('<body style="margin:0px;padding:0px;" onload="$browser.bridgeLoad()" onstart="$browser.bridgeStart()" onstop="$browser.bridgeStop()" ondestroy="$browser.bridgeDestroy()">');
-	html.push('<webview id="browser" url="'+url+'"/>');// backMonitor="true"
+	html.push('<webview id="browser" url="'+url+'" backmonitor="true"/>');// backMonitor="true"
 	//html.push('<browser id="browser" url="'+url+'" action="true" adapter="false"/>');
 	html.push('</body>');
 	html.push('</html>');
@@ -258,6 +305,15 @@ $util.parseResURL = function(str){
 	return opt;	
 
 };
+
+$native.decode = function(callback){
+	var decode = new Decode();
+	decode.onCallback = function (){
+		callback&&callback(decode.isSuccess()?decode:null);
+
+    };
+    decode.startDecode(); 
+}
 
 
 /**
@@ -522,36 +578,6 @@ $util.form = function(opts){
 	}
 	
 	$util.go(opts, DirectFormSubmit);
-};
-
-$util.provide = function(pageObj, sourceObj, callback){
-	
-	if(!pageObj||!sourceObj||!callback){
-		return;
-	}
-
-	var doAjax = function(opts, cb){
-		if(typeof opts=='string'||!opts.url){
-			cb(opts);
-		}else{
-			opts.success = function(html){
-				cb(html);
-			}
-			opts.error = function(){
-				cb('');
-			}
-			A.ajax(opts);
-		}
-	};
-	
-	doAjax(pageObj, function(html){
-		doAjax(sourceObj, function(data){
-			data = A.Util.formatJSON(data);
-			var render = template.compile(html);
-        	html = render(data);
-        	callback&&callback(html);
-		});
-	});
 };
 
 $util.paramsToJSON = function(data){

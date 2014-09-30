@@ -112,6 +112,33 @@
 			          	</a>
 			        </li>
 		      </ul>
+		      <h5 class="content-padded">Data Handle</h5>
+		      <ul class="table-view">
+			        <li class="table-view-cell media">
+			          	<a class="navigate-right" href="#ajax" data-target="native">
+				            <span class="media-object icon icomoon-hourglass pull-left"></span>
+				            <div class="media-body">Ajax请求</div>
+			          	</a>
+			        </li>
+			        <li class="table-view-cell media">
+			         	<a class="navigate-right" href="#inject" data-target="native">
+				            <span class="media-object icon icomoon-briefcase pull-left"></span>
+				            <div class="media-body">容器注入</div>
+			          	</a>
+			        </li>
+			        <li class="table-view-cell media">
+			          	<a class="navigate-right" href="#data" data-target="native">
+				            <span class="media-object icon icomoon-publish pull-left"></span>
+				            <div class="media-body">数据注入</div>
+			          	</a>
+			        </li>  
+			        <li class="table-view-cell media">
+			          	<a class="navigate-right" href="#example" data-target="native">
+				            <span class="media-object icon icomoon-lab pull-left"></span>
+				            <div class="media-body">综合示例</div>
+			          	</a>
+			        </li>
+		      </ul>
 	      </div>
         </article>
     </section>
@@ -119,8 +146,8 @@
 </div>
 <script>
 document.addEventListener("plusready", function() {
-	alert(1);
-}, false );
+	$native.toast('HTML5框架Agile启动完毕');
+},false);
 </script>
 <!--- exmobijs --->
 <script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
@@ -146,7 +173,7 @@ document.addEventListener("plusready", function() {
 				content : $('#content').val()
 			};
 		$util.sendMail(opts);
-		A.Router.goTo('#index_section');
+		A.Router.back();
 	});
 	/*
 	$util.form({
@@ -159,6 +186,7 @@ document.addEventListener("plusready", function() {
 		}
 	});
 	*/
+	
 
 })();
 

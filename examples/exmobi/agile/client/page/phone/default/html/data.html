@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>webapp</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet-theme-ios.css">
+    <link rel="stylesheet" href="../../script/agile/css/agile.css">
+    <link rel="stylesheet" href="../../script/app/app.css">
+    <link rel="stylesheet" href="../../script/icomoon/icomoon.css">
+	<style>
+	.scroller p{
+		word-break:break-all;
+	}
+	</style>
+</head>
+<body>
+<div id="section_container">
+    <section id="layout_section" class="active">
+        <header class="bar bar-nav">
+	      <a class="icon icon-left-nav pull-left" data-target="close" href="#"></a>
+	      <h1 class="title">数据注入</h1>
+	    </header>
+	    
+	    <nav class="bar bar-tab">
+		  <a class="tab-item active" href="#introduce_article" data-target="article">
+		    <span class="icon icon-list"></span>
+		    <span class="tab-label">说明</span>
+		  </a>
+		  <a class="tab-item" href="#js_article" data-target="article">
+		    <span class="icon icon-stop"></span>
+		    <span class="tab-label">JS注入</span>
+		  </a>
+		  <a class="tab-item" href="#template_article" data-target="article">
+		    <span class="icon icon-pages"></span>
+		    <span class="tab-label">模板注入</span>
+		  </a>
+		</nav>
+		<article id="template_article" data-scroll="true">
+			<div class="scroller">
+		      	<div class="card">
+					<ul class="table-view">
+						<li class="table-view-divider">原理</li>
+				        <li class="table-view-cell">模板注入是把页面中的一个html片段直接作为模板，并对此模板内容进行注入替换</li>
+						<li class="table-view-divider">示例</li>
+				        <li class="table-view-cell">1、在页面中准备一个script，模板片段</li>
+				        <li class="table-view-cell">2、该script必须有id属性，并且有data-inject="true"扩展属性</li>
+				        <li class="table-view-cell">3、如果有data-source属性，则初始化script的时候即进行数据注入，将data-source请求的结果注入到script中。</li>
+			        	<li class="table-view-divider">刷新数据</li>
+				        <li class="table-view-cell">script仅在初始化的时候被注入一次，这个过程中可能要刷新数据（覆盖、追加），目前提供了四种方法刷新</li>
+				        <li class="table-view-divider">方法一</li>
+				        <li class="table-view-cell">用法：$('#scriptId').render(options)</li>
+				        <li class="table-view-cell">options可以没有，如果没有的话则相当于把初始化的事情再做一次，但是需要注意的是，默认的刷新方式是在顶部追加</li>
+				        <li class="table-view-cell">data:要注入的json数据，支持自定义表达式如${data.list}，但是如果是自定义表达式则必须为字符串</li>
+				        <li class="table-view-cell">dataSource:能够请求道要注入的json数据的url地址</li>
+				        <li class="table-view-cell">type:注入的类型，在显示注入的容器中是直接覆盖（replace）、尾部追加（after）还是顶部追加（before）数据</li>
+				        <li class="table-view-cell">callback:回调函数，注入执行完毕后执行</li>
+				        <li class="table-view-divider">方法二</li>
+				        <li class="table-view-cell">用法：$('#scriptId').renderReplace([data||dataSource] [,callback])</li>
+				        <li class="table-view-cell">说明：把data或者dataSource注入到模板中，并覆盖原来注入过的所有内容，如果有回调函数则注入后执行</li>
+				        <li class="table-view-divider">方法三</li>
+				        <li class="table-view-cell">用法：$('#scriptId').renderAfter([data||dataSource] [,callback])</li>
+				        <li class="table-view-cell">说明：把data或者dataSource注入到模板中，并追加到原来注入过的内容之后，如果有回调函数则注入后执行</li>
+				        <li class="table-view-divider">方法四</li>
+				        <li class="table-view-cell">用法：$('#scriptId').renderBefore([data||dataSource] [,callback])</li>
+				        <li class="table-view-cell">说明：把data或者dataSource注入到模板中，并追加到原来注入过的内容之前，如果有回调函数则注入后执行</li>
+			        </ul>
+	        	</div>
+	        	
+	        	<script id="menu" type="text/html" data-inject="true" data-source="../json/article.json">
+	        	<div class="grid">	        		
+					<%for(var i=0;i<(css||[]).length;i++){%>		
+					<a data-role="grid">
+						<div class="grid-img">
+							<span class="icon <%=css[i]%>"></span>
+							<span class="badge bg-alizarin"><%=i+1%></span>
+						</div>
+						<label class="grid-label">grid</label>
+					</a>		
+					<%}%>					
+			    </div>
+				</script>
+	    	</div>
+	    </article>
+		
+		<article id="js_article" data-scroll="true">
+			<div class="scroller">
+		      	<div class="card">
+					<ul class="table-view">
+						<li class="table-view-divider">方法一</li>
+				        <li class="table-view-cell"><p>A.tmpl(containerSelector,templateId,data,type)你好</p></li>
+				        <li class="table-view-cell">containerSelector:欲填充的容器</li>
+				        <li class="table-view-cell">templateId:模板ID</li>
+				        <li class="table-view-cell">data:数据源</li>
+				        <li class="table-view-cell">type:[可选] add|replace</li>
+				        <li class="table-view-divider">方法二</li>
+				        <li class="table-view-cell"><p>A.render(options)</p></li>
+				       	<li class="table-view-cell">container:显示注入数据的容器#id，或者不写，如果不写，则必须在模板的script标签增加data-replace="container"或者data-add="container"，以著名要在哪个容器替换或者添加注入的数据</li>
+			        	<li class="table-view-cell">tmpl:模板的html片段，包含script本身，若不包含script，则必须指明container</li>
+			        	<li class="table-view-cell">tmplSource:能够请求道模板文件的url地址</li>
+			        	<li class="table-view-cell">tmplId:模板的id</li>
+			        	<li class="table-view-cell">data:要注入的json数据，支持自定义表达式如${data.list}，但是如果是自定义表达式则必须为字符串</li>
+			        	<li class="table-view-cell">dataSource:能够请求道要注入的json数据的url地址</li>
+			        	<li class="table-view-cell">type:注入的类型，在显示注入的容器中是直接覆盖（replace）、尾部追加（after）还是顶部追加（before）数据</li>
+			        	<li class="table-view-cell">callback:回调函数，当找不到container的时候最终渲染后的html片段会通过callbacl传回</li>
+			        </ul>
+	        	</div>
+	        	<div class="demo-btn">
+	        		<input type="text" id="text" placeholer="请输入文字并点击下面按钮"/>
+	        		<button class="btn" style="width:45%;" onclick="doTmpl()">tmpl注入</button>
+	        		<button class="btn pull-right" style="width:45%;" onclick="doRender()">render注入</button>
+	        		<div id="inject_container">
+	        		
+	        		</div>
+	        	</div>
+	    	</div>
+	    </article>
+		
+		
+		<article id="introduce_article" class="active" data-scroll="true">
+			<div class="scroller">
+		      	<div class="card">
+					<ul class="table-view">
+						<li class="table-view-divider">原理</li>
+				        <li class="table-view-cell">是指将一段json数据注入到一个模板中</li>
+				        <li class="table-view-divider">JS注入</li>
+				        <li class="table-view-cell">是指通过JS函数完成注入</li>
+				       	<li class="table-view-divider">模板注入</li>
+				       	<li class="table-view-cell">是指直接在页面中设置属性进行模板注入</li>
+			        </ul>
+	        	</div>
+	    	</div>
+	    </article><!-- /.content -->
+    </section>
+</div>
+<script id="tmpl" type="text/html" data-replace="#inject_container">
+<p>您输入的是：<%=text%></p>
+<div class="toggle" data-on="是" data-on-value="1" data-off="否" data-off-value="0"></div>
+</script>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+
+<script>
+function doTmpl(){
+	var data = {'text':$('#text').val()||'Hello Agile!'};
+	A.tmpl('#inject_container','tmpl',data,'replace');
+}
+
+function doRender(){
+	var data = {'text':$('#text').val()||'Hello Agile!'};
+	//A.render({tmplId:'#tmpl',data:data});
+	A.render({tmplSource:'inject_template.html',dataSource:'../json/section.json'});
+}
+$('#template_article').on('articleshow',function(){
+	$('#menu').render();//默认是before追加
+	//$('#menu').renderReplace();
+	//$('#menu').renderAfter();
+	//$('#menu').renderBefore();
+});
+</script>
+</body>
+</html>

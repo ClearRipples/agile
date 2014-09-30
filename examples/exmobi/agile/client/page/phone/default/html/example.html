@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>webapp</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet-theme-ios.css">
+    <link rel="stylesheet" href="../../script/agile/css/agile.css">
+    <link rel="stylesheet" href="../../script/app/app.css">
+    <link rel="stylesheet" href="../../script/icomoon/icomoon.css">
+	<style>
+	.scroller p{
+		word-break:break-all;
+	}
+	</style>
+</head>
+<body>
+<div id="section_container">
+    <section id="layout_section" class="active">
+        <header class="bar bar-nav">
+	      <a class="icon icon-left-nav pull-left" data-target="close" href="#"></a>
+	      <h1 class="title">示例</h1>
+	    </header>
+	    
+	    <nav class="bar bar-tab">
+		  <a class="tab-item active" href="#refresh_article" data-target="article">
+		    <span class="icon icon-list"></span>
+		    <span class="tab-label">列表刷新</span>
+		  </a>
+		  <a class="tab-item" href="#form_article" data-target="article">
+		    <span class="icon icon-stop"></span>
+		    <span class="tab-label">表单注入</span>
+		  </a>
+		</nav>
+		
+		<article id="form_article" data-scroll="true">
+			<div class="scroller">
+		      	<form class="input-group">
+		      		<script id="form_template" type="text/html" data-inject="true" data-source="../json/form.json">
+				  	<div class="input-row">
+				    	<label>姓名</label>
+				    	<input type="text" placeholder="请输入姓名" value="<%=name%>">
+				  	</div>
+				  	<div class="input-row">
+				    	<label>在职</label>
+				    	<div class="toggle <%=position?'active':''%>" data-on="是" data-on-value="1" data-off="否" data-off-value="0"></div>
+				  	</div>
+				  
+				  	<div class="input-row">
+				    	<label>公司</label>
+				    	<div data-role="select">
+					  	<select>
+					  		<option value="">请选择公司</option>
+					  		<option value="fiberhome" <%=company=='fiberhome'?'selected':''%>>烽火通信股份有限公司</option>
+					  		<option value="fhss" <%=company=='fhss'?'selected':''%>>烽火星空通信发展有限公司</option>
+					  	</select>
+				  		</div>
+				  	</div>
+				  
+				  	<div class="input-row">
+				    	<label>兴趣</label>
+				    	<div class="control-container">
+				    		<label for="bb" class="checkbox-label"><input type="checkbox" id="bb" <%=interest=='bb'?'checked':''%>/>篮球</label>
+				    		<label for="fb" class="checkbox-label"><input type="checkbox" id="fb" <%=interest=='fb'?'checked':''%>/>足球</label>
+				    		<label for="vb" class="checkbox-label"><input type="checkbox" id="vb" <%=interest=='vb'?'checked':''%>/>排球</label>
+				    	</div>
+				  	</div>
+				  
+				  	<div class="input-row">
+				    	<label>性别</label>
+				    	<div class="control-container">
+				    		<label for="nan" class="radio-label"><input type="radio" name="sexy" id="nan" <%=sex=='nan'?'checked':''%>/>男</label>
+				    		<label for="nv" class="radio-label"><input type="radio" name="sexy" id="nv" <%=sex=='nv'?'checked':''%>/>女</label>
+				    	</div>
+				  	</div>
+				  
+				  	<div class="input-row">
+				    	<label>基本情况</label>
+				    	<textarea rows="4" placeholder="请输入基本情况"><%=description%></textarea>
+				  	</div>
+				  	<div class="input-row">
+				    	<label>日期</label>
+					  	<div data-role="date">
+							<label>请选择日期</label>
+							<input type="hidden" value="<%=date%>"/>
+					  	</div>
+				  	</div>
+				  	<div class="input-row">
+				    	<label>时间</label>
+				  		<div data-role="time">
+							<label>请选择时间</label>
+							<input type="hidden" value="<%=time%>"/>
+				  		</div>
+				  	</div>
+				  	<div class="input-row">
+				    	<label>文件</label>
+				  		<div data-role="file">
+							<label>请选择文件</label>
+							<input type="hidden" value="<%=file%>"/>
+				  		</div>
+				  	</div>
+				  	<div class="input-row">
+				    	<label>条形码</label>
+				  		<div data-role="barcode">
+					  		<label>请扫描</label>
+					  		<input type="hidden" value="<%=barcode%>"/>
+					  	</div>
+				  	</div>
+				  	<div class="input-row">
+				    	<label>二维码</label>
+				  		<div data-role="qrcode">
+					  		<label>请扫描</label>
+					  		<input type="hidden" value="<%=qrcode%>"/>
+					  	</div>
+				  	</div>
+					</script>
+				</form>
+	    	</div>
+	    </article>
+		
+		<article id="refresh_article" class="active">
+			<div class="scroller">
+		      	<div class="card">
+					<ul class="table-view">
+				        <li class="table-view-cell">这是老数据</li>
+						<li class="table-view-cell">这是老数据</li>
+						<script id="refresh_template" type="text/html" data-inject="true" data-source="../json/template.json">
+						<%
+						for(var i=0;i<(list||[]).length;i++){
+						%>
+						<li class="table-view-cell"><%=list[i].title%></li>
+						<%
+						}
+						%>
+						</script>
+			        </ul>
+	        	</div>
+	    	</div>
+	    </article><!-- /.content -->
+    </section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+
+<script>
+$('#refresh_article').on('articleload',function(){
+	A.Refresh({
+        selector : '#refresh_article',
+        type : 'pullDown',
+        refreshTip : '<span id="refresh_time" class="sliver">更新于：从未更新</span>',
+        callback : function(){
+        	var scroll = this;
+        	$('#refresh_template').renderBefore(function(html){
+                $('#refresh_time').html('更新于：'+A.Util.formatDate(new Date(),'MM-dd hh:mm'));
+                scroll.refresh();
+                $native.toast('更新成功');
+        	});
+        }
+    });
+});
+</script>
+</body>
+</html>

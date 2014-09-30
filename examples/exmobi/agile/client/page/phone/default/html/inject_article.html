@@ -1,0 +1,16 @@
+	<article id="inject_article" data-source="../json/article.json" data-scroll="true">
+		<div class="scroller">
+			<div class="grid">
+				<%for(var i=0;i<(css||[]).length;i++){%>		
+				<a data-role="grid">
+					<div class="grid-img">
+						<span class="icon <%=css[i]%>"></span>
+						<span class="badge bg-alizarin"><%=i+1%></span>
+					</div>
+					<label class="grid-label">grid</label>
+				</a>		
+				<%}%>
+		    </div>
+		    <p class="demo-btn">上面九宫格是通过数据注入显示的，其数据来源于此artcile的属性data-souce的url值</p>
+		</div>
+	</article>
