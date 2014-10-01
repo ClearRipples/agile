@@ -1,10 +1,6 @@
 ﻿/*
 *	ExMobi4.0 JS 框架之 应用场景类app.js(依赖utility.js)
-*	Version	:	1.0.0.8
-*	Author	:	@黄楠nandy
-*	Email	:	huangnan@nj.fiberhome.com.cn
-*	Weibo   :   http://weibo.com/nandy007
-*   Copyright 2012 (c) 南京烽火星空通信发展有限公司
+*	Version	:	1.2.0
 */
 var $a = {
 	//拨打电话t为号码，n为名称
@@ -57,6 +53,8 @@ var $a = {
 
 		var key = cacheFlag?(cacheFlag==true?url:cacheFlag):"";
 		
+		requestHeader = requestHeader?requestHeader:'{"Content-Type":"application/x-www-form-urlencode"}';
+		
 		var a = new Ajax(url, method, data, $a._globalSuccess, failFunction?failFunction:$a._globalError, requestHeader, isShowProgress);
 
 		callbackParams = callbackParams?((typeof callbackParams) == "string"?callbackParams.toJSON():callbackParams):{};
@@ -106,6 +104,11 @@ var $a = {
 	_cacheSuccess:function(data){
 		
 		var isRefreshData = $a.init.isRefreshData;
+		
+		if(!$u.icache(data.getStringData("_cahceFlagKey"))){
+			isRefreshData = true;
+		}		
+		
 		var str = data.responseText.trim()
 		if($u.icache(data.getStringData("_cahceFlagKey"))==str){
 			isRefreshData = false;
@@ -182,7 +185,7 @@ var $a = {
 		}else if($a["$"+obj.id+"isClear"]==true){
 			
 			obj.innerHTML = $a["$"+obj.id+"template"].tjt(json);//.htmlDecode();
-		}else if(obj.objName=="div"){
+		}else if(obj.append){
 			obj.append($a["$"+obj.id+"template"].tjt(json));
 		}else{
 			obj.innerHTML += $a["$"+obj.id+"template"].tjt(json);//.htmlDecode();
@@ -244,7 +247,6 @@ var $a = {
 		});
 		return trueValue;
 	},
-	
 	getAppInfo:function(){
 		var fileContent = FileUtil.readFile('res:config.xml');
 		var obj = {
@@ -288,108 +290,6 @@ var $a = {
 	    mail.subject = subject?subject:'';
 	    mail.body = content?content:'';
 	    mail.show();
-	},
-	ajax : function(opts){
-		if(!opts) return;
-		opts = (typeof opts=='string')?opts.toJOSN():opts;
-		
-		var _formatMethod = function(m){
-			var methodArr = {"get":true,"post":true,"default":"get"};
-			m = m?m.toLowerCase():'';
-			return methodArr[m]?m:methodArr["default"];
-		};
-		var _formatIsBlock = function(b){
-			b = (typeof b == 'undefined')?true:b;
-			return b?true:false;
-		};
-		var _formatData = function(d){			
-			d = d?d:'';
-			if(opts.dataType=="jsonp"){
-				opts.jsonp = opts.jsonp?opts.jsonp:'jsonpcallback';
-				var jsonpcallback = $a._ajaxJsonpCallbackName+"="+opts.jsonp;
-				d += d?("&"+jsonpcallback):jsonpcallback;
-			}
-			return d;
-		};
-		
-		var _formatUrl = function(u){
-			return u?u:'';
-		};
-		
-		var _formatDataType = function(t){
-			var dataTypeArr = {"text":true,"json":true,"jsonp":true,"default":"text"};
-			t = t?t.toLowerCase():'';
-			return dataTypeArr[t]?t:dataTypeArr["default"];
-		};
-		
-		opts.dataType = _formatDataType(opts.dataType);
-		
-		var ajaxData = {};
-
-	    ajaxData.isBlock = opts.isBlock = _formatIsBlock(opts.isBlock); 
-
-	    ajaxData.method = opts.type = _formatMethod(opts.type);  
-	    
-	    if(opts.requestHeader){
-	    	ajaxData.requestHeader = opts.requestHeader;
-	    }
-
-	    ajaxData.url = opts.url = _formatUrl(opts.url);
-	    
-	    ajaxData.data = opts.data = _formatData(opts.data);
-
-	    ajaxData.successFunction = "__$a_ajaxSuccessHandle";
-	    ajaxData.failFunction = "__$a_ajaxErrorHandle";
-	    
-	    var _cacheKey = $a._cacheMap.index++;
-
-	    $a._cacheMap[_cacheKey] = opts;
-	    
-	    if(!ajaxData.url){
-	    	opts.error&&opts.error();
-	    	return;
-	    }
-	    
-	    
-	    var ajax = new DirectAjax(ajaxData);
-
-	    ajax.setStringData("_ajaxURL",_cacheKey);
-
-	    ajax.send();
-	},
-	_cacheMap : {
-		index : 0
-	},
-	_ajaxJsonpCallbackName : 'jsonpcallback',
-	
-
-};
-
-var __$a_ajaxSuccessHandle = function(data){
-	var _cacheKey = data.getStringData("_ajaxURL");
-	var opts = $a._cacheMap[_cacheKey];
-	
-	var result = data.responseText;
-
-	if(opts.dataType=='text'){
-		opts.success&&eval(opts.success+"(result)");
-	}else if(opts.dataType=='json'){
-		opts.success&&eval(opts.success+"(result.toJSON())");
-	}else if(opts.dataType=='jsonp'){
-		if(!opts.success) return;
-		var excutStr = ("var "+$a._ajaxJsonpCallbackName+" = function(obj){ "+opts.success+"(obj);};");
-		eval(excutStr);
-		try{
-			eval(result);
-		}catch(e){
-			$a._ajaxErrorHandle();
-		}
 	}
-	
-	
-};
-var __$a_ajaxErrorHandle = function(data){
-	var _cacheKey = data.getStringData("_ajaxURL");
-	var opts = $a._cacheMap[_cacheKey];
-	opts.error&&eval(opts.error+"(data)");
+
 };

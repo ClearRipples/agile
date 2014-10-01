@@ -1,4 +1,8 @@
-﻿var $native = {};
+﻿/*
+*	ExMobi4.0 JS 框架之 webview桥接类bridge.js(依赖app.js)
+*	Version	:	1.1.0
+*/
+var $native = {};
 
 $native.close = function(){
 	ExMobiWindow.close();

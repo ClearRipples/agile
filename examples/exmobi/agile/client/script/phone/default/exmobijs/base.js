@@ -1,10 +1,6 @@
 ﻿/*
 *	ExMobi4.0 JS 框架之 控件对象类base.js(依赖app.js)
-*	Version	:	1.0.0.7
-*	Author	:	@黄楠nandy
-*	Email	:	huangnan@nj.fiberhome.com.cn
-*	Weibo   :   http://weibo.com/nandy007
-*   Copyright 2012 (c) 南京烽火星空通信发展有限公司
+*	Version	:	1.1.0
 */
 function $(x){
 	
@@ -15,16 +11,7 @@ function $(x){
 		return x;
 	}else if((typeof x)=="string"){
 		obj = document.getElementById(x);
-		if(obj==null){
-			var objArr = document.getElementsByName(x);
-			obj = objArr.length>0?objArr[0]:null;
-			
-			if(obj==null){
-				objArr = document.getElementsByTagName(x);
-				obj = objArr.length>0?objArr[0]:null;
-			}
-		}
-
+		obj = obj==null&&document.getElementsByName(x.toString()).length>0?document.getElementsByName(x.toString())[0]:obj;
 	}else{
 		obj = x;
 	}
@@ -79,7 +66,7 @@ function $(x){
 		
 	//追加对象的innerHTML
 	obj.addHtml = function(){			
-		if(obj.objName=="div"){
+		if(obj.append){
 			obj.append(arguments[0]);
 		}else{
 			obj.innerHTML += arguments[0];
