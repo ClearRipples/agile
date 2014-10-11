@@ -65,7 +65,9 @@
 	    A.confirm('提示','这是一个Confirm！',function(){A.showToast('你选择了“确定”')},function(){A.showToast('你选择了“取消”')});
 	});
 	$('#btn_loading').tap(function(){
-	    A.showMask();
+	    A.showMask(function(){
+	    	A.showToast('您已关闭请求');
+	    });
 	});
 	$('#btn_center').tap(function(){
 		A.popup({

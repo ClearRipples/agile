@@ -15,12 +15,10 @@ document.addEventListener("backmonitor", function() {
     }
 },false);
 /*
- * 初始化settings
+ * 重置进度条
  * */
-//重置跨域请求的函数
-A.settings.crossDomainHandler = $util.ajax;
-A.showMask = $native.showMask;
-A.hideMask = $native.hideMask;
+//A.showMask = function(fun){ $native.showMask(fun); };
+//A.hideMask = function(fun){ $native.hideMask(fun); };
 /*
  * 扩展Element
  */

@@ -1,5 +1,7 @@
 ﻿$(function(){
 	A.launch({
-        showPageLoading : true
+        showPageLoading : false,
+        isAutoRender : true,
+        crossDomainHandler : $util.ajax
     });
 });

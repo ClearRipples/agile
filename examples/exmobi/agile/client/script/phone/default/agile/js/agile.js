@@ -1,5 +1,5 @@
 ﻿var Agile = A = {
-    version : '2.0.2',
+    version : '2.0.3',
     $ : window.Zepto||jQuery,
     //参数设置
     settings : {
@@ -145,6 +145,10 @@ A.Element = (function($){
     	//初始化data-articleshow事件
     	$(document).on('articleshow','article',function(e){
     		var $el = $(this);
+    		//处理title
+    		if($el.data('title')){
+    			$el.parents('section').first().find('header .title').first().html(A.Util.script($el.data('title')));
+    		}
     		if(!$el.data('__articleload_tag__')) $el.trigger('articleload');
         	var func = $el.data('articleshow');
         	if(func) eval(func);
@@ -457,7 +461,8 @@ A.Page = (function($){
                 },
                 error : function(html){
                 	callback && callback('');
-                }
+                },
+                isBlock : false
            };
 
     	return A.ajax(opts);
@@ -586,7 +591,6 @@ A.Router = (function($){
                 		var render = template.compile(html);
                     	html = render(data);
             		}
-            		
             		if($(href).length==0) $('#section_container').append(html);
             		$section = $(href);
                 	_commonHandle();
@@ -1139,6 +1143,16 @@ A.Util = (function($){
     	}):'';
     };
     
+    var checkBoolean = function(){
+    	var result = false;
+    	for(var i=0;i<arguments.length;i++){
+    		if(typeof arguments[i]=='boolean'){
+    			return arguments[i];
+    		}
+    	}
+    	return result;
+    };
+    
     var _eval = function(str){
     	str = (str||'').trim();
     	var obj = {};   	
@@ -1158,6 +1172,9 @@ A.Util = (function($){
     	opts.url = _script(opts.url);
     	var random = '__ajax_random__='+Math.random();
     	opts.url += (opts.url.split(/\?|&/i).length==1?'?':'&')+random;
+    	
+    	var _isBlock = A.Util.checkBoolean(opts.isBlock,A.settings.showPageLoading);
+    	
     	var ajaxData = {
                 url : opts.url,
                 timeout : 20000,
@@ -1165,11 +1182,14 @@ A.Util = (function($){
                 dataType : opts.dataType||'text',
                 success : function(html){
                     opts.success && opts.success(html);
+                    if(_isBlock) A.hideMask();
                 },
                 error : function(html){
                 	opts.error && opts.error(null);
+                	if(_isBlock) A.hideMask();
                 }
            };
+
     	var isCross = _isCrossDomain(opts.url);
 
     	var handler = $.ajax;
@@ -1181,6 +1201,8 @@ A.Util = (function($){
     	if(ajaxData.dataType.toLowerCase()=='jsonp'){
     		ajaxData.jsonp = opts.jsonp||'__jsonpcallback';
     	}
+    	
+    	if(_isBlock) A.showMask();
     	
     	handler(ajaxData);
     };
@@ -1197,7 +1219,8 @@ A.Util = (function($){
         isCrossDomain : _isCrossDomain,
         script :　_script,
         eval :　_eval,
-        ajax : _ajax
+        ajax : _ajax,
+        checkBoolean : checkBoolean
     };
 
 })(A.$);
@@ -1241,8 +1264,12 @@ A.Util = (function($){
      * 显示loading框
      * @param text
      */
-    A.showMask = function(text){
-        A.Popup.loading(text);
+    A.showMask = function(text, closeCallback){
+    	if(typeof text=='function'){
+    		closeCallback = text;
+    		text = '';
+    	}
+        A.Popup.loading(text, closeCallback);
     };
     /**
      * 关闭loading框
@@ -1334,7 +1361,7 @@ A.Util = (function($){
     			callback : function(){}
     			
     	};    	
-    	$.extend(options,opts);   
+    	$.extend(options,opts);
     	
     	var handleHTML = function(opts,callback){
     		
@@ -1358,6 +1385,13 @@ A.Util = (function($){
                 		callback(html);
                 		A.cache[scriptKey] = html;
                 	});                	
+                }else if($script.html().trim()==''&&$script.attr('src')){
+                	A.Page.loadContent($script.attr('src'),function(h){
+                		html = h||'';
+                		$script.text(html);
+                		callback($script);
+                		A.cache[scriptKey] = $script;
+                	});
                 }else{     
                 	html = $script;
                 	callback(html);
@@ -1404,7 +1438,10 @@ A.Util = (function($){
         			}
         		}
     		}
-
+    		
+    		var _isShowBlock = false;
+    		_isShowBlock = A.Util.checkBoolean($html.data('loading')||_isShowBlock);
+    		if(_isShowBlock) A.showMask();
     		handleData(options, function(o){
     			if(!o||o=={}||o==[]){
     				options.callback('');
@@ -1420,7 +1457,8 @@ A.Util = (function($){
     				A.Element.init(html);
     			}
     			options.callback(html);
-    		})
+    			if(_isShowBlock) A.hideMask();
+    		});
     	});
     	
     };
@@ -1497,7 +1535,9 @@ A.Popup = (function($){
             animation : true,//是否显示动画
             timingFunc : 'linear',
             duration : 200,//动画执行时间
-            onShow : undefined //@event 在popup内容加载完毕，动画开始前触发
+            onShow : undefined, //@event 在popup内容加载完毕，动画开始前触发
+            onHide : undefined, //@event 在popup隐藏后触发
+            onClose : undefined //@event 在popup被手动关闭后触发
         };
         $.extend(settings,options);
         clickMask2close = settings.clickMask2Close;
@@ -1520,7 +1560,6 @@ A.Popup = (function($){
                 transition = ANIM['defaultAnim'];
             }
         }else{
-            console.error('错误的参数！');
             return;
         }
         _mask.show();
@@ -1530,8 +1569,7 @@ A.Popup = (function($){
         }else if(settings.url){//远程加载
             html = A.Page.loadContent(settings.url);
         }else if(settings.tplId){//加载模板       	
-            html = template(settings.tplId,settings.tplData);
-            
+            html = template(settings.tplId,settings.tplData);          
         }
 
         //是否显示关闭按钮
@@ -1551,7 +1589,15 @@ A.Popup = (function($){
         A.Element.init(_popup);
         //执行onShow事件，可以动态添加内容
         settings.onShow && settings.onShow.call(_popup);
-
+        $(document).trigger('popupshow', [_popup]);
+        settings.onHide && $(document).on('popuphide',function(){
+        	settings.onHide();
+        	settings.onHide = undefined;
+        });
+        settings.onClose && $(document).on('popupclose',function(){
+        	settings.onClose();
+        	settings.onClose = undefined;
+        });
         //显示获取容器高度，调整至垂直居中
         if(settings.pos == 'center'){
             var height = _popup.height();
@@ -1578,13 +1624,18 @@ A.Popup = (function($){
             _popup.hide().empty();
             A.hasPopupOpen = false;
         }
-
+        $(document).trigger('popuphide');
     };
     var _subscribeEvents = function(){
+    	var closePopup = function(){
+    		hide();
+    		$(document).trigger('popupclose');
+    	}
+    	
         _mask.on('tap',function(){
-            clickMask2close &&  hide();
+            clickMask2close &&  closePopup();
         });
-        _popup.on('tap','[data-target="closePopup"]',function(){hide();});
+        _popup.on('tap','[data-target="closePopup"]',function(){closePopup();});
     };
     /**
      * alert组件
@@ -1646,15 +1697,17 @@ A.Popup = (function($){
     /**
      * loading组件
      * @param text 文本，默认为“加载中...”
+     * @param closeCallback 函数，当loading被人为关闭的时候的触发事件
      */
-    var loading = function(text){
+    var loading = function(text,closeCallback){
         var markup = TEMPLATE.loading.replace('{title}',text||'加载中...');
         show({
             html : markup,
             pos : 'loading',
             opacity :.1,
             animation : true,
-            clickMask2Close : false
+            clickMask2Close : false,
+            onClose : closeCallback
         });
     };
 
