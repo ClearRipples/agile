@@ -440,11 +440,10 @@ A.Page = (function($){
      * @param url
      */
     var loadContent = function(hashObj,callback){   	
-
     	if(typeof hashObj=='string'){
     		hashObj = A.Util.parseHash(hashObj);
     	}
-
+    	
     	if(!hashObj||!hashObj.url){
     		callback&&callback(null);
     		return;
@@ -999,6 +998,7 @@ A.Transition = (function($){
 A.Util = (function($){
 	var parseHash = function(hash){
 		var url = hash;
+		url = _script(url);
         var tag,query,param={};
         var arr = hash.split('?');
         tag = arr[0];
@@ -1169,7 +1169,8 @@ A.Util = (function($){
      * */
     var _ajax = function(opts){
     	if(!opts||!opts.url) return;
-    	opts.url = _script(opts.url);
+    	//opts.url = _script(opts.url);
+    	
     	var random = '__ajax_random__='+Math.random();
     	opts.url += (opts.url.split(/\?|&/i).length==1?'?':'&')+random;
     	
@@ -2376,7 +2377,7 @@ A.Popup = (function($){
 			}
 			$el.attr('__inject_cache__',true);
 			$referObj.after($(html).attr('__inject_dependence__',tag));
-			A.Element.init($el);
+			A.Element.init($el.parent());
 			if(opts&&opts.callback){			
 				opts.callback(html);
 			}
