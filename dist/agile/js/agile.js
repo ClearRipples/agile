@@ -1,5 +1,5 @@
 ﻿var Agile = A = {
-    version : '2.0.3',
+    version : '2.0.4',
     $ : window.Zepto||jQuery,
     //参数设置
     settings : {
@@ -19,7 +19,11 @@
         //ajax跨域请求默认处理函数，可以使用其他跨平台方法避免原生ajax的jsonp麻烦
         crossDomainHandler : null,
         //是否默认渲染模板
-        isAutoRender : false
+        isAutoRender : false,
+        //滑动例外
+        slidingException : '.sliding_container',
+        //懒人加载默认图片
+        lazyloadPlaceholder : ''
     },
     //手机或者平板
     mode : window.innerWidth < 800 ? "phone" : "tablet",
@@ -30,6 +34,8 @@
     hasAsideMenuOpen : false,
     //是否有打开的弹出框
     hasPopupOpen : false,
+    //是否打开模态框
+    hasModalOpen : false,
     /**
      * 启动
      * @param opts {object}
@@ -149,6 +155,7 @@ A.Element = (function($){
     		if($el.data('title')){
     			$el.parents('section').first().find('header .title').first().html(A.Util.script($el.data('title')));
     		}
+    		_init_lazyload($el);
     		if(!$el.data('__articleload_tag__')) $el.trigger('articleload');
         	var func = $el.data('articleshow');
         	if(func) eval(func);
@@ -220,6 +227,58 @@ A.Element = (function($){
     	$el.render();
     };
     
+    /**
+     * 初始化懒人加载组件
+     */
+    var _init_lazyload = function(el){
+    	var $el = $(el);
+    	var source = $el.data('source');
+    	if(!source){
+    		$.map(_getMatchElements($el,SELECTOR.lazyload.selector),SELECTOR.lazyload.handler);
+        	return;
+    	}
+    	var placeholder = $el.attr('placeholder')||A.settings.lazyloadPlaceholder;
+    	if(!$el.attr('src')&&placeholder) $el.attr('src', placeholder);
+    	
+    	var eTop = $el.offset().top;//元素的位置
+    	var validateDistance = 100;
+    	var winHeight = $(window).height()+validateDistance;
+    	if(eTop<0||eTop>winHeight) return;    	
+    	
+    	var _injectImg = function(data){
+    		if(!$el.data('source')) return;
+			$el.attr('src', data);
+			$el.removeAttr('data-source');
+			setTimeout(function(){
+				_init_scroll($('section.active article[data-scroll]'));
+			},500);  
+    	};
+    	
+    	var type = $el.data('type');    	
+    	if(type=='base64'){
+    		A.ajax({
+    			url : source,
+    			success : function(data){
+    				_injectImg(data);
+    			},
+    			isBlock : false
+    		});
+    	}else{
+    		var img = new Image();
+    		img.src = source;
+    		if(img.complete) {
+    			_injectImg(source);
+    			img = null;
+    	    }else{
+    	    	img.onload = function(){
+    				_injectImg(source);	
+    				img = null;
+        		}; 
+    	    	
+    	    }
+    	}
+    };
+    
 
     /**
      * 构造toggle切换组件
@@ -267,10 +326,17 @@ A.Element = (function($){
     		scroll : {selector:'[data-scroll="true"]', handler:function(el){
     				var zoom = $(el).data('zoom');
     				var tag = zoom==true?true:false;
-    				A.Scroll(el,{zoom:tag,hScroll:tag});
+    				A.Scroll(el,{
+    					zoom:tag,
+    					hScroll:tag,
+    					onScrollEnd: function(){
+    						_init_lazyload(el);
+    					}
+    				});
     			}
     		},
-    		inject : {selector:'[data-inject="true"]', handler:_init_inject}
+    		inject : {selector:'[data-inject="true"]', handler:_init_inject},
+    		lazyload : {selector:'img[data-source]', handler:_init_lazyload}
     		
     };
     var FORM_SELECTOR = {
@@ -288,7 +354,8 @@ A.Element = (function($){
         initForm : _initFormElement,
         scroll : _init_scroll,
         addFormSelector : _addFormSelector,
-        initInject : _init_inject
+        initInject : _init_inject,
+        initLazyload : _init_lazyload
     };
 })(A.$);
 
@@ -343,11 +410,19 @@ A.AsideMenu = (function($){
         });
 
         $asideContainer.on('tap','.aside-close',hideAsideMenu);
-        
-        $(document).on('swipeRight','section.active[data-aside-left]',function(){
+        var isSwipe = true;
+        $(document).on('touchstart','section.active[data-aside-left],section.active[data-aside-right]',function(e){
+        	isSwipe = true;
+        	if($(e.target).parents(A.settings.slidingException).length>0){
+        		isSwipe = false;
+        	}
+        });
+        $(document).on('swipeRight','section.active[data-aside-left]',function(e){
+        	if(!isSwipe) return;
         	showAsideMenu($(this).data('aside-left'));
         });
-        $(document).on('swipeLeft','section.active[data-aside-right]',function(){
+        $(document).on('swipeLeft','section.active[data-aside-right]',function(e){
+        	if(!isSwipe) return;
         	showAsideMenu($(this).data('aside-right'));
         });
         
@@ -707,7 +782,6 @@ A.Router = (function($){
     
     
     var _showModal = function(href){
-
     	//读取hash信息
         var hashObj = A.Util.parseHash(href);
     	
@@ -716,8 +790,10 @@ A.Router = (function($){
     	var _doToggle = function(href){
     		var $el = $(href);
     		if($el.hasClass('active')){
+    			A.hasModalOpen = false;
     			$el.removeClass('active').trigger('modalhide').find('article').trigger('articleshow');
     		}else{
+    			A.hasModalOpen = $el;
     			$el.addClass('active').trigger('modalshow').find('article').trigger('articlehide');
     		}
     	};
@@ -1169,7 +1245,7 @@ A.Util = (function($){
      * */
     var _ajax = function(opts){
     	if(!opts||!opts.url) return;
-    	//opts.url = _script(opts.url);
+    	opts.url = _script(opts.url);
     	
     	var random = '__ajax_random__='+Math.random();
     	opts.url += (opts.url.split(/\?|&/i).length==1?'?':'&')+random;

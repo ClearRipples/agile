@@ -3,8 +3,8 @@
     <appid>agile</appid>
     <appname>agile前端框架</appname>
     <description>基于zepto和ratchet的移动应用开发框架</description>
-    <version>1.1</version>
-    <date>2014-09-29</date>
+    <version>1.2</version>
+    <date>2014-10-20</date>
     <homepage src="res:page/index.xhtml"/>
     <faultconfig src=""/>
     <vendor url="" email=""></vendor>

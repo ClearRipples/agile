@@ -19,6 +19,8 @@
   		<forward pattern="/page/json" path="page/json.jsp"/>
   		
   		<forward pattern="/mail_interface_section" path="mail_interface_section.jsp"/>
+  		
+  		<forward pattern="/getImgBase64" path="getImgBase64.jsp"/>
   	</http-service>
   </services>
 </maxml>

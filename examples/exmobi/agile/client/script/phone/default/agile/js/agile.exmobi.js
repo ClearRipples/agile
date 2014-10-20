@@ -6,6 +6,8 @@ document.addEventListener("backmonitor", function() {
         A.AsideMenu.hide();
     }else if(A.hasPopupOpen){
         A.closePopup();
+    }else if(A.hasModalOpen){
+    	A.Router.showModal('#'+$(A.hasModalOpen).attr('id'));
     }else{
     	if(A.Router.history().length<2){
     		$native.close();
