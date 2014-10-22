@@ -17,7 +17,7 @@ font.icon{
 font.icon:before{
 	font-size:24px;
 }
-[data-scroll]{
+[data-scroll],[data-scroll-orientation]{
 	overflow:hidden;
 }
 .scroller {
@@ -1211,3 +1211,23 @@ aside ul.menu li.anchor{
     animation: spinner .8s infinite linear;
 }
 .injecting{ display:none; }
+
+[data-role="slider-bar"]{
+	border:none;
+	line-height:20px;
+}
+[data-role="slider-bar"] .control-item{
+	font-size:18px;
+	border:none;
+	background-color: transparent;
+	color: #ddd;
+}
+[data-role="slider-bar"] .control-item.active{
+	border:none;
+	background-color: transparent;
+	color: #3498db;
+	border-bottom:2px solid #3498db;
+}
+[data-role="slider-bar"]:active{
+	background-color: transparent;
+}

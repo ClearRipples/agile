@@ -1,5 +1,5 @@
 ﻿var Agile = A = {
-    version : '2.0.4',
+    version : '2.1.0',
     $ : window.Zepto||jQuery,
     //参数设置
     settings : {
@@ -96,6 +96,38 @@ A.Element = (function($){
         return $el.find(selector).add($el.filter(selector));
     };
     
+    var _trans_article = function(currentSection, currentArticle, type){
+    	if(type=='right'){
+    		type = 'Right';
+    		targetArticle = currentArticle.prev('article');
+    	}else{
+    		type = 'Left';
+    		targetArticle = currentArticle.next('article');
+    	}
+    	
+		if(targetArticle.length==0) return;
+
+		A.anim(currentArticle, 'slide'+type+'Out', function(){
+			currentArticle.removeClass('active').trigger('articlehide');
+		});
+		A.anim(targetArticle, 'slide'+type+'In', function(){
+			targetArticle.addClass('active').trigger('articleshow');
+			var targetArticleId = targetArticle.attr('id');
+			if(!targetArticleId) return;
+			currentSection.find('a[data-target="article"]').each(function(i){
+	    		var $refer = $(this);
+	    		var referHashObj = A.Util.parseHash($refer.attr('href'));
+	    		if(referHashObj.tag=='#'+targetArticleId){
+	    			$refer.addClass('active');
+	    			_init_scroll_orientation($refer.parents('[data-scroll-orientation="horizontal"]'), $refer);
+	    		}else{
+	    			$refer.removeClass('active');
+	    		}	    		
+	    	});
+		});
+		
+    };
+    
     /**
      * 初始化section
      */
@@ -109,6 +141,25 @@ A.Element = (function($){
         	if(func) eval(func);
         	//初始化inject
         	if(A.settings.isAutoRender) _init_inject($el);
+        	
+        	//初始化section下的article左右滑动切换
+        	if($el.data('article-slider')==true){
+        		var isSwipe = true;
+        		$el.on('touchstart', 'article', function(e){
+                	isSwipe = true;
+                	if($(e.target).parents(A.settings.slidingException).length>0){
+                		isSwipe = false;
+                	}
+                });
+        		$el.on('swipeRight', 'article', function(){
+        			if(isSwipe) _trans_article($el, $(this), 'right');       			
+        		});
+        		$el.on('swipeLeft', 'article', function(atcObj){
+        			if(isSwipe) _trans_article($el, $(this), 'left');
+        		});
+        	}
+        	//初始化横向滚动 
+        	_init_scroll_orientation($el);
         });
     	//初始化data-pageshow事件
     	$(document).on('pageshow','section',function(e){
@@ -208,6 +259,23 @@ A.Element = (function($){
      */
     var _init_scroll = function(selector){
         $.map(_getMatchElements($(selector),SELECTOR.scroll.selector),SELECTOR.scroll.handler);
+    };
+    
+    /**
+     * 初始化滚动组件
+     */
+    var _init_scroll_orientation = function(el, targetObj){
+    	var $el = $(el);
+    	var orientation = $el.data('scroll-orientation');
+    	
+    	if(!orientation){
+    		$.map(_getMatchElements($el,SELECTOR.scrollOrientation.selector),SELECTOR.scrollOrientation.handler);
+    	}else if(orientation=='horizontal'){
+    		var scroller = A.Scroll($el,{hScroll:true,hScrollbar : false}).scroller;
+    		if(targetObj.length>0) scroller.scrollToElement(targetObj[0]);
+    	}else if(orientation=='vertical'){
+    		SELECTOR.scroll.handler(el);
+    	}
     };
     
     /**
@@ -336,7 +404,8 @@ A.Element = (function($){
     			}
     		},
     		inject : {selector:'[data-inject="true"]', handler:_init_inject},
-    		lazyload : {selector:'img[data-source]', handler:_init_lazyload}
+    		lazyload : {selector:'img[data-source]', handler:_init_lazyload},
+    		scrollOrientation : {selector:'[data-scroll-orientation]', handler:_init_scroll_orientation}
     		
     };
     var FORM_SELECTOR = {
@@ -355,7 +424,8 @@ A.Element = (function($){
         scroll : _init_scroll,
         addFormSelector : _addFormSelector,
         initInject : _init_inject,
-        initLazyload : _init_lazyload
+        initLazyload : _init_lazyload,
+        initScrollOrientation : _init_scroll_orientation
     };
 })(A.$);
 
@@ -2242,7 +2312,6 @@ A.Popup = (function($){
             }
             gestureStarted = false;
         };
-
 
         _init();
         _bindEvents();
