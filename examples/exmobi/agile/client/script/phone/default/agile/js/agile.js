@@ -1,5 +1,5 @@
 ﻿var Agile = A = {
-    version : '2.1.0',
+    version : '2.1.1',
     $ : window.Zepto||jQuery,
     //参数设置
     settings : {
@@ -82,7 +82,12 @@ A.Element = (function($){
         if($el.length == 0)return;
         
         for(var k in FORM_SELECTOR){
-        	$.map(_getMatchElements($el,FORM_SELECTOR[k].selector),FORM_SELECTOR[k].handler);
+        	$.map(_getMatchElements($el,FORM_SELECTOR[k].selector),function(el){
+        		var $obj = $(el);
+        		if($obj.attr('__form_element_init__')) return;
+        		FORM_SELECTOR[k].handler(el);
+        		$obj.attr('__form_element_init__', true);
+        	});
         }
         
         $el = null;
@@ -94,38 +99,6 @@ A.Element = (function($){
      */
     var _getMatchElements = function($el,selector){
         return $el.find(selector).add($el.filter(selector));
-    };
-    
-    var _trans_article = function(currentSection, currentArticle, type){
-    	if(type=='right'){
-    		type = 'Right';
-    		targetArticle = currentArticle.prev('article');
-    	}else{
-    		type = 'Left';
-    		targetArticle = currentArticle.next('article');
-    	}
-    	
-		if(targetArticle.length==0) return;
-
-		A.anim(currentArticle, 'slide'+type+'Out', function(){
-			currentArticle.removeClass('active').trigger('articlehide');
-		});
-		A.anim(targetArticle, 'slide'+type+'In', function(){
-			targetArticle.addClass('active').trigger('articleshow');
-			var targetArticleId = targetArticle.attr('id');
-			if(!targetArticleId) return;
-			currentSection.find('a[data-target="article"]').each(function(i){
-	    		var $refer = $(this);
-	    		var referHashObj = A.Util.parseHash($refer.attr('href'));
-	    		if(referHashObj.tag=='#'+targetArticleId){
-	    			$refer.addClass('active');
-	    			_init_scroll_orientation($refer.parents('[data-scroll-orientation="horizontal"]'), $refer);
-	    		}else{
-	    			$refer.removeClass('active');
-	    		}	    		
-	    	});
-		});
-		
     };
     
     /**
@@ -144,6 +117,7 @@ A.Element = (function($){
         	
         	//初始化section下的article左右滑动切换
         	if($el.data('article-slider')==true){
+
         		var isSwipe = true;
         		$el.on('touchstart', 'article', function(e){
                 	isSwipe = true;
@@ -152,11 +126,14 @@ A.Element = (function($){
                 	}
                 });
         		$el.on('swipeRight', 'article', function(){
-        			if(isSwipe) _trans_article($el, $(this), 'right');       			
+        			var currentArticle = $(this);
+        			if(isSwipe) A.Transition.transArticle($el, currentArticle, currentArticle.prev('article'));       			
         		});
         		$el.on('swipeLeft', 'article', function(atcObj){
-        			if(isSwipe) _trans_article($el, $(this), 'left');
+        			var currentArticle = $(this);
+        			if(isSwipe) A.Transition.transArticle($el, currentArticle, currentArticle.next('article'));
         		});
+
         	}
         	//初始化横向滚动 
         	_init_scroll_orientation($el);
@@ -185,10 +162,7 @@ A.Element = (function($){
     var _init_article = function(){
     	//初始化article的滚动组件
     	$(document).on('articleshow','article[data-scroll="true"]',function(){
-        	var _this = this;
-        	setTimeout(function(){
-        		A.Element.scroll(_this);
-        	}, 500);           
+        	A.Element.scroll(this);           
         });
     	
     	//初始化data-articleload事件
@@ -196,8 +170,29 @@ A.Element = (function($){
     		var $el = $(this);
     		$el.data('__articleload_tag__',true);
     		_initFormElement($el);
+    		_init_scroll_orientation($el);
         	var func = $el.data('articleload');
-        	if(func) eval(func);  
+        	if(func) eval(func);
+        	if($el.data('slider-page')){   
+        		var key = A.cache.index++;
+        		$el.attr('__slider_page__', key);
+        		A.cache['__slider_page__'+key] = new A.Slider({
+        	        selector : $el,
+        	        container : $el,
+        	        siliders : $el.find('[data-slider-page]'),
+        	        showDots : false,
+        	        onAfterSlide : function(i){
+        	        	var $target = $el.find('[data-role="slider-page"]:eq('+i+')').addClass('active').trigger('sliderpageshow');
+        	        	$target.siblings('.active').removeClass('active').trigger('sliderpagehide');
+        	        	var $section = $target.parents('section');
+        	        	var $refer = $section.find('[data-target="sliderPage"][href="#'+$target.attr('id')+'"]').addClass('active');
+        	        	$refer.siblings('.active').removeClass('active');
+        	        	
+        	        	A.Element.initScrollOrientation($refer.parents('[data-scroll-orientation="horizontal"]'), $refer);
+        	        	
+        	        }
+        	    });
+        	}
         });
     	//初始化data-articleshow事件
     	$(document).on('articleshow','article',function(e){
@@ -271,8 +266,10 @@ A.Element = (function($){
     	if(!orientation){
     		$.map(_getMatchElements($el,SELECTOR.scrollOrientation.selector),SELECTOR.scrollOrientation.handler);
     	}else if(orientation=='horizontal'){
-    		var scroller = A.Scroll($el,{hScroll:true,hScrollbar : false}).scroller;
-    		if(targetObj.length>0) scroller.scrollToElement(targetObj[0]);
+    		setTimeout(function(){
+    			var scroller = A.Scroll($el,{hScroll:true,hScrollbar : false}).scroller;
+        		if(targetObj.length>0) scroller.scrollToElement(targetObj[0]);
+    		},1);   		
     	}else if(orientation=='vertical'){
     		SELECTOR.scroll.handler(el);
     	}
@@ -317,9 +314,7 @@ A.Element = (function($){
     		if(!$el.data('source')) return;
 			$el.attr('src', data);
 			$el.removeAttr('data-source');
-			setTimeout(function(){
-				_init_scroll($('section.active article[data-scroll]'));
-			},500);  
+			_init_scroll($('section.active article[data-scroll]'));  
     	};
     	
     	var type = $el.data('type');    	
@@ -394,13 +389,15 @@ A.Element = (function($){
     		scroll : {selector:'[data-scroll="true"]', handler:function(el){
     				var zoom = $(el).data('zoom');
     				var tag = zoom==true?true:false;
-    				A.Scroll(el,{
-    					zoom:tag,
-    					hScroll:tag,
-    					onScrollEnd: function(){
-    						_init_lazyload(el);
-    					}
-    				});
+    				setTimeout(function(){
+    					A.Scroll(el,{
+        					zoom:tag,
+        					hScroll:tag,
+        					onScrollEnd: function(){
+        						_init_lazyload(el);
+        					}
+        				});
+    				}, 1);	
     			}
     		},
     		inject : {selector:'[data-inject="true"]', handler:_init_inject},
@@ -814,12 +811,17 @@ A.Router = (function($){
 	    	
 	    	//动画展示
 	    	var targetObj = article;
-	    	var currentObj = article.addClass('active').siblings('.active');	    	
-	    	A.Transition.change({
-	    		target : targetObj,
-	    		current : currentObj,
-	    		trigger : 'article'
-	    	});
+	    	var currentObj = article.addClass('active').siblings('.active');
+	    	if(_section.data('article-slider')){
+	    		A.Transition.transArticle(_section, currentObj, targetObj);
+	    	}else{
+	    		A.Transition.change({
+		    		target : targetObj,
+		    		current : currentObj,
+		    		trigger : 'article'
+		    	});
+	    	}
+	    	
 	    	
        };
     	
@@ -889,13 +891,24 @@ A.Router = (function($){
 
     };
     
+    var _showSliderPage = function(href){
+    	var currentSliderPage = $(href);
+    	if(currentSliderPage.length==0) return;
+    	var parentArticle = currentSliderPage.parents('article');
+    	var key = parentArticle.attr('__slider_page__');
+    	var slider = A.cache['__slider_page__'+key];
+		if(slider){
+			slider.index(currentSliderPage.index());
+		}
+    };
+    
     var ROUTER = {
     		section : _showSection,
     		article : _showArticle,
     		aside : _toggleAsideMenu,
     		back : function(){ window.history.go(-1); },   		
-    		modal : _showModal
-    		
+    		modal : _showModal,
+    		sliderPage : _showSliderPage
     };
     
     var _addRouter = function(type, handler){
@@ -911,7 +924,8 @@ A.Router = (function($){
         add : _addRouter,
         history : function(){
         	return _history;
-        }
+        },
+        showSliderPage : _showSliderPage
     };
 })(A.$);
 /**
@@ -1131,10 +1145,38 @@ A.Transition = (function($){
     	
     };
     
+    var _trans_article = function(currentSection, currentArticle, targetArticle){
+    	if(!targetArticle||targetArticle.length==0) return;
+    	var type,location;   	
+    	location = currentArticle.index()<targetArticle.index()?'left':'right';
+    	type = location=='left'?'Left':'Right';
+
+		A.anim(currentArticle, 'slide'+type+'Out', function(){
+			currentArticle.removeClass('active').trigger('articlehide');
+		});
+		A.anim(targetArticle, 'slide'+type+'In', function(){
+			targetArticle.addClass('active').trigger('articleshow');
+			var targetArticleId = targetArticle.attr('id');
+			if(!targetArticleId) return;
+			currentSection.find('a[data-target="article"]').each(function(i){
+	    		var $refer = $(this);
+	    		var referHashObj = A.Util.parseHash($refer.attr('href'));
+	    		if(referHashObj.tag=='#'+targetArticleId){
+	    			$refer.addClass('active');
+	    			A.Element.initScrollOrientation($refer.parents('[data-scroll-orientation="horizontal"]'), $refer);
+	    		}else{
+	    			$refer.removeClass('active');
+	    		}	    		
+	    	});
+		});
+		
+    };
+    
     return {
         run : run,
         add : addAnimation,
-        change : change
+        change : change,
+        transArticle : _trans_article
     };
 
 })(A.$);
@@ -1377,6 +1419,7 @@ A.Util = (function($){
 (function(){
 	//通用缓存
 	A.cache = {};
+	A.cache.index = 0;
 	A.cache.set = function(k, v){
 		window.localStorage.setItem(k, JSON.stringify(v));
 	};
@@ -2179,6 +2222,8 @@ A.Popup = (function($){
             autoPlay = selector.autoPlay;
             interval = selector.interval || 3000;
             speed = selector.speed||speed;
+            container = selector.container;
+            slides = selector.slides;
         }else{
             wrapper = $(selector);
         }
@@ -2186,11 +2231,11 @@ A.Popup = (function($){
          * 初始化容器大小
          */
         var _init = function() {
-            container = wrapper.children().first();
-            slides = container.children();
+            container = container?container:wrapper.children().first();
+            slides = slides?slides:container.children();
             slideNum = slides.length;
             slideWidth = wrapper.offset().width;
-            container.css('width',slideNum * slideWidth);
+            container.css('width',slideNum * slideWidth).attr('__is_slider__', true);
             slides.css({
                     'width':slideWidth,
                     'float':'left'
@@ -2277,6 +2322,11 @@ A.Popup = (function($){
             deltaX = 0;
             container[0].style.webkitTransitionDuration = 0;
             gestureStarted = true;
+            if($(event.target).closest('[__is_slider__]')[0]==container[0]){
+            	gestureStarted = true;
+            }else{
+            	gestureStarted = false;
+            }
         };
 
         var _touchMove = function(event) {
@@ -2405,7 +2455,10 @@ A.Popup = (function($){
                     topOffset:isPullDown?topOffset:0,
                     bounce : true,
                     onScrollMove : function(){
-                        if (this.y > opts.minPullHeight && isPullDown && !iconEl.hasClass(opts.onReleaseIcon)) {
+                    	
+                        if(!isPullDown&&this.y>=0){
+                        	//do something
+                        }else if (this.y > opts.minPullHeight && isPullDown && !iconEl.hasClass(opts.onReleaseIcon)) {
                             iconEl.addClass(opts.onReleaseIcon);
                             labelEl.html(opts.releaseText);
                             this.minScrollY = 0;
