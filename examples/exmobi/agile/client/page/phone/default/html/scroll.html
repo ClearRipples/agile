@@ -16,146 +16,65 @@
 <body>
 
 <div id="section_container">
-	<section id="scroll_section" class="active" data-article-slider="true">
+	<section id="scroll_section" class="active">
 	    <header class="bar bar-nav">
 	      	<a class="icon icon-left-nav pull-left" data-target="close" href="#"></a>
 	      	<h1 class="title">滚动组件</h1>
 	    </header>
-	    
-	    <div class="bar bar-standard bar-header-secondary">
-			<div data-scroll-orientation="horizontal" id="h_scroll_demo" style="height:100%;width:90%;">					
-			    <div class="segmented-control" data-role="slider-bar" style="width:500px;">			    	  	
-					<a class="control-item active" href="#article_1" data-target="article">概要</a>
-					<a class="control-item" href="#article_2" data-target="article">要闻</a>
-					<a class="control-item" href="#article_3" data-target="article">国际</a>
-					<a class="control-item" href="#article_4" data-target="article">体育</a>
-					<a class="control-item" href="#article_5" data-target="article">娱乐</a>
-					<a class="control-item" href="#article_6" data-target="article">财经</a>
-					<a class="control-item" href="#article_7" data-target="article">视频</a>										
-				</div>
-				<a class="icon icon-up-nav" style="position:absolute;right:8px;top:0px;"></a>
-			</div>
-		</div>
+	
+	    <nav class="bar bar-tab">
+		  	<a class="tab-item active" href="#article_article" data-target="article">
+		    	<span class="icon icon-more-vertical"></span>
+		    	<span class="tab-label">垂直1</span>
+		  	</a>
+		  	<a class="tab-item" href="#vertical_article" data-target="article">
+		    	<span class="icon icon-more-vertical"></span>
+		    	<span class="tab-label">垂直2</span>
+		  	</a>
+		  	<a class="tab-item" href="#horizontal_article" data-target="article">
+			    <span class="icon icon-more"></span>
+			    <span class="tab-label">横向</span>
+		  	</a>
+		</nav>
 		
-		<article id="article_1" class="active" data-scroll="true"  data-zoom="true">
+		<article id="article_article" class="active" data-scroll="true" data-zoom="true">
 			<div class="scroller demo-btn">
-				<p>谁说移动应用开发不能用HTML5？页面白屏、动画生硬、滚动卡顿让你累觉不爱？如果有一个Native Like的HTML5移动APP框架摆在你的面前，你还会相信爱吗？</p>
-				<p>没错！ExMobi移动应用平台的HTML5引擎再次升级，搭配Agile HTML5前端框架，让您编写飞快的HTML5移动APP。</p>
-				<p>9月15日至19日，第25期ExMobi移动应用平台大型主题培训，一起来体验在ExMobi中流畅的HTML5编码乐趣！</p>
-      
-      			<p>欢迎小伙伴们前来交流和学习，报名请点击“我要参加”，或者下载附件内容 烽火星空第25期“ExMobi移动应用平台”大型主题培训邀请函.zip ，按照附件指引操作。</p>
-	      		<h2>特别提醒：请尝试使用手势放大或者缩小页面。</h2>
-	      </div>
+				<p>垂直滚动第一种方式给Article设置<b>data-scroll="true"</b></p>
+				<p>如果希望在滚动容器的内容可以放大缩小，可以设置<b>data-zoom="true"</b></p>
+		      	<h2>特别提醒：请尝试使用手势放大或者缩小页面。</h2>
+		   </div>
+	    </article>
+		
+		<article id="vertical_article">
+			<div id="v_scroll_demo" data-scroll-orientation="vertical">
+				<div class="scroller demo-btn">
+					<p>垂直滚动第二种方法是给div容器增加<b>data-scroll-orientation="vertical"</b></p>
+					<p>设置此属性的容器内部超出容器本身高度可以垂直滚动</p>
+		      	</div>
+	      	</div>
 	    </article>
 	
-	    <article id="article_2" data-scroll="true">
-			<div class="scroller">
-				<div id="slider_banner" class="sliding_container" data-role="banner">
-			    	<div style="height:200px;overflow:hidden;">
-			        	<div style="text-align: center"><img src="../../image/1.jpg" class="full-width"></div>
-			            <div style="text-align: center"><img src="../../image/2.jpg" class="full-width"></div>
-			            <div style="text-align: center"><img src="../../image/3.jpg" class="full-width"></div>
-			        </div>
-			    </div>
-			    
-			    <ul class="table-view">
-			        <li class="table-view-cell media">
-			          <a class="navigate-right" href="#">
-			            <span class="media-object icon icon-pages pull-left"></span>
-			            <div class="media-body">
-			              	左右滑动试试
-			            </div>
-			          </a>
-			        </li>
-			        <li class="table-view-cell media">
-			          <a class="navigate-right" href="#">
-			            <span class="media-object icon icon-pages pull-left"></span>
-			            <div class="media-body">
-			              	页面中含有sliding_container则其他左右滑动事件失效
-			            </div>
-			          </a>
-			        </li>
-			        <li class="table-view-cell media">
-			          <a class="navigate-right" href="#">
-			            <span class="media-object icon icon-pages pull-left"></span>
-			            <div class="media-body">
-			              	在sliding_container以外的区域左右滑动事件有效
-			            </div>
-			          </a>
-			        </li>
-		        </ul>
-		    	
-		        
-			</div>
-	    </article>
-	    
-	    <article id="article_3" data-scroll="true">
-			<div class="scroller">
-		    	
-		    	<ul class="table-view">
-			        <li class="table-view-cell media">
-			          <a class="navigate-right" href="#">
-			            <span class="media-object icon icon-pages pull-left"></span>
-			            <div class="media-body">
-			              	上面的滑动菜单也是滚动组件
-			            </div>
-			          </a>
-			        </li>
-			        <li class="table-view-cell media">
-			          <a class="navigate-right" href="#">
-			            <span class="media-object icon icon-person pull-left"></span>
-			            <div class="media-body">
-			              	它是一个横向滚动的容器
-			            </div>
-			          </a>
-			        </li>
-			        <li class="table-view-cell media">
-			          <a class="navigate-right" href="#">
-			            <span class="media-object icon icon-star-filled pull-left"></span>
-			            <div class="media-body">
-			            	通过设置data-scroll-orientation="horizontal"来实现横向滚动的效果
-			            </div>
-			          </a>
-			        </li>
-		      </ul>
-		    	
-		        
-			</div>
-	    </article>
-	    
-	    <article id="article_4">
+	    <article id="horizontal_article">
 			<div class="scroller demo-btn">
 		    	
-		    	<h4>左右滑动试试</h4>
+		    	<h4>横向滚动可以通过给div容器设置data-scroll-orientation="horizontal"实现</h4>
 		    	
-		        
-			</div>
-	    </article>
-	    
-	    <article id="article_5">
-			<div class="scroller demo-btn">
-		    	
-		    	<h4>左右滑动试试</h4>
-		    	
-		        
-			</div>
-	    </article>
-	    
-	    <article id="article_6">
-			<div class="scroller demo-btn">
-		    	
-		    	<h4>左右滑动试试</h4>
-		    	
-		        
-			</div>
-	    </article>
-	    
-	    <article id="article_7">
-			<div class="scroller demo-btn">
-		    	
-		    	<h4>左右滑动试试</h4>
-		    	
-		        
+		        <div id="h_scroll_demo" data-scroll-orientation="horizontal">
+		        	<div class="segmented-control" style="width:700px;">
+						<a class="control-item active" href="#article_home" data-target="article">List</a>
+						<a class="control-item" href="#article_grid" data-target="article">Grid</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+						<a class="control-item" href="#article_layout" data-target="article">Layout</a>
+					</div>
+		        </div>
 			</div>
 	    </article>
 	</section>
@@ -170,23 +89,5 @@
 <script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
 <script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
 <script type="text/javascript" src="../../script/app/app.js"></script>
-<script>
-$('#article_2').on('articleload', function(){
-	var label;
-	new A.Slider({
-        selector : '#slider_banner',
-        onBeforeSlide : function(){
-            return true;
-        },
-        onAfterSlide : function(i){
-        	if(!label){
-        		label = $('#slider_banner').append('<div class="slider_label"></div>').find('div.slider_label');
-        	}
-        	//alert(label.html());
-        	label.html('这是第'+i+'条新闻');
-        }
-    });
-});
-</script>
 </body>
 </html>

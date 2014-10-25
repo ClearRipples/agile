@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>webapp</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="../../script/ratchet/css/ratchet-theme-ios.css">
+    <link rel="stylesheet" href="../../script/agile/css/agile.css">
+    <link rel="stylesheet" href="../../script/app/app.css">
+    <link rel="stylesheet" href="../../script/icomoon/icomoon.css">
+</head>
+<body>
+
+<div id="section_container">
+	<section id="page_section" class="active">
+	    <header class="bar bar-nav">
+	      	<a class="icon icon-left-nav pull-left" data-target="close" href="#"></a>
+	      	<h1 class="title">滑动页</h1>
+	    </header>
+	    
+	    <div class="bar bar-standard bar-header-secondary">
+			<div data-scroll-orientation="horizontal" id="h_scroll_demo" style="height:100%;width:90%;">					
+			    <div class="segmented-control" data-role="slider-bar" style="width:500px;">			    	  	
+					<a class="control-item active" href="#page1" data-target="sliderPage">概要</a>
+					<a class="control-item" href="#page2" data-target="sliderPage">要闻</a>
+					<a class="control-item" href="#page3" data-target="sliderPage">国际</a>
+					<a class="control-item" href="#page4" data-target="sliderPage">体育</a>
+					<a class="control-item" href="#page5" data-target="sliderPage">娱乐</a>
+					<a class="control-item" href="#page6" data-target="sliderPage">财经</a>
+					<a class="control-item" href="#page7" data-target="sliderPage">视频</a>										
+				</div>
+				<a class="icon icon-up-nav" style="position:absolute;right:8px;top:0px;"></a>
+			</div>
+		</div>
+		
+		<article id="page_article" class="active" data-slider-page="true">
+			<div id="page1" data-role="slider-page">
+				<div class="scroller">
+					<div id="slider_banner" class="sliding_container" data-role="banner">
+				    	<div style="height:200px;overflow:hidden;">
+				        	<div style="text-align: center"><img src="../../image/1.jpg" onclick="$native.toast(1)" class="full-width"></div>
+				            <div style="text-align: center"><img src="../../image/2.jpg" onclick="$native.toast(2)" class="full-width"></div>
+				            <div style="text-align: center"><img src="../../image/3.jpg" onclick="$native.toast(3)" class="full-width"></div>
+				        </div>
+				    </div>
+					<ul class="table-view">
+			        	<li class="table-view-cell media">
+			          		<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-pages pull-left"></span>
+				            	<div class="media-body">
+				              		滑动页只能存在于article中，左右滑动页面看效果
+				            	</div>
+			          		</a>
+			        	</li>
+				        <li class="table-view-cell media">
+				          	<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-person pull-left"></span>
+					            <div class="media-body">
+					              	一个article内可以有多个滑动页
+					            </div>
+				          	</a>
+				        </li>
+				        <li class="table-view-cell media">
+				          	<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-person pull-left"></span>
+					            <div class="media-body">
+					              	通过给article设置data-slider-page="true"启用
+					            </div>
+				          	</a>
+				        </li>
+				        <li class="table-view-cell media">
+				          	<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-person pull-left"></span>
+					            <div class="media-body">
+					              	每个滑动页必须设置data-role="slider-page"
+					            </div>
+				          	</a>
+				        </li>
+			      	</ul>
+			
+			      	<h5 class="content-padded">Other accounts</h5>
+			      	<ul class="table-view" id="up_ul">
+			        	<li class="table-view-cell media">
+			          		<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-more pull-left"></span>
+				            	<div class="media-body">
+				              	Misc
+				            	</div>
+			          		</a>
+			        	</li>
+			      	</ul>
+				</div>
+			</div>
+			<div id="page2" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<ul class="table-view">
+			        	<li class="table-view-cell media">
+			          		<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-pages pull-left"></span>
+				            	<div class="media-body">
+				              		这是要闻
+				            	</div>
+			          		</a>
+			        	</li>
+				        <li class="table-view-cell media">
+				          	<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-person pull-left"></span>
+					            <div class="media-body">
+					              	这是要闻
+					            </div>
+				          	</a>
+				        </li>
+			      	</ul>
+				</div>
+			</div>
+			<div id="page3" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<ul class="table-view">
+			        	<li class="table-view-cell media">
+			          		<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-pages pull-left"></span>
+				            	<div class="media-body">
+				              		这是国际新闻
+				            	</div>
+			          		</a>
+			        	</li>
+				        <li class="table-view-cell media">
+				          	<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-person pull-left"></span>
+					            <div class="media-body">
+					              	这是国际新闻
+					            </div>
+				          	</a>
+				        </li>
+			      	</ul>
+				</div>
+			</div>
+			<div id="page4" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<ul class="table-view">
+			        	<li class="table-view-cell media">
+			          		<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-pages pull-left"></span>
+				            	<div class="media-body">
+				              		这是体育新闻
+				            	</div>
+			          		</a>
+			        	</li>
+				        <li class="table-view-cell media">
+				          	<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-person pull-left"></span>
+					            <div class="media-body">
+					              	这是体育新闻
+					            </div>
+				          	</a>
+				        </li>
+			      	</ul>
+				</div>
+			</div>
+			<div id="page5" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<ul class="table-view">
+			        	<li class="table-view-cell media">
+			          		<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-pages pull-left"></span>
+				            	<div class="media-body">
+				              		这是娱乐新闻
+				            	</div>
+			          		</a>
+			        	</li>
+				        <li class="table-view-cell media">
+				          	<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-person pull-left"></span>
+					            <div class="media-body">
+					              	这是娱乐新闻
+					            </div>
+				          	</a>
+				        </li>
+			      	</ul>
+				</div>
+			</div>
+			<div id="page6" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<ul class="table-view">
+			        	<li class="table-view-cell media">
+			          		<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-pages pull-left"></span>
+				            	<div class="media-body">
+				              		这是财经新闻
+				            	</div>
+			          		</a>
+			        	</li>
+				        <li class="table-view-cell media">
+				          	<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-person pull-left"></span>
+					            <div class="media-body">
+					              	这是财经新闻
+					            </div>
+				          	</a>
+				        </li>
+			      	</ul>
+				</div>
+			</div>
+			<div id="page7" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<ul class="table-view">
+			        	<li class="table-view-cell media">
+			          		<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-pages pull-left"></span>
+				            	<div class="media-body">
+				              		这是视频
+				            	</div>
+			          		</a>
+			        	</li>
+				        <li class="table-view-cell media">
+				          	<a class="navigate-right" href="#">
+				            	<span class="media-object icon icon-person pull-left"></span>
+					            <div class="media-body">
+					              	这是视频
+					            </div>
+				          	</a>
+				        </li>
+			      	</ul>
+				</div>
+			</div>
+	    </article>
+	</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+<script>
+$('#page1').on('sliderpageshow', function(){
+	A.Refresh({
+        selector : '#page1',
+        type : 'pullDown',
+        refreshTip : '<span id="refresh_time" class="sliver">更新于：从未更新</span>',
+        callback : function(){
+            var scroll = this;
+            setTimeout(function () {
+            	var li = '<li class="table-view-cell media"><a class="navigate-right"><span class="media-object icon icon-more pull-left"></span><div class="media-body">新数据</div></a></li>';
+                $('#up_ul').append(li);
+                $('#refresh_time').html('更新于：'+A.Util.formatDate(new Date(),'MM-dd hh:mm'));
+                scroll.refresh();
+                $native.toast('更新成功');
+            }, 2000);
+        }
+    });
+});
+$('#page_article').on('articleload', function(){
+	
+	var label;
+	new A.Slider({
+        selector : '#slider_banner',
+        onBeforeSlide : function(){
+            return true;
+        },
+        onAfterSlide : function(i){
+        	if(!label){
+        		label = $('#slider_banner').append('<div class="slider_label"></div>').find('div.slider_label');
+        	}
+        	//alert(label.html());
+        	label.html('这是第'+i+'条新闻');
+        }
+    });
+});
+</script>
+</body>
+</html>
