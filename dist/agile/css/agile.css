@@ -180,27 +180,27 @@ article.active{
     display: block;
     z-index: 1;
 }
-.bar-nav ~ article, .bar-nav ~ #article_container > article {
+.bar-nav ~ article {
   top: 44px;
 }
 
-.bar-header-secondary ~ article, .bar-nav ~ #article_container > article{
+.bar-header-secondary ~ article {
   top: 88px;
 }
 
-.bar-footer ~ article, .bar-footer ~ #article_container > article {
+.bar-footer ~ article {
   bottom: 44px;
 }
 
-.bar-footer-secondary ~ article, .bar-footer-secondary ~ #article_container > article {
+.bar-footer-secondary ~ article {
   bottom: 88px;
 }
 
-.bar-tab ~ article, .bar-tab ~ #article_container > article {
+.bar-tab ~ article {
   bottom: 50px;
 }
 
-.bar-footer-secondary-tab ~ article, .bar-footer-secondary-tab ~ #article_container > article {
+.bar-footer-secondary-tab ~ article {
   bottom: 94px;
 }
 .grid{
@@ -362,7 +362,7 @@ input[type="search"]{
 	overflow:hidden;
 }
 [data-role]:active{
-	/*background-color:#eee;*/
+	background-color:#eee;
 }
 
 [data-role*="file-"]:before {
@@ -1115,14 +1115,9 @@ aside ul.menu li.anchor{
 .agile-calendar table td.active{
     background-color: #46CA5E;
 }
-[data-slider-page="true"]{
-	overflow: hidden;
-}
-[data-role="slider-page"]{
-	width:100%;
-	height:100%;
-}
-.sliding_container, [data-role="slider-page"]{
+
+
+.sliding_container{
     position: relative;
     overflow: hidden;
 }
