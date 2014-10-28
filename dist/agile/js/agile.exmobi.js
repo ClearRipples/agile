@@ -1,6 +1,18 @@
 ﻿/*
  * 初始化exmobi事件
  * */
+document.addEventListener("plusready", function() {
+	A.cache.set = function(k, v){
+		if(typeof v != 'object') return;
+		CacheUtil.setCache(k, JSON.stringify(v));
+	};
+	A.cache.get = function(k){
+		return JSON.parse(CacheUtil.getCache(k));
+	};
+	A.cache.remove = function(k){
+		CacheUtil.remove(k);
+	};
+},false);
 document.addEventListener("backmonitor", function() {
 	if(A.hasAsideMenuOpen){
         A.AsideMenu.hide();
