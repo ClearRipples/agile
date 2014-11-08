@@ -18,3 +18,17 @@ ExMobi是由烽火星空推出的移动应用平台，除了封装了丰富的�
 或者，开发者也可以加入到ExMobi开发者交流群（321316202）中，与Q友共同学习。
 #License
 The MIT license.
+<br>
+注意事项：
+<br>
+Agile框架采用了众多开源资源，但为了适应更多场景均有进行改动（包括修复其中的bug），所以请勿轻易替换这些资源，以免造成框架瘫痪或者有运行障碍以及出现新的bug。
+<br>
+采纳和使用的第三方框架及版本：
+1、Ratchet V2.0.2版本，<https://github.com/twbs/ratchet>
+2、iScroll V4.2.5，<http://cubiq.org/iscroll-4>
+3、Jingle V0.4，<https://github.com/shixy/Jingle>
+4、jQuery V1.11.1，<http://jquery.com/>
+5、Zepto V1.1.3，<http://zeptojs.com/>
+6、artTemplate V3.0的native语法(template-native.js)，<http://aui.github.io/artTemplate/>
+<br>
+在此，一并感谢上述开源框架的作者和团队，也希望有更多的开发者加入开源行列，对Agile框架提出建议或者bug。
