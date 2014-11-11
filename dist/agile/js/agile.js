@@ -1,5 +1,5 @@
 ﻿var Agile = A = {
-    version : '2.1.1',
+    version : '2.1.2',
     $ : window.Zepto||jQuery,
     //参数设置
     settings : {
@@ -312,9 +312,12 @@ A.Element = (function($){
     	
     	var _injectImg = function(data){
     		if(!$el.data('source')) return;
-			$el.attr('src', data);
-			$el.removeAttr('data-source');
-			_init_scroll($('section.active article[data-scroll]'));  
+    		A.anim($el,'fadeOut', 200, function(){
+    			$el.attr('src', data);
+    			$el.removeAttr('data-source');
+    			_init_scroll($('section.active article[data-scroll]'));
+    			A.anim($el,'fadeIn', 200);
+    		});			
     	};
     	
     	var type = $el.data('type');    	
