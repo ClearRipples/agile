@@ -1,5 +1,5 @@
 ﻿var Agile = A = {
-    version : '2.1.2',
+    version : '2.1.3',
     $ : window.Zepto||jQuery,
     //参数设置
     settings : {
@@ -2487,8 +2487,8 @@ A.Popup = (function($){
                             setTimeout(function(){//解决在chrome下onRefresh的时候文本无法更改的问题。奇怪的问题！
                                 opts.callback.call(_this);
                             },1);
-
                         }
+                        A.Element.initLazyload($(opts.selector));
                     },
                     onRefresh: function () {
                         iconEl.removeClass(opts.onRefreshIcon).addClass(opts.onPullIcon);
