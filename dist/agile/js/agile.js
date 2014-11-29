@@ -1,5 +1,5 @@
 ﻿var Agile = A = {
-    version : '2.1.3',
+    version : '2.1.4',
     $ : window.Zepto||jQuery,
     //参数设置
     settings : {
@@ -2216,6 +2216,8 @@ A.Popup = (function($){
             autoPlay,
             interval = 0;
         var _this = this;
+        
+        var sliderRole = "",$sliderLabel;
 
         if($.isPlainObject(selector)){
             wrapper = $(selector.selector);
@@ -2230,6 +2232,9 @@ A.Popup = (function($){
         }else{
             wrapper = $(selector);
         }
+        
+        if(wrapper.data("role")=="banner") sliderRole = "banner";
+        
         /**
          * 初始化容器大小
          */
@@ -2248,6 +2253,19 @@ A.Popup = (function($){
             _slide(0, 0);
             afterSlide(0);
             autoPlay && _autoPlay();
+            _init_slider_label();
+        };
+        
+        var _init_slider_label = function(){
+        	if(sliderRole=="banner"){
+        		$sliderLabel = wrapper.append('<div class="slider_label"></div>').find('.slider_label');
+        		_set_slider_label();
+            }
+        };
+        
+        var _set_slider_label = function(index){
+        	index = arguments.length==0?0:index;
+        	if($sliderLabel) $sliderLabel.html($(slides.get(index)).find('[data-title]').data('title'));
         };
 
         var _autoPlay = function(){
@@ -2301,8 +2319,9 @@ A.Popup = (function($){
             if(index != i){
                 index = i;
                 if(dots) $(dots.find('li').get(index)).addClass('active').siblings().removeClass('active');
-                afterSlide(index);
+                afterSlide(index);  
             }
+            _set_slider_label(index);
         };
 
         /**

@@ -61,9 +61,9 @@
 	    	<div class="scroller">
 		    	<div id="slider_banner" class="sliding_container" data-role="banner">
 			    	<div style="height:200px;overflow:hidden;">
-			        	<div style="text-align: center"><img src="../../image/1.jpg" onclick="$native.toast(1)" class="full-width"></div>
-			            <div style="text-align: center"><img src="../../image/2.jpg" onclick="$native.toast(2)" class="full-width"></div>
-			            <div style="text-align: center"><img src="../../image/3.jpg" onclick="$native.toast(3)" class="full-width"></div>
+			        	<div style="text-align: center"><img src="../../image/1.jpg" data-title="第一条新闻" onclick="$native.toast(1)" class="full-width"></div>
+			            <div style="text-align: center"><img src="../../image/2.jpg" data-title="第二条新闻" onclick="$native.toast(2)" class="full-width"></div>
+			            <div style="text-align: center"><img src="../../image/3.jpg" data-title="第三条新闻" onclick="$native.toast(3)" class="full-width"></div>
 			        </div>
 			    </div>
 			    <ul class="table-view">
@@ -113,8 +113,6 @@ function doNormalArticleLoad(){
 }
 
 function doBannerArticleLoad(){
-	
-	var label;
 	var bannerSlider = new A.Slider({
 		                selector : '#slider_banner',
 		                speed : 500,
@@ -122,12 +120,7 @@ function doBannerArticleLoad(){
 		                    return true;
 		                },
 		                onAfterSlide : function(i){
-		                	
-		                	if(!label){
-		                		label = $('#slider_banner').append('<div class="slider_label"></div>').find('div.slider_label');
-		                	}
-		                	//alert(label.html());
-		                	label.html('这是第'+i+'条新闻');
+		                	return true;
 		                }
 		            });
     $('#slider_prev').click(function(){bannerSlider.prev(); return false;});
