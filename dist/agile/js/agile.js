@@ -1,5 +1,5 @@
 ﻿var Agile = A = {
-    version : '2.1.4',
+    version : '3.0.0',
     $ : window.Zepto||jQuery,
     //参数设置
     settings : {
@@ -64,6 +64,7 @@ A.Element = (function($){
         if(selector){
         	_initFormElement(selector);
         	_init_scroll(selector.parents('article[data-scroll="true"]'));
+        	_init_lazyload(selector);
         }else{
         	_init_section();
             _init_article();
@@ -174,13 +175,17 @@ A.Element = (function($){
         	var func = $el.data('articleload');
         	if(func) eval(func);
         	if($el.data('slider-page')){   
-        		var key = A.cache.index++;
+        		var key = A.cache._index++;
         		$el.attr('__slider_page__', key);
-        		A.cache['__slider_page__'+key] = new A.Slider({
+        		var slider = A.cache['__slider_page__'+key] = new A.Slider({
         	        selector : $el,
         	        container : $el,
         	        siliders : $el.find('[data-slider-page]'),
         	        showDots : false,
+        	        onBeforeSlide : function(){
+        	        	slider.flush({slides:$el.find('[data-role="slider-page"]')});
+        	        	return true;
+        	        },
         	        onAfterSlide : function(i){
         	        	var $target = $el.find('[data-role="slider-page"]:eq('+i+')').addClass('active').trigger('sliderpageshow');
         	        	$target.siblings('.active').removeClass('active').trigger('sliderpagehide');
@@ -297,7 +302,7 @@ A.Element = (function($){
      */
     var _init_lazyload = function(el){
     	var $el = $(el);
-    	var source = $el.data('source');
+    	var source = A.Util.script($el.data('source'));
     	if(!source){
     		$.map(_getMatchElements($el,SELECTOR.lazyload.selector),SELECTOR.lazyload.handler);
         	return;
@@ -313,10 +318,16 @@ A.Element = (function($){
     	var _injectImg = function(data){
     		if(!$el.data('source')) return;
     		A.anim($el,'fadeOut', 200, function(){
+    			$el.css('visibility', 'hidden');
     			$el.attr('src', data);
     			$el.removeAttr('data-source');
-    			_init_scroll($('section.active article[data-scroll]'));
-    			A.anim($el,'fadeIn', 200);
+    			$el[0].onload = function(){
+    				//_init_scroll($('section.active article[data-scroll]'));
+    				A.anim($el,'fadeIn', 200, function(){
+    					$el.css('visibility', 'visible');
+    				});
+        		};    			
+    			
     		});			
     	};
     	
@@ -479,7 +490,7 @@ A.AsideMenu = (function($){
         	'touchcancel' : _touchEnd
         });
 
-        $asideContainer.on('tap','.aside-close',hideAsideMenu);
+        $asideContainer.on('tap','.agile-aside-close',hideAsideMenu);
         var isSwipe = true;
         $(document).on('touchstart','section.active[data-aside-left],section.active[data-aside-right]',function(e){
         	isSwipe = true;
@@ -508,8 +519,8 @@ A.AsideMenu = (function($){
             showClose = $aside.data('show-close'),
             width = $aside.width(),
             translateX = position == 'left'?width+'px':'-'+width+'px';
-        if(showClose && $aside.find('div.aside-close').length == 0){
-            $aside.append('<div class="aside-close icon icomoon-close"></div>');
+        if(showClose && $aside.find('div.agile-aside-close').length == 0){
+            $aside.append('<div class="agile-aside-close"></div>');
         }
 
         //aside中可能需要scroll组件
@@ -901,6 +912,7 @@ A.Router = (function($){
     	var key = parentArticle.attr('__slider_page__');
     	var slider = A.cache['__slider_page__'+key];
 		if(slider){
+			slider.flush({slides:parentArticle.find('[data-role="slider-page"]')});
 			slider.index(currentSliderPage.index());
 		}
     };
@@ -941,8 +953,8 @@ A.Template = (function($){
      * @param title  显示文本
      * @param icon   图标
      */
-    var background = function(el,title,icon){
-        var markup = '<div class="back-mask"><div class="icon '+icon+'"></div><div>'+title+'</div></div>';
+    var background = function(el,title,className){
+        var markup = '<div class="agile-back-mask"><div class="agile-icon '+className+'"></div><div>'+title+'</div></div>';
         $(el).html(markup);
     };
     /**
@@ -950,14 +962,14 @@ A.Template = (function($){
      * @param el
      */
     var no_result = function(el){
-        background(el,'没有找到相关数据','drawer');
+        background(el,'没有找到相关数据','agile-drawer');
     };
     /**
      * 加载等待背景模板
      * @param el
      */
     var loading = function(el){
-        background(el,'加载中...','cloud-download');
+        background(el,'加载中...','agile-cloud-download');
     };
 
     /**
@@ -998,9 +1010,9 @@ A.Toast = (function($){
         //定义模板
         TEMPLATE = {
             toast : '<a href="#">{value}</a>',
-            success : '<a href="#"><i class="icon icomoon-checkmark-circle"></i>{value}</a>',
-            error : '<a href="#"><i class="icon icomoon-cancel-circle"></i>{value}</a></div>',
-            info : '<a href="#"><i class="icon icomoon-info-2"></i>{value}</a>'
+            success : '<a href="#"><i class="agile-toast-success"></i>{value}</a>',
+            error : '<a href="#"><i class="agile-toast-error"></i>{value}</a></div>',
+            info : '<a href="#"><i class="agile-toast-info"></i>{value}</a>'
         };
 
     var _init = function(){
@@ -1054,6 +1066,7 @@ A.Transition = (function($){
     var isBack,$current,$target,transitionName,
         animationClass = {
         //[[currentOut,targetIn],[currentOut,targetIn]]
+        empty : [['','empty'],['empty','']],
         slide : [['slideLeftOut','slideLeftIn'],['slideRightOut','slideRightIn']],
         cover : [['','slideLeftIn'],['slideRightOut','']],
         slideUp : [['','slideUpIn'],['slideDownOut','']],
@@ -1102,7 +1115,7 @@ A.Transition = (function($){
         $current = $(current);
         $target = $(target);
         var type = isBack?$current.attr('data-transition'):$target.attr('data-transition');
-        type = type|| A.settings.transitionType;
+        type = type|| A.settings.transitionType||'empty';
         //后退时取相反的动画效果组
         transitionName  = isBack ? animationClass[type][1] : animationClass[type][0];
         _doTransition();
@@ -1422,7 +1435,7 @@ A.Util = (function($){
 (function(){
 	//通用缓存
 	A.cache = {};
-	A.cache.index = 0;
+	A.cache._index = 0;
 	A.cache.set = function(k, v){
 		window.localStorage.setItem(k, JSON.stringify(v));
 	};
@@ -1637,7 +1650,7 @@ A.Util = (function($){
     		if(_isShowBlock) A.showMask();
     		handleData(options, function(o){
     			if(!o||o=={}||o==[]){
-    				options.callback('');
+    				options.callback('', null);
     				return;
     			}
     			try{
@@ -1649,7 +1662,7 @@ A.Util = (function($){
     				$target[typeMap[type]](html);
     				A.Element.init(html);
     			}
-    			options.callback(html);
+    			options.callback(html, o);
     			if(_isShowBlock) A.hideMask();
     		});
     	});
@@ -1696,9 +1709,9 @@ A.Popup = (function($){
             defaultAnim : ['bounceIn','bounceOut']
         },
         TEMPLATE = {
-            alert : '<div class="popup-title">{title}</div><div class="popup-content">{content}</div><div id="popup_btn_container"><a data-target="closePopup" data-icon="icomoon-checkmark">{ok}</a></div>',
-            confirm : '<div class="popup-title">{title}</div><div class="popup-content">{content}</div><div id="popup_btn_container"><a class="cancel" data-icon="icomoon-close">{cancel}</a><a data-icon="icomoon-checkmark">{ok}</a></div>',
-            loading : '<i class="icon icomoon-spinner5 spinner"></i><p>{title}</p>'
+            alert : '<div class="popup-title">{title}</div><div class="popup-content">{content}</div><div id="popup_btn_container"><a data-target="closePopup" class="agile-icon agile-popup-alert-ok">{ok}</a></div>',
+            confirm : '<div class="popup-title">{title}</div><div class="popup-content">{content}</div><div id="popup_btn_container"><a class="cancel agile-icon agile-popup-alert-cancel">{cancel}</a><a class="agile-icon agile-popup-alert-ok">{ok}</a></div>',
+            loading : '<i class="agile-icon agile-popup-spinner spinner"></i><p>{title}</p>'
         };
 
     /**
@@ -1767,7 +1780,7 @@ A.Popup = (function($){
 
         //是否显示关闭按钮
         if(settings.showCloseBtn){
-            html += '<div id="tag_close_popup" data-target="closePopup" class="icon icomoon-cancel-circle"></div>';
+            html += '<div id="tag_close_popup" data-target="closePopup" class="agile-icon agile-popup-close"></div>';
         }
         //popover 箭头方向
         if(settings.arrowDirection){
@@ -1860,11 +1873,11 @@ A.Popup = (function($){
             clickMask2Close : false,
             showCloseBtn : false
         });
-        $('#popup_btn_container [data-icon="icomoon-checkmark"]').tap(function(){
+        $('#popup_btn_container .agile-popup-alert-ok').tap(function(){
             hide();
             okCall.call(this);
         });
-        $('#popup_btn_container [data-icon="icomoon-close"]').tap(function(){
+        $('#popup_btn_container .agile-popup-alert-cancel').tap(function(){
             hide();
             cancelCall.call(this);
         });
@@ -1909,12 +1922,16 @@ A.Popup = (function($){
      * @param buttons 按钮集合
      * [{color:'red',text:'btn',handler:function(){}},{color:'red',text:'btn',handler:function(){}}]
      */
-    var actionsheet = function(buttons){
+    var actionsheet = function(buttons,showCancel){
         var markup = '<div class="actionsheet">';
+        var defaultCalssName = "button block agile-popup-actionsheet-normal";
+        var defaultCancelCalssName = "button block agile-popup-actionsheet-cancel";
+        showCancel = showCancel==false?false:true;
+        
         $.each(buttons,function(i,n){
-            markup += '<button class="button block bg-nephritis white" style="background-color: '+ n.color +' !important;">'+ n.text +'</button>';
+            markup += '<button class="'+(n.css||defaultCalssName)+'">'+ n.text +'</button>';
         });
-        markup += '<button class="button block bg-alizarin white">取消</button>';
+        if(showCancel==true) markup += '<button class="'+defaultCancelCalssName+'">取消</button>';
         markup += '</div>';
         show({
             html : markup,
@@ -2013,11 +2030,11 @@ A.Popup = (function($){
 
         var _renderNav = function(year,month){
             var html = '<div class="agile-calendar-nav">';
-            html += '<div><i class="icon icomoon-arrow-left8 __previous" data-year='+year+'></i><span>'+year+'</span><i class="icon icomoon-arrow-right8 __next" data-year='+year+'></i></div>';
-            html += '<div><i class="icon icomoon-arrow-left8 __previous" data-month='+month+'></i> <span>'+_this.settings.months[month]+'</span><i class="icon icomoon-arrow-right8 __next" data-month='+month+'></i></div>';
+            html += '<div><i class="agile-icon agile-calendar-pre __previous" data-year='+year+'></i><span>'+year+'</span><i class="agile-icon agile-calendar-next __next" data-year='+year+'></i></div>';
+            html += '<div><i class="agile-icon agile-calendar-pre __previous" data-month='+month+'></i> <span>'+_this.settings.months[month]+'</span><i class="agile-icon agile-calendar-next __next" data-month='+month+'></i></div>';
             html += '</div>';
 
-            return html;
+            return html;l
         };
 
         var _renderHead = function(){
@@ -2090,7 +2107,7 @@ A.Popup = (function($){
                 if($target.is('td')){
                     var dateStr = $target.data('date');
                     if(dateStr && _this.settings.onSelect){
-                        _this.settings.onSelect.call(_this,dateStr);
+                        _this.settings.onSelect.call($target[0],dateStr);
                     }
                 }
 
@@ -2161,15 +2178,26 @@ A.Popup = (function($){
                lockDirection : true,
                useTransform: true,
                useTransition: false,
-               checkDOMChanges: false,
+               checkDOMChanges: true,
                hideScrollbar: true,
                fadeScrollbar: true,
                zoom: false,
-               onBeforeScrollStart: function (e) {
+               scrollbarClass: 'agile-scrollbar',
+               onBeforeScrollStart: function (e) {   	   
                     var target = e.target;
                     while (target.nodeType != 1) target = target.parentNode;
                     if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
                         e.preventDefault();
+               },
+               onRefreshEnd: function(){           	   
+                   	var _focusObj = $el.find(':focus');
+                   	if(_focusObj.length>0){
+                   		//scroller.scrollToElement(_focusObj[0],0);
+                   		var elTop = _focusObj.offset().top;
+                   		var wHeight = $(window).height();
+                   		if(elTop>wHeight) scroller.scrollTo(0,elTop-wHeight/2,0,true);
+                   	}      
+                   	   	
                }
             };
         scrollId = $el.data('_jscroll_');
@@ -2235,31 +2263,41 @@ A.Popup = (function($){
         
         if(wrapper.data("role")=="banner") sliderRole = "banner";
         
-        /**
-         * 初始化容器大小
-         */
-        var _init = function() {
-            container = container?container:wrapper.children().first();
-            slides = slides?slides:container.children();
-            slideNum = slides.length;
-            slideWidth = wrapper.offset().width;
+        var _flush = this.flush = function(opts) {
+        	opts = opts||{};
+        	slides = opts.slides;
+            slideNum = slides.length;           
             container.css('width',slideNum * slideWidth).attr('__is_slider__', true);
             slides.css({
                     'width':slideWidth,
                     'float':'left'
             }).show();
+        	
+        };
+        
+        /**
+         * 初始化容器大小
+         */
+        var _init = function(opts) {
+        	opts = opts||{};
+            container = container?container:wrapper.children().first();
+            slideWidth = wrapper.offset().width;
+            _flush({
+            	slides : slides?slides:container.children()
+            });
+            
             if(showDots == undefined)showDots = true;
             showDots && _initDots();
+            _init_slider_label();
             _slide(0, 0);
             afterSlide(0);
-            autoPlay && _autoPlay();
-            _init_slider_label();
+            autoPlay && _autoPlay();           
         };
         
         var _init_slider_label = function(){
         	if(sliderRole=="banner"){
+        		wrapper.find('.slider_label').remove();
         		$sliderLabel = wrapper.append('<div class="slider_label"></div>').find('.slider_label');
-        		_set_slider_label();
             }
         };
         
@@ -2319,9 +2357,11 @@ A.Popup = (function($){
             if(index != i){
                 index = i;
                 if(dots) $(dots.find('li').get(index)).addClass('active').siblings().removeClass('active');
+                _set_slider_label(index);
                 afterSlide(index);  
-            }
-            _set_slider_label(index);
+            }else{
+            	_set_slider_label(index);
+            }          
         };
 
         /**
@@ -2384,13 +2424,13 @@ A.Popup = (function($){
             }
             gestureStarted = false;
         };
-
+        
         _init();
         _bindEvents();
 
         this.refresh = function(){
             container.attr('style','');
-            _init();
+            _init(opts);
         };
 
         this.prev = function() {
@@ -2403,7 +2443,11 @@ A.Popup = (function($){
             }
         };
         this.index = function(i) {
-            _slide(i);
+        	if(arguments.length==0){
+        		return index;
+        	}else{
+        		_slide(i);
+        	} 
         };
     }
     A.Slider = slider;
@@ -2423,9 +2467,9 @@ A.Popup = (function($){
                 releaseText: '松开加载更新',
                 refreshText: '加载中请稍后',
                 refreshTip : false,//下拉时显示的文本，比如：最后更新时间:2014-....
-                onPullIcon : 'icomoon-arrow-down2',
-                onReleaseIcon  : 'icon-reverse',
-                onRefreshIcon : 'icomoon-spinner5 spinner',
+                onPullIcon : 'agile-icon agile-refresh-down-icon',
+                onReleaseIcon  : 'agile-refresh-icon-reverse',
+                onRefreshIcon : 'agile-refresh-spinner spinner',
                 callback : undefined
             };
         //装载配置
@@ -2440,7 +2484,7 @@ A.Popup = (function($){
                     pullText: '上拉加载更多',
                     releaseText: '松开加载更新',
                     refreshText: '加载中请稍后',
-                    onPullIcon : 'icomoon-arrow-up2'
+                    onPullIcon : 'agile-icon agile-refresh-up-icon',
                 });
             }
         }
@@ -2453,18 +2497,18 @@ A.Popup = (function($){
          */
         var _init = function(opts){
             scroller = $(opts.selector).children()[0];
-            var refreshTpl = '<div class="refresh-container"><span class="refresh-icon carrot '+opts.onPullIcon
-                +'"></span><span class="refresh-label sliver">'
+            var refreshTpl = '<div class="agile-refresh-container"><span class="agile-refresh-icon '+opts.onPullIcon
+                +'"></span><span class="agile-refresh-label">'
                 +opts.pullText+'</span>'
-                +(opts.refreshTip?'<div class="refresh-tip">'+opts.refreshTip+'</div>':'')+'</div>';
+                +(opts.refreshTip?'<div class="agile-refresh-tip">'+opts.refreshTip+'</div>':'')+'</div>';
             if(isPullDown){
                 refreshEl = $(refreshTpl).prependTo(scroller);
             }else{
                 refreshEl = $(refreshTpl).appendTo(scroller);
             }
             topOffset = refreshEl.height();
-            iconEl = refreshEl.find('.refresh-icon');
-            labelEl = refreshEl.find('.refresh-label');
+            iconEl = refreshEl.find('.agile-refresh-icon');
+            labelEl = refreshEl.find('.agile-refresh-label');
         };
 
         /**
@@ -2584,7 +2628,7 @@ A.Popup = (function($){
 		var tag = '#'+$el.attr('id');
 		
 		options.tmplId = tag;
-		options.callback = function(html){	
+		options.callback = function(html, o){	
 			var $referObj = $el;
 			var $oldObj = $('[__inject_dependence__="'+tag+'"]');
 			if(options.type=='replace'){
@@ -2599,7 +2643,7 @@ A.Popup = (function($){
 			$referObj.after($(html).attr('__inject_dependence__',tag));
 			A.Element.init($el.parent());
 			if(opts&&opts.callback){			
-				opts.callback(html);
+				opts.callback(html, o);
 			}
 		};
   	
@@ -2635,26 +2679,37 @@ A.Popup = (function($){
 /*
  * 扩展JSON
  * */
-(function(){
-	if(JSON){
-		JSON.stringify = function(o){
-			var r = [];   
-			if(typeof o =="string") return "\""+o.replace(/([\'\"\\])/g,"\\$1").replace(/(\n)/g,"\\n").replace(/(\r)/g,"\\r").replace(/(\t)/g,"\\t")+"\"";   
-		    if(typeof o =="undefined") return "";
-			if(typeof o != "object") return o.toString();
-			if(o===null) return null;
-	        if(o instanceof Array){
-	        	for(var i =0;i<o.length;i++){
-	            	r.push(this.stringify(o[i]));
-	            }
-	            r="["+r.join()+"]"; 
-	        }else{              
-	            for(var i in o){
-	            	r.push('"'+i+'":'+this.stringify(o[i]));
-	            }
-	            r="{"+r.join()+"}";
-	        }   
-	        return r; 
-		};
+var aJSON = (function(){
+	var JSON = {};
+
+	JSON.parse = function(str){
+		try{
+			return eval("("+str+")");
+		}catch(e){
+			return null;
+		}
 	}
+
+
+	JSON.stringify = function(o){
+		var r = [];   
+		if(typeof o =="string") return "\""+o.replace(/([\'\"\\])/g,"\\$1").replace(/(\n)/g,"\\n").replace(/(\r)/g,"\\r").replace(/(\t)/g,"\\t")+"\"";   
+		if(typeof o =="undefined") return "";
+		if(typeof o != "object") return o.toString();
+		if(o===null) return null;
+		if(o instanceof Array){
+			for(var i =0;i<o.length;i++){
+		        r.push(this.stringify(o[i]));
+		    }
+		    r="["+r.join()+"]"; 
+		}else{              
+			for(var i in o){
+			   r.push('"'+i+'":'+this.stringify(o[i]));
+		    }
+		    r="{"+r.join()+"}";
+		}   
+		return r; 
+	};
+	window.JSON = JSON;
+	return JSON;
 })();

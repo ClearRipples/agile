@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>首页</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+<link rel="stylesheet" href="../../script/flat/css/iconlogo.css">
+<link rel="stylesheet" href="../../script/flat/css/animate.css">
+<style>
+/*动画速度*/
+.animated.fast{
+	-webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+}
+
+.animated.one {
+	-webkit-animation-delay:0.3s;
+	-ms-animation-delay:0.3s;
+	animation-delay:0.3s;
+}
+
+.animated.two {
+	-webkit-animation-delay:0.6s;
+	-ms-animation-delay:0.6s;
+	animation-delay:0.6s;
+}
+
+.animated.three {
+	-webkit-animation-delay:0.9s;
+	-ms-animation-delay:0.9s;
+	animation-delay:0.9s;
+}
+.animated.four {
+	-webkit-animation-delay:1.2s;
+	-ms-animation-delay:1.2s;
+	animation-delay:1.2;
+}
+.animated.five {
+	-webkit-animation-delay:1.5s;
+	-ms-animation-delay:1.5s;
+	animation-delay:1.5s;
+}
+/*菜单样式*/
+.grid1{
+	width:60%;background-color:#1fc968;height:200px;float:left;border:3px solid white;color:white;position:relative;
+}
+.grid1:active{
+	background-color:#21a44b;
+	color:white;
+}
+.grid2{
+	background-color:#ee5c2d;height:50%;border:3px solid white;color:white;display:-webkit-box;-webkit-box-align:center;-webkit-box-pack:center;text-align:center;
+}
+.grid2:active{
+	background-color:#d5492e;
+	color:white;
+}
+.grid3{
+	background-color:#f3c300;height:50%;border:3px solid white;color:white;display:-webkit-box;-webkit-box-align:center;-webkit-box-pack:center;text-align:center;
+}
+.grid3:active{
+	background-color:#d8a015;
+	color:white;
+}
+.grid4{
+	width:37%;height:120px;float:left;background-color:#8f79ff;border:3px solid white;color:white;display:-webkit-box;-webkit-box-align:center;-webkit-box-pack:center;text-align:center;
+}
+.grid4:acitve{
+	background-color:#7765f0;
+	color:white;
+}
+.grid5{
+	width:63%;background-color:#4977ff;height:120px;float:left;border:3px solid white;position:relative;
+}
+.grid5:active{
+	background-color:#415fec;
+	color:white;
+}
+</style>
+</head>
+<body>
+
+<div id="section_container">
+	<section id="animate" class="active">
+	   <header>
+		    <div class="titlebar">
+		    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+		    	<h1>滑动容器</h1>
+		    </div>
+		</header>
+	    <article id="banner_article" data-articleload="loadPage()" class="active" data-scroll="true" style="top:44px;bottom:0px">
+	    <div class="scroller">
+			<div id="slider_banner" class="sliding_container" data-role="banner">
+		    	<div style="height:150px;overflow:hidden;">
+		        	<div style="text-align: center"><img src="../../script/flat/image/main/banner-01.jpg" data-title="第一条新闻" onclick="$native.toast(1)" class="full-width"></div>
+		            <div style="text-align: center"><img src="../../script/flat/image/main/banner-02.jpg" data-title="第二条新闻" onclick="$native.toast(2)" class="full-width"></div>
+		            <div style="text-align: center"><img src="../../script/flat/image/main/banner-03.jpg" data-title="第三条新闻" onclick="$native.toast(3)" class="full-width"></div>
+		        </div>
+		    </div>
+		    <a class="grid1 animated fast fadeInLeft one" id="grid1">
+                	<img src="../../script/flat/image//main/notice.png" alt="" style="width:100%"/>
+                    <div style="position:absolute;bottom:10px;left:10px;">
+                    	公告
+                    </div>
+                </a>
+                <div style="width:40%;height:200px;float:left;" id="grid2">
+                    <a class="grid2 animated fast fadeInRight two">
+                        <img src="../../script/flat/image//main/doc.png" alt="" style="width:64px;"/>
+                        <br/>
+                        公文
+                    </a>
+                    <a class="grid3 animated fast fadeInRight three">
+                        <img src="../../script/flat/image//main/write.png" alt="" style="width:64px;"/>
+                        <br/>
+                        请假审批
+                    </a>
+                </div>
+                <a class="grid4 animated fast fadeInUp four" id="grid3">
+                	<img src="../../script/flat/image//main/contact.png" alt="" style="width:64px;"/>
+                    <br/>
+                    通讯录
+                </a>
+                <a class="grid5 animated fast fadeInUp five" id="grid4">
+                	<div style="position:absolute;left:10px;top:10px;">
+                    	<img src="../../script/flat/image//main/mail.png" alt="" style="width:64px;"/>
+                    </div>
+                    <div style="position:absolute;right:10px;bottom:10px;color:white;text-align:right;">
+                        邮件
+                    </div>
+                </a>
+	    </div>
+	    </article>
+	</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+<script>
+function loadPage() {
+	doBannerArticleLoad();
+	initGrid();
+}
+function doBannerArticleLoad(){
+	var bannerSlider = new A.Slider({
+		                selector : '#slider_banner',
+		                speed : 500,
+		                onBeforeSlide : function(){
+		                    return true;
+		                },
+		                onAfterSlide : function(i){
+		                	return true;
+		                }
+		            });
+    $('#slider_prev').click(function(){bannerSlider.prev(); return false;});
+    $('#slider_next').click(function(){bannerSlider.next(); return false;});
+}
+function initGrid(){
+	var gridHeight=$(window).height()-$("header").height()-$("#slider_banner").height();
+	$("#grid1,#grid2").height(Math.floor(gridHeight*0.61)+"px");
+	$("#grid3,#grid4").height(Math.floor(gridHeight*0.39)+"px");
+}
+
+</script>
+</body>
+</html>

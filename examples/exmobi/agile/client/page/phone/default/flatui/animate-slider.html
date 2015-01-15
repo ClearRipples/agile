@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>首页</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+<link rel="stylesheet" href="../../script/flat/css/iconlogo.css">
+<link rel="stylesheet" href="../../script/flat/css/animate.css">
+</head>
+<body>
+
+<div id="section_container">
+	<section id="animate" class="active">
+	   <header>
+		    <div class="titlebar">
+		    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+		    	<h1>滑动容器</h1>
+		    </div>
+		</header>
+	    <article id="banner_article" data-articleload="doBannerArticleLoad()" class="active" data-scroll="true" style="top:44px;bottom:0px">
+	    <div class="scroller">
+			<div id="slider_banner" class="sliding_container" data-role="banner">
+		    	<div style="height:150px;overflow:hidden;">
+		        	<div style="text-align: center"><img src="../../script/flat/image/main/banner-01.jpg" data-title="第一条新闻" class="width-full"></div>
+		            <div style="text-align: center"><img src="../../script/flat/image/main/banner-02.jpg" data-title="第二条新闻" class="width-full"></div>
+		            <div style="text-align: center"><img src="../../script/flat/image/main/banner-03.jpg" data-title="第三条新闻" class="width-full"></div>
+		        </div>
+		    </div>
+		    <!-- 可清除内容-start -->
+			<div class="box box-center box-middle" style="height:300px;width:100%;color:#ddd;font-size:16px;">
+				<span class="iconfont iconline-book" style="font-size:40px;"></span>
+				<br/>
+				<span style="margin-top:8px;">内容</span>
+			</div>
+			<!-- 可清除内容-end -->
+	    </div>
+	    </article>
+	</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+<script>
+function doBannerArticleLoad(){
+	var bannerSlider = new A.Slider({
+		                selector : '#slider_banner',
+		                speed : 500,
+		                onBeforeSlide : function(){
+		                    return true;
+		                },
+		                onAfterSlide : function(i){
+		                	return true;
+		                }
+		            });
+    $('#slider_prev').click(function(){bannerSlider.prev(); return false;});
+    $('#slider_next').click(function(){bannerSlider.next(); return false;});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>首页</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+<link rel="stylesheet" href="../../script/flat/css/iconlogo.css">
+<link rel="stylesheet" href="../../script/flat/css/animate.css">
+<link rel="stylesheet" href="../../script/flat/css/loading.css">
+</head>
+<body>
+
+<div id="section_container">
+	<section id="animate" class="active">
+	   <header>
+		    <div class="titlebar">
+		    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+		    	<h1>动画效果</h1>
+		    </div>
+		</header>
+	    <article id="normal_article" class="active" data-scroll="true" style="top:44px;bottom:0px">
+	    	<div class="scroller" style="padding:0 8px 20px 8px;">
+	    	<!-- 部分机型不支持水柱动画 -->
+<!-- 				<div class="section-title">progress 水柱</div> -->
+<!-- 				<div class="box box-center"> -->
+<!-- 					<div class="loading-box"> -->
+<!-- 						<i class="iconfont iconline-rdo-cancel close"></i> -->
+<!-- 						<i class="iconfont iconlogo-logo-starrysky progress loading-icon" style="height:60px;"></i> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+				
+				<div class="section-title">gradient 渐变</div>
+				<div class="box box-center">
+					<div class="loading-box">
+						<i class="iconfont iconline-rdo-cancel close"></i>
+						<i class="iconfont iconlogo-logo-starrysky gradient loading-icon"></i>
+					</div>
+				</div>
+				
+				<div class="section-title">spinner 旋转</div>
+				<div class="box box-center">
+					<div class="loading-box">
+						<i class="iconfont iconline-rdo-cancel close"></i>
+						<i class="iconfont iconline-reloading spinner" style="font-size:40px;width:41px;height:41px;position:absolute;left:50%;top:50%;margin:-20px 0 0 -20px"></i>
+					</div>
+				</div>
+				
+				<div class="section-title">div制作旋转</div>
+				<div class="box box-center">
+					<div class="loading-box">
+						<i class="iconfont iconline-rdo-cancel close"></i>
+						<div id="floatingBarsG" class="loading-icon">
+							<div class="blockG" id="rotateG_01">
+							</div>
+							<div class="blockG" id="rotateG_02">
+							</div>
+							<div class="blockG" id="rotateG_03">
+							</div>
+							<div class="blockG" id="rotateG_04">
+							</div>
+							<div class="blockG" id="rotateG_05">
+							</div>
+							<div class="blockG" id="rotateG_06">
+							</div>
+							<div class="blockG" id="rotateG_07">
+							</div>
+							<div class="blockG" id="rotateG_08">
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+	    	</div>
+	    </article>
+	</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+<script>
+function animateThis(obj,anim){
+	$(obj).addClass(anim+' animated-long').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	  $(obj).removeClass(anim+' animated-long');
+	});
+}
+</script>
+</body>
+</html>

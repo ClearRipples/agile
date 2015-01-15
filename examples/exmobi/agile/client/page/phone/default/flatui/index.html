@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>首页</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+<link rel="stylesheet" href="../../script/flat/css/welcome.css">
+<!-- less客户端换肤 -->
+<!-- <link rel="stylesheet/less" type="text/css" href="../../script/flat/css/flat.color.less" /> -->
+<script>
+  /*less = {
+    env: "development",
+    async: false,
+    fileAsync: false,
+    poll: 1000,
+    functions: {},
+    dumpLineNumbers: "comments",
+    relativeUrls: false,
+    rootpath: ":/a.com/"
+  };*/
+</script>
+<!-- <script type="text/javascript" src="../../script/flat/js/less.min.js"></script> -->
+<style>
+	.grid-thumbnail{
+		border-radius:8px;
+		border:1px solid #ddd;
+		overflow:hidden;
+	}
+</style>
+</head>
+<body>
+<div id="section_container">
+<section id="page_section" class="active" >
+		<header>
+		    <div class="titlebar">
+		    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+		    	<h1>h5扁平模板</h1>
+		    </div>
+		    <div class="tabbar">
+		    	<a class="tab active" href="#page1" data-target="sliderPage">常用控件</a>
+		    	<a class="tab" href="#page2" data-target="sliderPage">常用页面</a>
+		    </div>
+		</header>
+		
+		<article id="page_article" class="active" data-slider-page="true" style="top:88px;bottom:0;">
+			<div id="page1" data-role="slider-page" data-scroll-orientation="vertical" java-pagename="常用控件">
+			<div class="scroller">
+				<p class="title">列表控件</p>
+				<div class="grid" data-col="3" java-gridname="列表控件">
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/list-oneline.jpg" data-target="native" href="list-oneline.html"/>
+						</div>
+						<label class="grid-label">单行列表</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/list-twoline.jpg" data-target="native" href="list-twoline.html"/>
+						</div>
+						<label class="grid-label">双行列表</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/list-button.jpg" data-target="native" href="list-button.html"/>
+						</div>
+						<label class="grid-label">按钮列表</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/list-news.jpg" data-target="native" href="list-news.html"/>
+						</div>
+						<label class="grid-label">新闻列表</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/list-grid.jpg" data-target="native" href="list-grid.html"/>
+						</div>
+						<label class="grid-label">功能列表</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/list-mail.jpg" data-target="native" href="list-mail.html"/>
+						</div>
+						<label class="grid-label">邮件列表</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/list-drag.jpg" data-target="native" href="list-drag.html"/>
+						</div>
+						<label class="grid-label">刷新列表</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/list-lazy.jpg" data-target="native" href="list-lazy.html"/>
+						</div>
+						<label class="grid-label">懒人加载</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/list-lazy.jpg" data-target="native" href="list-download.html"/>
+						</div>
+						<label class="grid-label">下载列表</label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<p class="title">按钮控件</p>
+				<div class="grid" data-col="3" java-gridname="按钮控件">
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/button.jpg" data-target="native" href="button.html"/>
+						</div>
+						<label class="grid-label">按钮</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/button-grid.jpg" data-target="native" href="button-grid.html"/>
+						</div>
+						<label class="grid-label">九宫按钮</label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<p class="title">表单控件</p>
+				<div class="grid" data-col="3" java-gridname="表单控件">
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/form-common.jpg" data-target="native" href="form-common.html"/>
+						</div>
+						<label class="grid-label">普通表单</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/form-square.jpg" data-target="native" href="form-square.html"/>
+						</div>
+						<label class="grid-label">框形表单</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/form-group.jpg" data-target="native" href="form-group.html"/>
+						</div>
+						<label class="grid-label">分组表单</label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<p class="title">弹出框</p>
+				<div class="grid" data-col="3" java-gridname="弹出框">
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/pop-common.jpg" data-target="native" href="pop-common.html"/>
+						</div>
+						<label class="grid-label">常用弹出框</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/pop-side.jpg" data-target="native" href="pop-side.html"/>
+						</div>
+						<label class="grid-label">左右弹出框</label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<p class="title">页签栏</p>
+				<div class="grid" data-col="3" java-gridname="页签栏">
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/tab-more.jpg" data-target="native" href="tab-more.html"/>
+						</div>
+						<label class="grid-label">更多页签栏</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/tab-tabbar.jpg" data-target="native" href="tab-tabbar.html"/>
+						</div>
+						<label class="grid-label">头部页签栏</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/tab-menubar.jpg" data-target="native" href="tab-menubar.html"/>
+						</div>
+						<label class="grid-label">底部页签栏</label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<p class="title">动画效果</p>
+				<div class="grid" data-col="3" java-gridname="动画效果">
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/animate.jpg" data-target="native" href="animate.html"/>
+						</div>
+						<label class="grid-label">动画效果</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/animate-loading.jpg" data-target="native" href="animate-loading.html"/>
+						</div>
+						<label class="grid-label">加载动画</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/animate-slider.jpg" data-target="native" href="animate-slider.html"/>
+						</div>
+						<label class="grid-label">滑动容器</label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<p class="title">文字图标</p>
+				<div class="grid" data-col="3" java-gridname="文字图标">
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/iconfont-iconline.jpg" data-target="native" href="iconfont-iconline.html"/>
+						</div>
+						<label class="grid-label">常用图标</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/iconfont-iconform.jpg" data-target="native" href="iconfont-iconform.html"/>
+						</div>
+						<label class="grid-label">表单图标</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/iconfont-iconlogo.jpg" data-target="native" href="iconfont-iconlogo.html"/>
+						</div>
+						<label class="grid-label">logo图标</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/iconfont-iconweather.jpg" data-target="native" href="iconfont-iconweather.html"/>
+						</div>
+						<label class="grid-label">天气图标</label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="grid" data-col="3">
+					
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			</div>
+			<div id="page2" data-role="slider-page" data-scroll-orientation="vertical" java-pagename="常用页面">
+			<div class="scroller">
+				<p class="title">登录</p>
+				<div class="grid" data-col="3" java-gridname="登录">
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/login1.jpg" data-target="native" href="login1.html"/>
+						</div>
+						<label class="grid-label">登录1</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/login2.jpg" data-target="native" href="login2.html"/>
+						</div>
+						<label class="grid-label">登录2</label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<p class="title">主页</p>
+				<div class="grid" data-col="3" java-gridname="主页">
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/main1.jpg" data-target="native" href="main1.html"/>
+						</div>
+						<label class="grid-label">主页1</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail">
+							<img src="../../script/flat/image/thumbnail/main2.jpg" data-target="native" href="main2.html"/>
+						</div>
+						<label class="grid-label">主页2</label>
+					</div>
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/main3.jpg" data-target="native" href="main3.html"/>
+						</div>
+						<label class="grid-label">主页3</label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<p class="title">欢迎页</p>
+				<div class="grid" data-col="3" java-gridname="欢迎页">
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/welcome.jpg" data-target="native" href="welcome.html"/>
+						</div>
+						<label class="grid-label">滚动欢迎</label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<p class="title">详情</p>
+				<div class="grid" data-col="3" java-gridname="详情">
+					<div class="grid-cell">
+						<div class="grid-thumbnail"><img src="../../script/flat/image/thumbnail/detail-img.jpg" data-target="native" href="detail-img.html"/>
+						</div>
+						<label class="grid-label">图片详情</label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			</div>
+	    </article>
+</section>
+</div>
+<div style="padding:0;margin:0;position:fixed;z-index:100;left:0;top:0;background-color:#3498db;height:100%;width:100%;" id="welcome">
+	<div class="topic" id="topic">
+		<div class="welcome-title">Flat UI</div>
+		<div class="subtitle" id="subtitle">它是基于html | css | js轻量级webapp</div>
+	</div>
+	<!-- 三圆 -->
+	<div style="position:fixed;top:35%;left:50%;-webkit-transform:translateX(-50%);width:280px;height:250px;">
+		<div class="rdohtml" id="rdohtml">
+			HTML
+		</div>
+		<div class="rdocss" id="rdocss">
+			CSS
+		</div>
+		<div class="rdojs" id="rdojs">
+			JS
+		</div>
+	</div>
+	<!-- 丰富的组件 -->
+	<div class="topic2" id="topic2">
+		<div class="welcome-title">Flat UI</div>
+		<div class="subtitle" id="subtitle2" style="opacity:1;">组件齐全可扩展</div>
+	</div>
+	<div class="boxplug" id="boxplug">
+		<img src="../../script/flat/image/welcome/chat.png" class="plugchat" id="plugchat"/>
+		<img src="../../script/flat/image/welcome/file.png" class="plugfile" id="plugfile"/>
+		<img src="../../script/flat/image/welcome/readmark.png" class="plugreadmark" id="plugreadmark"/>
+		<img src="../../script/flat/image/welcome/tel.png" class="plugtel" id="plugtel"/>
+		<img src="../../script/flat/image/welcome/home.png" class="plughome" id="plughome"/>
+		<img src="../../script/flat/image/welcome/friends.png" class="plugfriends" id="plugfriends"/>
+		<img src="../../script/flat/image/welcome/album.png" class="plugalbum" id="plugalbum"/>
+		<img src="../../script/flat/image/welcome/position.png" class="plugposition" id="plugposition"/>
+		<img src="../../script/flat/image/welcome/comments.png" class="plugcomments" id="plugcomments"/>
+		<img src="../../script/flat/image/welcome/earth.png" class="plugearth" id="plugearth"/>
+		<img src="../../script/flat/image/welcome/message.png" class="plugmessage" id="plugmessage"/>
+		<img src="../../script/flat/image/welcome/img.png" class="plugimg" id="plugimg"/>
+		<img src="../../script/flat/image/welcome/share.png" class="plugshare" id="plugshare"/>
+		<img src="../../script/flat/image/welcome/search.png" class="plugsearch" id="plugsearch"/>
+	</div>
+	<div style="position:fixed;bottom:3%;left:50%;-webkit-transform:translate(-50%)" id="down"><img src="../../script/flat/image/welcome/down.png" style="width:24px;"/></div>
+	<!-- 我们致力于用户体验 -->
+	<div class="topic3" id="topic3">我们致力于用户体验</div>
+	<img class="pull" src="../../script/flat/image/welcome/phone.png" id="phone"/>
+	<img src="../../script/flat/image/welcome/pull.png" class="pull" id="pull"/>
+	
+	<div style="position:fixed;bottom:0;">
+		<input type="hidden" id="txt-up" value="oneanimate"/>
+		<input type="hidden" id="txt-down"/>
+	</div>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+
+<!-- UI界面 -->
+<script type="text/javascript" src="../../script/flat/js/jquery.js"></script>
+<script type="text/javascript" src="../../script/flat/js/h5.base.js"></script>
+
+<script>
+function welcome(){
+    var isload=$phone.hasLoad();
+	if(isload){
+		$('#welcome').css("display","none");
+	}else{
+		$('#welcome').css("display","block");
+	}
+}
+
+function oneanimateBackward(){
+	$('#topic').replaceClassTo("topic-backward");
+	$('#subtitle').replaceClassTo("subtitle-backward");
+	$('#rdohtml').replaceClassTo("rdohtml-backward");
+	$('#rdocss').replaceClassTo("rdocss-backward");
+	$('#rdojs').replaceClassTo("rdojs-backward");
+	
+	$('#txt-up').val('oneanimate');
+	$('#txt-down').val('oneanimateBackward');
+}
+function oneanimate(){
+	//从2跳回来，或者从1跳过来
+	if($('#boxplug').attr("class")=="boxplug-forward"||$('#boxplug').attr("class")=="boxplug-down"){
+		$('#boxplug').replaceClassTo("boxplug-backward");
+		$('#topic2').replaceClassTo("topic2-backward");
+		$('#topic').replaceClassTo("topic-down");
+		initplugs();
+	}else{
+		$('#topic').replaceClassTo("topic-forward");
+		$('#subtitle').replaceClassTo("subtitle-forward");
+	}
+	
+	//加载圆
+	$('#rdohtml').replaceClassTo("rdohtml-forward");
+	$('#rdocss').replaceClassTo("rdocss-forward");
+	$('#rdojs').replaceClassTo("rdojs-forward");
+	
+	$('#txt-up').val('twoanimate');
+	$('#txt-down').val('oneanimateBackward');
+	
+}
+function twoanimate(){
+	//从3跳回来
+	if($('#phone').attr("class")=="phone-forward"){
+		$('#down').replaceClassTo("animate-show");
+		$('#phone').replaceClassTo("phone-backward");
+		$('#pull').replaceClassTo("pull-backward");
+		$('#topic3').replaceClassTo("topic3-backward");
+		
+		$('#topic2').replaceClassTo("topic-down");
+		$('#boxplug').replaceClassTo("boxplug-down");
+		plugsload();
+	}
+	//从2跳过来
+	if($('#rdohtml').attr("class")=="rdohtml-forward"){
+		$('#rdohtml').replaceClassTo("rdohtml-backward");
+		$('#rdocss').replaceClassTo("rdocss-backward");
+		$('#rdojs').replaceClassTo("rdojs-backward");
+		$('#topic').replaceClassTo("topic-up");
+		$('#topic2').replaceClassTo("topic2-forward");
+		$('#boxplug').replaceClassTo("boxplug-forward");
+		plugsload();
+	}
+	$('#txt-up').val('threeanimate');
+	$('#txt-down').val('oneanimate');
+}
+function plugsload(){
+	$('#plugchat').replaceClassTo("plugchat-forward");
+	$('#plughome').replaceClassTo("plughome-forward");
+	$('#plugfile').replaceClassTo("plugfile-forward");
+	$('#plugreadmark').replaceClassTo("plugreadmark-forward");
+	$('#plugtel').replaceClassTo("plugtel-forward");
+	$('#plugfriends').replaceClassTo("plugfriends-forward");
+	$('#plugalbum').replaceClassTo("plugalbum-forward");
+	$('#plugposition').replaceClassTo("plugposition-forward");
+	$('#plugcomments').replaceClassTo("plugcomments-forward");
+	$('#plugearth').replaceClassTo("plugearth-forward");
+	$('#plugmessage').replaceClassTo("plugmessage-forward");
+	$('#plugimg').replaceClassTo("plugimg-forward");
+	$('#plugshare').replaceClassTo("plugshare-forward");
+	$('#plugsearch').replaceClassTo("plugsearch-forward");
+}
+function initplugs(){
+	$('#plugchat').replaceClassTo("plugchat");
+	$('#plughome').replaceClassTo("plughome");
+	$('#plugfile').replaceClassTo("plugfile");
+	$('#plugreadmark').replaceClassTo("plugreadmark");
+	$('#plugtel').replaceClassTo("plugtel");
+	$('#plugfriends').replaceClassTo("plugfriends");
+	$('#plugalbum').replaceClassTo("plugalbum");
+	$('#plugposition').replaceClassTo("plugposition");
+	$('#plugcomments').replaceClassTo("plugcomments");
+	$('#plugearth').replaceClassTo("plugearth");
+	$('#plugmessage').replaceClassTo("plugmessage");
+	$('#plugimg').replaceClassTo("plugimg");
+	$('#plugshare').replaceClassTo("plugshare");
+	$('#plugsearch').replaceClassTo("plugsearch");
+}
+function threeanimate(){
+	initplugs();
+	$('#topic2').replaceClassTo("topic-up");
+	$('#boxplug').replaceClassTo("boxplug-up");
+	$('#down').replaceClassTo("animate-hide");
+	
+	$('#phone').replaceClassTo("phone-forward");
+	$('#pull').replaceClassTo("pull-forward");
+	$('#topic3').replaceClassTo("topic3-forward");
+	
+	$('#txt-up').val('closewelcome');
+	$('#txt-down').val('twoanimate');
+}
+function closewelcome(){
+	$('#welcome').animate({top:'-100%'},500);
+	setTimeout(function(){$('#welcome').css("display","none")},500);
+}
+$("#welcome").swipeToUp({fun:swipeToUp});
+$("#welcome").swipeToDown({fun:swipeToDown});
+function swipeToUp(){
+	var upStr=$('#txt-up').val().toString();
+	$phone.runFunction(eval(upStr));
+}
+function swipeToDown(){
+	var downStr=$('#txt-down').val().toString();
+	$phone.runFunction(eval(downStr));
+}
+$("#welcome").mouseToUp({fun:swipeToUp});
+$("#welcome").mouseToDown({fun:swipeToDown});
+function mouseToUp(){
+    var upStr=$('#txt-up').val().toString();
+    $phone.runFunction(eval(upStr));
+}
+function mouseToDown(){
+    var downStr=$('#txt-down').val().toString();
+    $phone.runFunction(eval(downStr));
+}
+document.addEventListener('plusready',welcome,false);
+</script>
+</body>
+</html>

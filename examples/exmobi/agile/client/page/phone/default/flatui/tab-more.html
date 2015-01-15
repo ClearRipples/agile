@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>页签栏</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+<style>
+/*弹出更多*/
+ul.btn-case{
+	list-style:none;margin:0px;padding:0;
+}
+ul.btn-case li{
+	width:25%;
+	display:block;
+	float:left;
+}
+ul.btn-case li a{
+	margin:8px;
+	padding:8px 0;
+	border-radius:4px;
+	border:1px solid #d8d8d8;
+	background-color:#f8f8f8;
+	text-align:center;
+	color:#000;
+	display:inline-block;
+	width:80%;
+	font-size:14px;
+}
+ul.btn-case li a:active{
+	background-color:#e8e8e8;
+}
+</style>
+</head>
+<body>
+<div id="section_container">
+<section id="index_section" class="active" data-transition="slideDown">
+	<header>
+	    <div class="titlebar">
+	    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+	    	<h1>更多页签栏</h1>
+	    </div>
+	    <div class="tabbar-slider" data-scroll-orientation="horizontal">
+		    <div class="tabbar" style="width:440px;padding-right:44px;">
+		    	<a class="tab active" href="#page1" data-target="sliderPage">头条</a>
+		    	<a class="tab" href="#page2" data-target="sliderPage">南京</a>
+		    	<a class="tab" href="#page3" data-target="sliderPage">江苏</a>
+		    	<a class="tab" href="#page4" data-target="sliderPage">国内</a>
+		    	<a class="tab" href="#page5" data-target="sliderPage">国际</a>
+		    	<a class="tab" href="#page6" data-target="sliderPage">财经</a>
+		    	<a class="tab" href="#page7" data-target="sliderPage">视频</a>
+		    </div>
+	    	<a class="tab-more iconfont iconline-arrow-down" onclick="toggleMore()"></a>
+	    </div>
+	</header>
+	
+	<article id="page_article" class="active" data-slider-page="true" style="top:88px;bottom:0;">
+			<div id="page1" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<!-- 可清除内容-start -->
+					<div class="box box-center box-middle" style="height:350px;width:100%;color:#ddd;font-size:16px;">
+						<span class="iconfont iconline-book" style="font-size:40px;"></span>
+						<br/>
+						<span style="margin-top:8px;">第1页</span>
+					</div>
+					<!-- 可清除内容-end -->
+				</div>
+			</div>
+			<div id="page2" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<!-- 可清除内容-start -->
+					<div class="box box-center box-middle" style="height:350px;width:100%;color:#ddd;font-size:16px;">
+						<span class="iconfont iconline-book" style="font-size:40px;"></span>
+						<br/>
+						<span style="margin-top:8px;">第2页</span>
+					</div>
+					<!-- 可清除内容-end -->
+				</div>
+			</div>
+			<div id="page3" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<!-- 可清除内容-start -->
+					<div class="box box-center box-middle" style="height:350px;width:100%;color:#ddd;font-size:16px;">
+						<span class="iconfont iconline-book" style="font-size:40px;"></span>
+						<br/>
+						<span style="margin-top:8px;">第3页</span>
+					</div>
+					<!-- 可清除内容-end -->
+				</div>
+			</div>
+			<div id="page4" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<!-- 可清除内容-start -->
+					<div class="box box-center box-middle" style="height:350px;width:100%;color:#ddd;font-size:16px;">
+						<span class="iconfont iconline-book" style="font-size:40px;"></span>
+						<br/>
+						<span style="margin-top:8px;">第4页</span>
+					</div>
+					<!-- 可清除内容-end -->
+				</div>
+			</div>
+			<div id="page5" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<!-- 可清除内容-start -->
+					<div class="box box-center box-middle" style="height:350px;width:100%;color:#ddd;font-size:16px;">
+						<span class="iconfont iconline-book" style="font-size:40px;"></span>
+						<br/>
+						<span style="margin-top:8px;">第5页</span>
+					</div>
+					<!-- 可清除内容-end -->
+				</div>
+			</div>
+			<div id="page6" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<!-- 可清除内容-start -->
+					<div class="box box-center box-middle" style="height:350px;width:100%;color:#ddd;font-size:16px;">
+						<span class="iconfont iconline-book" style="font-size:40px;"></span>
+						<br/>
+						<span style="margin-top:8px;">第6页</span>
+					</div>
+					<!-- 可清除内容-end -->
+				</div>
+			</div>
+			<div id="page7" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<!-- 可清除内容-start -->
+					<div class="box box-center box-middle" style="height:350px;width:100%;color:#ddd;font-size:16px;">
+						<span class="iconfont iconline-book" style="font-size:40px;"></span>
+						<br/>
+						<span style="margin-top:8px;">第7页</span>
+					</div>
+					<!-- 可清除内容-end -->
+				</div>
+			</div>
+	    </article>
+</section>
+</div>
+<!-- 弹出框 -->
+<div id="tab-more" style="display:none;width:100%;height:100%;position:absolute;z-index:100;top:44px;background-color:white;">
+	<div class="tabbar-slider" style="height:44px;line-height:44px;padding:0 8px;">
+		已有频道
+		<a class="tab-more iconfont iconline-arrow-up" onclick="toggleMore()"></a>
+	</div>
+	<ul class="btn-case" id="menu-checked">
+		<li><a style="color:#3779d0;">头条</a></li>
+		<li><a onclick="delMenu(this)">南京</a></li>
+		<li><a onclick="delMenu(this)">江苏</a></li>
+		<li><a onclick="delMenu(this)">国内</a></li>
+		<li><a onclick="delMenu(this)">国际</a></li>
+	</ul>
+	<div class="clearfix"></div>
+	
+	<div class="tabbar-slider" style="height:44px;line-height:44px;padding:0 8px;">
+		更多频道
+		<span class="right" style="color:#aaa">点击添加频道</span>
+	</div>
+	<ul class="btn-case" id="menu-unchecked">
+		<li><a onclick="addMenu(this)">直播</a></li>
+		<li><a onclick="addMenu(this)">健康</a></li>
+		<li><a onclick="addMenu(this)">汽车</a></li>
+		<li><a onclick="addMenu(this)">体育</a></li>
+		<li><a onclick="addMenu(this)">军事</a></li>
+		<li><a onclick="addMenu(this)">历史</a></li>
+		<li><a onclick="addMenu(this)">文化</a></li>
+	</ul>
+	<div class="clearfix"></div>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+
+<!-- UI界面 -->
+<script type="text/javascript" src="../../script/flat/js/jquery.js"></script>
+<script type="text/javascript" src="../../script/flat/js/h5.base.js"></script>
+<script>
+function toggleMore(){
+	if($("#tab-more").css("display")=="none"){
+		$("#tab-more").slideDown("slow");
+	}else{
+		$("#tab-more").slideUp("slow");
+	}
+}
+function addMenu(obj){
+	$(obj).attr("onclick","delMenu(this)").parent().clone().appendTo("#menu-checked");
+	$(obj).parent().remove();
+}
+function delMenu(obj){
+	$(obj).attr("onclick","addMenu(this)").parent().clone().appendTo("#menu-unchecked");
+	$(obj).parent().remove();
+}
+</script>
+</body>
+</html>

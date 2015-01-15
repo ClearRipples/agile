@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>页签栏</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+</head>
+<body>
+<div id="section_container">
+<section id="index_section" class="active" data-transition="slideDown">
+	<header>
+	    <div class="titlebar">
+	    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+	    	<h1>底部页签栏</h1>
+	    </div>
+	</header>
+	
+	<article id="page_article" class="active" data-slider-page="true" style="top:44px;bottom:52px;">
+			<div id="page1" data-role="slider-page" data-scroll-orientation="vertical">
+				<!-- 可清除内容-start -->
+				<div class="box box-center box-middle" style="height:350px;width:100%;color:#ddd;font-size:16px;">
+					<span class="iconfont iconline-book" style="font-size:40px;"></span>
+					<br/>
+					<span style="margin-top:8px;">第1页</span>
+				</div>
+				<!-- 可清除内容-end -->
+			</div>
+			<div id="page2" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<!-- 可清除内容-start -->
+					<div class="box box-center box-middle" style="height:350px;width:100%;color:#ddd;font-size:16px;">
+						<span class="iconfont iconline-book" style="font-size:40px;"></span>
+						<br/>
+						<span style="margin-top:8px;">第2页</span>
+					</div>
+					<!-- 可清除内容-end -->
+				</div>
+			</div>
+			<div id="page3" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<!-- 可清除内容-start -->
+					<div class="box box-center box-middle" style="height:350px;width:100%;color:#ddd;font-size:16px;">
+						<span class="iconfont iconline-book" style="font-size:40px;"></span>
+						<br/>
+						<span style="margin-top:8px;">第3页</span>
+					</div>
+					<!-- 可清除内容-end -->
+				</div>
+			</div>
+			<div id="page4" data-role="slider-page" data-scroll-orientation="vertical">
+				<div class="scroller">
+					<!-- 可清除内容-start -->
+					<div class="box box-center box-middle" style="height:350px;width:100%;color:#ddd;font-size:16px;">
+						<span class="iconfont iconline-book" style="font-size:40px;"></span>
+						<br/>
+						<span style="margin-top:8px;">第4页</span>
+					</div>
+					<!-- 可清除内容-end -->
+				</div>
+			</div>
+	    </article>
+	    <footer>
+			<nav class="menubar">
+				<a class="menu active" href="#page1" data-target="sliderPage">
+					<span class="menu-icon iconfont iconline-mail"></span>
+				    <span class="menu-text">邮件</span>
+				</a>
+				<a class="menu" href="#page2" data-target="sliderPage">
+					<span class="menu-icon iconfont iconline-notebook"></span>
+				    <span class="menu-text">通讯录</span>
+				</a>
+				<a class="menu" href="#page3" data-target="sliderPage">
+					<span class="menu-icon iconfont iconline-file"></span>
+				    <span class="menu-text">审批</span>
+				</a>
+				<a class="menu" href="#page4" data-target="sliderPage">
+					<span class="menu-icon iconfont iconline-map-location"></span>
+				    <span class="menu-text">定位</span>
+				</a>
+			</nav>
+		</footer>
+</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+
+</body>
+</html>

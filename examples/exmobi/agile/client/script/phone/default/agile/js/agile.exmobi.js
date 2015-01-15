@@ -2,12 +2,27 @@
  * 初始化exmobi事件
  * */
 document.addEventListener("plusready", function() {
+	//初始化JSON
+	window.JSON = aJSON;
+	
+	//初始化cache
 	A.cache.set = function(k, v){
-		if(typeof v != 'object') return;
-		CacheUtil.setCache(k, JSON.stringify(v));
+		v = v||'';
+		try{
+			CacheUtil.setCache(k, JSON.stringify(v));
+			//return true;
+		}catch(e){
+			CacheUtil.setCache(k, v.toString());
+			//return false;
+		}
+		
 	};
 	A.cache.get = function(k){
-		return JSON.parse(CacheUtil.getCache(k));
+		try{
+			return JSON.parse(CacheUtil.getCache(k));
+		}catch(e){
+			return CacheUtil.getCache(k);
+		}
 	};
 	A.cache.remove = function(k){
 		CacheUtil.remove(k);

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>登陆</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+<link rel="stylesheet" href="../../script/flat/css/iconform.css">
+<style>
+	body{
+		padding:0;margin:0;
+	}
+	article{
+		top:0px;
+		bottom:0px;
+	}
+	.scroller{
+		width:100%;
+		height:100%;
+		position:relative;
+	}
+	/*页面动画*/
+	.logo {
+   		position: relative;
+		top:50%;
+		left:50%;
+		width:150px;
+		-webkit-transform:translate(-50%,-50%);
+ 			-ms-transform:translate(-50%,-50%);
+ 				transform:translate(-50%,-50%);
+ 		-webkit-animation:moveLogo ease-in 1;
+ 		-ms-animation:moveLogo ease-in 1;
+ 		animation:moveLogo ease-in 1;
+ 		-webkit-animation-delay: 1s;
+ 		-ms-animation-delay: 1s;
+ 		animation-delay: 1s;
+ 		-webkit-animation-duration:1s;
+ 		-ms-animation-duration:1s;
+ 		animation-duration:1s;
+	
+ 		-webkit-animation-fill-mode:forwards;
+ 		-ms-animation-fill-mode:forwards;
+ 		animation-fill-mode:forwards;
+   	}
+   	
+   	@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@-ms-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	
+	@-webkit-keyframes moveLogo {
+		0% {
+		}
+		
+		100% {
+			-webkit-transform:translate(-50%,10%) scale(.8);
+		}
+	}
+	
+	.fade-in {
+		opacity:0;  /* make things invisible upon start */
+		-webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+		-ms-animation:fadeIn ease-in 1;
+		animation:fadeIn ease-in 1;
+	
+		-webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+		-ms-animation-fill-mode:forwards;
+		animation-fill-mode:forwards;
+	
+		-webkit-animation-duration:1s;
+		-ms-animation-duration:1s;
+		animation-duration:1s;
+	}
+	
+	.fade-in.one {
+	-webkit-animation-delay:2s;
+	-ms-animation-delay:2s;
+	animation-delay:2s;
+	}
+	
+	.fade-in.two {
+	-webkit-animation-delay:2.5s;
+	-ms-animation-delay:2.5s;
+	animation-delay:2.5s;
+	}
+	
+	.fade-in.three {
+	-webkit-animation-delay:3s;
+	-ms-animation-delay:3s;
+	animation-delay:3s;
+	}
+	.fade-in.four {
+	-webkit-animation-delay:3.5s;
+	-ms-animation-delay:3.5s;
+	animation-delay:3.5s;
+	}
+	
+   	/*表单布局*/
+	input[type="text"],input[type="password"]{
+	    margin:8px 0;
+		color:white;
+		border-color:white;
+		width:100%;
+		height:40px;
+		text-indent:32px;
+	}
+	.uid{
+	   background:url(../../script/flat/image/login/uid.png) no-repeat 6px center rgba(0,0,0,.5);background-size:24px 24px;
+	}
+	.pwd{
+	   background:url(../../script/flat/image/login/pwd.png) no-repeat 6px center rgba(0,0,0,.5);background-size:24px 24px;
+	}
+	
+	.input-row{
+        margin:8px 0;
+    }
+	input[type="checkbox"]{
+		height:24px;
+		width:24px;
+		margin-left:8px;
+	}
+	input[type="checkbox"]:after{
+		color:white;
+		font-size:24px;
+	}
+	input[type="checkbox"]+label{
+		color:white;
+		height:24px;
+		line-height:24px;
+		display:inline-block;
+		vertical-align:middle;
+		margin-left:4px;
+	}
+	.btn-login{
+		border-color:#ffffff;
+		color:#4fc1e9;
+		background-color:#ffffff;
+		width:100%;
+		height:40px;
+	}
+	.btn-login:active{
+		background-color:#3bafda;
+		color:white;
+	}
+	.login-form {
+        padding:50px 20px 0 20px;
+        z-index:9999;
+        position:absolute;
+        top:0;
+        width:100%;
+    }
+    .outer-container {
+        width:100%; 
+        height:100%; 
+        color:#ffffff;
+        position:relative;
+        background-color:transparent;
+    }
+</style>
+
+</head>
+<body>
+<div id="section_container">
+<section id="index_section" class="active" data-transition="slideDown" style="background:url(../../script/flat/image/login/login_bg2.jpg);background-size:cover;">
+	<article class="active outer-container" data-scroll="false" style="background:url(../../script/flat/image/login/login_bg2.jpg);background-size:cover;top:0;bottom:0;">
+	    <div class="logo">
+       	    <img src="../../script/flat/image/login/logo_exmobi.png" style="width:150px;"/>
+       	</div>
+       	<div class="login-form">
+    		<input type="text" placeholder="请输入用户名" class="uid fade-in one">
+    		<input type="password" placeholder="请输入密码" class="pwd fade-in two">
+    		<div class="input-row fade-in three">
+    			<input type="checkbox" id="remberpwd"/>
+    			<label for="remberpwd">记住密码</label>
+    		</div>
+    		<button class="btn-login input-row fade-in four" href="#" data-target="close">登录</button>
+		</div>
+	</article>
+</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+
+<!-- UI界面 -->
+<script type="text/javascript" src="../../script/flat/js/jquery.js"></script>
+<script type="text/javascript" src="../../script/flat/js/h5.base.js"></script>
+
+<script>
+    function getCHeight(){
+        var cHeight = $(window).height();
+        $(".outer-container").height(cHeight);
+    }
+    document.addEventListener('plusready',getCHeight,false);
+</script>
+</body>
+</html>

@@ -84,14 +84,20 @@ function doArticleLoad(){
 	});
 	
 }
-$(document).on('exmobistart', function(){
+$(document).on('onstart', function(){
 	$native.toast('页面处于激活状态');
 });
-$(document).on('exmobistop', function(){
+$(document).on('onstop', function(){
 	$native.toast('页面处于非激活状态');
 });
-$(document).on('exmobidestroy', function(){
+$(document).on('ondestroy', function(){
 	$native.toast('页面销毁中');
+});
+$(document).on('onactivate', function(){
+	$native.toast('程序从后台切到前台');
+});
+$(document).on('oninactivate', function(){
+	$native.toast('程序从前台切到后台');
 });
 
 </script>

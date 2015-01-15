@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>分组表单</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+<link rel="stylesheet" href="../../script/flat/css/iconform.css">
+</head>
+<body>
+<div id="section_container">
+<section id="index_section" class="active" data-transition="slideDown">
+	<header>
+	    <div class="titlebar">
+	    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+	    	<h1>分组表单</h1>
+	    </div>
+	</header>
+	
+	<article class="active" data-scroll="true" style="top:44px;bottom:0px;">
+	<div class="scroller">
+		<form class="form-group">
+			<div class="card">
+		  		<input type="text" placeholder="姓名" class="noborder">
+		  	</div>
+		  	
+		  	<div class="card">
+		  		<textarea rows="5" class="noborder"></textarea>
+		  	</div>
+		  	
+		  	<div data-role="select" class="card">
+				<select placeholder="选择公司">
+					<option>请选择公司</option>
+				  	<option>烽火通信股份有限公司</option>
+				  	<option>烽火星空通信发展有限公司</option>
+				</select>
+		  	</div>
+		  	
+		  	<div class="card">
+				<ul class="listitem">
+				  	<li class="title">爱好</li>
+				  	<li class="nopadding">
+					  	<a href="#" data-role="checkbox">
+					  		<label for="basketball" class="black">篮球</label><input type="checkbox" id="basketball"/>
+					  	</a>
+				  	</li>
+				  	<li class="noborder nopadding">
+					  	<a href="#" data-role="checkbox">
+					  		<label for="football" class="black">足球</label><input type="checkbox" id="football"/>
+					  	</a>
+				  	</li>
+				</ul>
+		  	</div>
+		  	
+		  	<div class="card">
+				<ul class="listitem">
+				  	<li class="title">性别</li>
+				  	<li class="nopadding">
+				  		<a href="#" data-role="radio">
+				  			<label for="rdo1" class="black">男</label>
+				  			<input type="radio" name="sex" id="rdo1"/>
+				  		</a>
+				  	</li>
+				  	<li class="nopadding noborder">
+				  		<a href="#" data-role="radio">
+				  			<label for="rdo2" class="black">女</label><input type="radio" name="sex" id="rdo2"/>
+				  		</a>
+				  	</li>
+				</ul>
+		  	</div>
+		  
+		  
+		  	<div data-role="file" class="card">
+		  		<label>请选择文件</label>
+		  		<input name="file" type="hidden">
+		  	</div>
+		  	
+		  	<div data-role="date" class="card">
+		  		<label>请选择日期</label>
+		  		<input type="hidden"/>
+		  	</div>
+		  
+		  
+		  	<div data-role="time" class="card">
+		  		<label>请选择时间</label>
+		  		<input type="hidden"/>
+		  	</div>
+		  	
+		  	
+		  	<div data-role="barcode" class="card">
+		  		<label>请扫描条形码</label>
+		  		<input type="hidden"/>
+		  	</div>
+		  	
+		  	
+		  	<div data-role="qrcode" class="card">
+		  		<label>请扫描二维码</label>
+		  		<input type="hidden"/>
+		  	</div>
+		  	
+		</form>
+		
+		<div class="card noborder">
+			<button class="submit width-full">提交</button>
+		</div>
+	</div>
+	</article>
+</section>
+</div>
+<!-- UI界面 -->
+<script type="text/javascript" src="../../script/flat/js/jquery.js"></script>
+<script type="text/javascript" src="../../script/flat/js/h5.base.js"></script>
+<script>
+$.noConflict();
+jQuery(document).ready(function($){
+	$("#email").addEmailHelp([{domain: '@nj.fiberhome.com.cn', label: '烽火邮箱'},{domain: '@baidu.com', label: '百度邮箱'}]);
+});
+</script>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+</body>
+</html>

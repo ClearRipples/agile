@@ -1,0 +1,10 @@
+注意事项：
+1、Agile框架是一个纯HTML5的框架，建议结合宿主容器，如：PhoneGap、ExMobi等运行
+其目标是使webapp开发接近原生效果，UI设计遵循native程序设计，所以不建议直接在浏览器上使用
+2、此工程为ExMobi工程，调试此工程必须在MBuilder中进行。
+MBuilder下载地址为：http://www.exmobi.cn/sdkdownload.jsp
+3、如果需要在非ExMobi容器中运行，请将client\script\phone\default\目录下的
+agile、app、flat、ratchet、icomoon目录拷贝出来使用，这些都是agile框架的核心代码
+其中app.js中涉及Agile框架的启动，请在合适的事件中启动Agile(plusready为ExMobi的事件)
+UI和交互示例代码可以参考client\page\phone\default下的html和flatui内的文件
+4、Agile框架的文档和学习互动可以访问http://www.exmobi.cn/agile/index.html

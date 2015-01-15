@@ -1,0 +1,119 @@
+<aside id="left_push_aside" data-position="left" data-transition="push">
+    左侧菜单
+</aside>
+<aside id="left_overlay_aside" data-position="left" data-transition="overlay" class="aside-white">
+	<ul class="listitem">
+		<li class="active">
+			<div class="img square" style="background-color:#fa5643;">
+            	<img src="../../script/flat/image/aside/newspaper.png" style="width:24px;"/>
+            </div>
+			<div class="text nowrap" style="height:38px;position:relative;">
+				<span class="middle">新闻</span>
+			</div>
+		</li>
+		<li>
+			<div class="img square" style="background-color:#fa9f43;">
+            	<i class="iconfont iconline-chat-bubbles"></i>
+            </div>
+			<div class="text nowrap" style="height:38px;position:relative;">
+				<span class="middle">段子</span>
+			</div>
+		</li>
+		<li>
+			<div class="img square" style="background-color:#3486f8;">
+            	<i class="iconfont iconline-media-video"></i>
+            </div>
+			<div class="text nowrap" style="height:38px;position:relative;">
+				<span class="middle">直播</span>
+			</div>
+		</li>
+		<li>
+			<div class="img square" style="background-color:#34b577;">
+            	<i class="iconfont iconline-favourite"></i>
+            </div>
+			<div class="text nowrap" style="height:38px;position:relative;">
+				<span class="middle">订阅</span>
+			</div>
+		</li>
+		<li>
+			<div class="img square" style="background-color:#fbc02d;">
+            	<i class="iconfont iconline-present"></i>
+            </div>
+			<div class="text nowrap" style="height:38px;position:relative;">
+				<span class="middle">积分商城</span>
+			</div>
+		</li>
+	</ul>
+</aside>
+
+<aside id="right_push_aside" data-position="right" data-transition="push">
+	<ul class="menu">
+       	<li style="color:white;text-align:center;padding:8px 0;">
+       		<div class="box box-center">
+           		<div class="photo"></div>
+           	</div>
+            <p style="display:block;color:white;font-size:18px;margin:8px;">张三</p>
+            <p style="opacity:0.7;margin:8px;">工号：1001</p>
+        </li>
+        <li class="side-list"><a href="#" onclick="$native.toast('离线版暂不支持此功能')"><div class="side-list-round"><img src="../../script/flat/image/aside/notice.png" class="wmz-side-img"/></div><span>公告收藏</span></a></li>
+        <li class="side-list"><a href="#" onclick="$native.toast('离线版暂不支持此功能')"><div class="side-list-round"><img src="../../script/flat/image/aside/doc.png" class="wmz-side-img"/></div><span>公文收藏</span></a></li>
+        <li class="side-list"><a href="#" onclick="$native.toast('离线版暂不支持此功能')"><div class="side-list-round"><img src="../../script/flat/image/aside/contact.png" class="wmz-side-img"/></div><span>通讯录收藏</span></a></li>
+    </ul>
+</aside>
+<aside id="right_overlay_aside" data-position="right" data-transition="overlay">
+	右侧菜单
+</aside>
+<aside id="right_reveal_aside" data-position="right" data-transition="reveal">
+	<div style="margin:0 20px 20px 20px;padding:16px 10px;border-bottom:1px solid rgba(255,255,255,0.1);">
+		<div class="photo"></div>
+		<span>用户登录</span>
+		<div style="width:50px;display:inline-block;vertical-align: middle;float:right;">
+			<img src="../../script/flat/image/aside/weather.png" style="width:40px;margin-top:8px;"/>
+			<br/>
+			<span style="color:rgba(255,255,255,0.3);font-size:12px;">多云   9℃</span>
+		</div>
+	</div>
+	<div class="grid" data-col="2">
+		<div class="grid-cell">
+			<div class="grid-img grid-img-guide" onclick="$native.toast('离线版暂不支持此功能')"></div>
+			<label class="grid-label">新手引导</label>
+		</div>
+		<div class="grid-cell">
+			<div class="grid-img grid-img-trash" onclick="$native.toast('离线版暂不支持此功能')"></div>
+			<label class="grid-label">清理缓存20M</label>
+		</div>
+		<div class="grid-cell">
+			<div id="menuswitch" class="grid-img grid-img-switch" onclick="switchToggle(this)"></div>
+			<label class="grid-label">推送开关</label>
+		</div>
+		<div class="grid-cell">
+			<div class="grid-img grid-img-feedback" onclick="$native.toast('离线版暂不支持此功能')"></div>
+			<label class="grid-label">意见反馈</label>
+		</div>
+		<div class="grid-cell">
+			<div class="grid-img grid-img-about" onclick="$native.toast('离线版暂不支持此功能')"></div>
+			<label class="grid-label">关于我们</label>
+		</div>
+		<div class="grid-cell">
+			<div class="grid-img grid-img-weibo" onclick="$native.toast('离线版暂不支持此功能')"></div>
+			<label class="grid-label">微博</label>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</aside>
+<aside id="custom_width_aside" data-position="right" data-transition="push" style="width:80px;">
+        <ul class="menu" style="text-align:center;font-size:2em;">
+            <li style="padding: 10px 0;">
+                <i class="iconfont iconline-box" style="font-size:20px;"></i>
+            </li>
+            <li style="padding: 10px 0;">
+                <i class="iconfont iconline-box-empty" style="font-size:20px;"></i>
+            </li>
+            <li style="padding: 10px 0;">
+                <i class="iconfont iconline-box-in" style="font-size:20px;"></i>
+            </li>
+            <li style="padding: 10px 0;">
+	            <i class="iconfont iconline-box-out" style="font-size:20px;"></i>
+	        </li>
+        </ul>
+</aside>

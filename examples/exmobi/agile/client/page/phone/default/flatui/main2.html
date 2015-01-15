@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>首页</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+<link rel="stylesheet" href="../../script/flat/css/animate.css">
+<style>
+  	#grid-container {
+  		padding:10px;
+  		color:#ffffff;
+  		background-color:#ffffff;
+  	}
+  	#content-container {
+  		padding:10px;
+  		background-color:#ffffff;
+  		margin-top:10px;
+  	}
+  	.grid1 {
+  		-webkit-animation-delay:100ms;
+	-ms-animation-delay:100ms;
+	animation-delay:100ms;
+  	}
+  	.grid2 {
+  		-webkit-animation-delay:200ms;
+	-ms-animation-delay:200ms;
+	animation-delay:200ms;
+  	}
+  	.grid3 {
+  		-webkit-animation-delay:300ms;
+	-ms-animation-delay:300ms;
+	animation-delay:300ms;
+  	}
+  	.grid4 {
+  		-webkit-animation-delay:400ms;
+	-ms-animation-delay:400ms;
+	animation-delay:400ms;
+  	}
+  	.grid5 {
+  		-webkit-animation-delay:500ms;
+	-ms-animation-delay:500ms;
+	animation-delay:500ms;
+  	}
+  	.grid6 {
+  		-webkit-animation-delay:600ms;
+	-ms-animation-delay:600ms;
+	animation-delay:600ms;
+  	}
+  	.grid7 {
+  		-webkit-animation-delay:700ms;
+	-ms-animation-delay:700ms;
+	animation-delay:700ms;
+  	}
+  	.grid8 {
+  		-webkit-animation-delay:800ms;
+	-ms-animation-delay:800ms;
+	animation-delay:800ms;
+  	}
+  	.grid1 .grid-img{
+  		background-color:#3498db;
+  	}
+  	.grid2 .grid-img{
+  		background-color:#F39C12;
+  	}
+  	.grid3 .grid-img{
+  		background-color:#1abc9c;
+  	}
+  	.grid4 .grid-img{
+  		background-color:#e74c3c;
+  	}
+  	.grid5 .grid-img{
+  		background-color:#78ba00;
+  	}
+  	.grid6 .grid-img{
+  		background-color:#8e44ad;
+  	}
+  	.grid7 .grid-img{
+  		background-color:#f1c40f;
+  	}
+  	.grid8 .grid-img{
+  		background-color:#2980b9;
+  	}
+  	.grid1 .grid-img:active{
+  		background-color:#1662c2;
+  	}
+  	.grid2 .grid-img:active{
+  		background-color:#e46706;
+  	}
+  	.grid3 .grid-img:active{
+  		background-color:#0b9266;
+  	}
+  	.grid4 .grid-img:active{
+  		background-color:#da231a;
+  	}
+  	.grid5 .grid-img:active{
+  		background-color:#428f00;
+  	}
+  	.grid6 .grid-img:active{
+  		background-color:#551f7d;
+  	}
+  	.grid7 .grid-img:active{
+  		background-color:#e79e06;
+  	}
+  	.grid8 .grid-img:active{
+  		background-color:#11488c;
+  	}
+  	
+  	.grid-img{
+  		background-color:#2980b9;
+  		border-radius:25px;
+  		border:none;
+  		width:50px;
+  		height:50px;
+  	}
+  	.grid-img .iconfont{
+  		font-size:32px;
+  	}
+</style>
+</head>
+<body>
+
+<div id="section_container">
+	<section id="animate" class="active">
+	   <header>
+		    <div class="titlebar">
+		    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+		    	<h1>主页</h1>
+		    </div>
+		</header>
+	    <article id="banner_article" data-articleload="doBannerArticleLoad()" class="active" data-scroll="true" style="top:44px;bottom:0px">
+	    <div class="scroller" style="background-color:#eeeeee;">
+			<div id="grid-container">
+				<div class="grid">
+					<div class="grid-cell grid1 flipInY animated-long">
+						<div class="grid-img">
+							<span class="iconfont iconline-mail"></span>
+							<span class="tip">8</span>
+						</div>
+						<label class="grid-label">邮件</label>
+					</div>
+					<div class="grid-cell grid2 flipInY animated-long">
+						<div class="grid-img">
+							<span class="iconfont iconline-notebook"></span>
+						</div>
+						<label class="grid-label">通讯录</label>
+					</div>
+					<div class="grid-cell grid3 flipInY animated-long">
+						<div class="grid-img">
+							<span class="iconfont iconline-file"></span>
+						</div>
+						<label class="grid-label">审批</label>
+					</div>
+					<div class="grid-cell grid4 flipInY animated-long">
+						<div class="grid-img">
+							<span class="iconfont iconline-map-location"></span>
+						</div>
+						<label class="grid-label">定位</label>
+					</div>
+					<div class="grid-cell grid5 flipInY animated-long">
+						<div class="grid-img">
+							<span class="iconfont iconline-setting"></span>
+						</div>
+						<label class="grid-label">设置</label>
+					</div>
+					<div class="grid-cell grid6 flipInY animated-long">
+						<div class="grid-img">
+							<span class="iconfont iconline-folder"></span>
+						</div>
+						<label class="grid-label">文档</label>
+					</div>
+					<div class="grid-cell grid7 flipInY animated-long">
+						<div class="grid-img">
+							<span class="iconfont iconline-chart-pie"></span>
+						</div>
+						<label class="grid-label">数据分析</label>
+					</div>
+					<div class="grid-cell grid8 flipInY animated-long">
+						<div class="grid-img">
+							<span class="iconfont iconline-list"></span>
+						</div>
+						<label class="grid-label">更多</label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div id="content-container" class="fadeInUp animated">
+	        	<ul class="listitem">
+	        		<li class="noclick">
+			        	<i class="icon iconfont iconline-media-volume1"></i>
+			            <div class="text" style="color:#aaa">通知公告</div>
+			        </li>
+			        <li>
+			            <div class="img square">
+			            	<i class="iconfont iconline-uid"></i>
+			            </div>
+			        	<div class="text">
+			              	国庆节放假通知
+			                <small class="nowrap ellipsis">各位同事好：请大家在国庆节放假前将手机、平板归还至戎娟华处，端午节后再重新领取。</small>
+			            </div>
+			        </li>
+			        <li>
+			            <div class="img square">
+			            	<i class="square-icon iconfont iconline-uid"></i>
+			            </div>
+			        	<div class="text">
+			              	国庆节放假通知
+			                <small class="nowrap ellipsis">各位同事好：请大家在国庆节放假前将手机、平板归还至戎娟华处，端午节后再重新领取。</small>
+			            </div>
+			        </li>
+			        <li>
+			            <div class="img square">
+			            	<i class="square-icon iconfont iconline-uid"></i>
+			            </div>
+			        	<div class="text">
+			              	国庆节放假通知
+			                <small class="nowrap ellipsis">各位同事好：请大家在国庆节放假前将手机、平板归还至戎娟华处，端午节后再重新领取。</small>
+			            </div>
+			        </li>
+	        	</ul>
+			</div>
+	    </div>
+	    </article>
+	</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+</body>
+</html>

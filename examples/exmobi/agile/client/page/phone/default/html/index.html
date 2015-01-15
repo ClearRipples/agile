@@ -23,7 +23,7 @@
 	    </header>
 	
 	    <div class="bar bar-footer">
-	      	<a class="icon icon-compose pull-right" href="${$native.app.getAppSetting().domain}/process/notify/agile/mail_interface_section?to=hn@126.com" data-target="section"></a>
+	      	<a class="icon icon-compose pull-right" href="${$native.app.getAppSetting().domain}/process/notify/${ClientUtil.getAppId()}/mail_interface_section?to=hn@126.com" data-target="section"></a>
 	      	<small class="updated-text">有话要说</small>
 	    </div>
         <article class="active" data-scroll="true">
@@ -189,7 +189,7 @@ document.addEventListener("plusready", function() {
 	});
 	/*
 	$util.form({
-		url : '${$native.app.getAppSetting().domain}/process/notify/agile/section/json',
+		url : '${$native.app.getAppSetting().domain}/process/notify/${ClientUtil.getAppId()}/section/json',
 		type : 'post',
 		fileElementId : '',//fileElementId : [],//多个文件时
 		data : 'username=huangnan',

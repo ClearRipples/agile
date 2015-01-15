@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>框形表单</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+<link rel="stylesheet" href="../../script/flat/css/iconform.css">
+</head>
+<body>
+<div id="section_container">
+<section id="index_section" class="active" data-transition="slideDown">
+	<header>
+	    <div class="titlebar">
+	    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+	    	<h1>普通表单</h1>
+	    </div>
+	</header>
+	
+	<article class="active" data-scroll="true" style="top:44px;bottom:0px;">
+	<div class="scroller">
+		<form autocomplete="off" oninput="range_output.value=parseInt(range.value)" class="form-common">
+			<label class="label-left" for="user">用户名</label>
+			<label class="label-right">
+		    	<input id="user" type="text" placeholder="请输入英文数字下滑线" pattern="^[a-zA-z][a-zA-Z0-9_]{2,9}$" title="英文数字下滑线" required/>
+		    </label>
+		    <hr/>
+			<label class="label-left" for="email">邮箱</label>
+			<label class="label-right">
+		    	<input id="email" type="email" placeholder="请输入邮箱" autocomplete="on" required/>
+		    </label>
+		    <hr/>
+		    
+		   	<label class="label-left" style="height:40px;">接收推送</label>
+		   	<label class="label-right" style="height:40px;">
+		    	<div class="toggle" data-on="是" data-on-value="1" data-off="否" data-off-value="0" style="margin-top:4px;"></div>
+		    </label>
+		    <hr/>
+		    <label class="label-left" for="age">年龄</label>
+		    <div class="label-right">
+		    	<input id="age" type="number"/>
+		    </div>
+		    <hr/>
+		    <label class="label-left">爱好</label>
+		    <label class="label-right">
+		    	<a href="#" data-role="checkbox">
+		    		<input type="checkbox" id="baskball"/>
+		  			<label for="baskball" class="black">篮球</label>
+		  		</a>
+		  		<a href="#" data-role="checkbox">
+		  			<input type="checkbox" id="football"/>
+		  			<label for="football" class="black">足球</label>
+		  		</a>
+		  		<a href="#" data-role="checkbox">
+		    		<input type="checkbox" id="pingpang"/>
+		  			<label for="pingpang" class="black">乒乓球</label>
+		  		</a>
+		  		<a href="#" data-role="checkbox">
+		  			<input type="checkbox" id="badminton"/>
+		  			<label for="badminton" class="black">羽毛球</label>
+		  		</a>
+		    </label>
+		    <hr/>
+		   <label class="label-left">性别</label>
+		    <label class="label-right">
+		    	<a href="#" data-role="radio">
+		    		<input type="radio" name="sex" id="male" style="left:0;right:auto;"/>
+		  			<label for="male" class="black">男</label>
+		  		</a>
+		  		<a href="#" data-role="radio">
+		  			<input type="radio" name="sex" id="female" style="left:0;right:auto;"/>
+		  			<label for="female" class="black">女</label>
+		  		</a>
+		    </label>
+		    <hr/>
+		    <label class="label-left" for="phone" style="height:80px;">手机</label>
+		    <div style="height:80px;" class="label-right">
+			    <input id="phone" type="number" value="13066889988" onBlur="jQuery('#phone_output').val(jQuery('#phone').mobileISP())"/>
+			    <output for="phone" id="phone_output">此手机号码为移动号</output>
+		    </div>
+		    <hr/>
+		    
+		    <label class="label-left" for="date">时间</label>
+		    <div data-role="time" class="label-right">
+		  		<label>请选择时间</label>
+		  		<input type="hidden"/>
+		  	</div>
+		    <hr/>
+		    
+		    <label class="label-left">扫描</label>
+		    <div data-role="barcode" class="label-right">
+		  		<label>请扫描条形码</label>
+		  		<input type="hidden"/>
+		  	</div>
+		    <hr/>
+		    
+		    <label class="label-left">日期</label>
+		    <div data-role="date" class="label-right">
+		  		<label>请选择日期</label>
+		  		<input type="hidden"/>
+		  	</div>
+		    <hr/>
+		    
+		    <!-- <label class="label-left" for="week">h5周</label>
+		    <label class="label-right">
+		    	<input id="week" type="week" placeholder="h5请选择周"/>
+		    </label>
+		    <hr/>
+		    <label class="label-left" for="url">个人主页</label>
+		    <label class="label-right">
+		    	<input id="url" type="url" placeholder="请输入个人网页" list="url_list"/>
+		    </label>
+		    <datalist id="url_list">
+		        <option label="W3School" value="http://www.w3school.com.cn" />
+		        <option label="Google" value="http://www.google.com" />
+		        <option label="Microsoft" value="http://www.microsoft.com" />
+		    </datalist>
+		    <hr/>
+		    <label class="label-left" for="month">h5月</label>
+		    <label class="label-right">
+		    	<input id="month" type="month" placeholder="h5请选择月"/>
+		    </label>
+		    <hr/>
+		    <label class="label-left" for="date">h5日期</label>
+		    <label class="label-right">
+		    	<input id="date" type="date" min="2014-09-14" placeholder="h5请选择日期"/>
+		    </label>
+		    <hr/>
+		    <label class="label-left" for="time">h5时间</label>
+		    <label class="label-right">
+		    	<input id="time" type="time" placeholder="h5请选择时间"/>
+		    </label>
+		    <hr/>
+		    <label class="label-left" for="datetime">h5日期时间</label>
+		    <label class="label-right">
+		    	<input id="datetime" type="datetime-local" placeholder="h5请选择日期时间"/>
+		    </label>
+		    <hr/>
+		    <label class="label-left" for="search">h5搜索</label>
+		    <label class="label-right">
+		    	<input id="search" type="search" placeholder="h5请输入搜索内容"/>
+		    </label>
+		    <hr/>
+		    <label class="label-left" for="color">h5颜色</label>
+		    <label class="label-right">
+		    	<input id="color" type="color"/>
+		    </label> -->
+		    <hr/>
+		</form>
+		
+		<div class="card noborder">
+			<button class="submit width-full">提交</button>
+		</div>
+	</div>
+	</article>
+</section>
+</div>
+<!-- UI界面 -->
+<script type="text/javascript" src="../../script/flat/js/jquery.js"></script>
+<script type="text/javascript" src="../../script/flat/js/h5.base.js"></script>
+<script>
+$.noConflict();
+jQuery(document).ready(function($){
+	$("#phone_output").val($("#phone").mobileISP());
+	$("#email").addEmailHelp([{domain: '@nj.fiberhome.com.cn', label: '烽火邮箱'},{domain: '@baidu.com', label: '百度邮箱'}]);
+});
+</script>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+</body>
+</html>

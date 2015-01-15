@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>首页</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+<link rel="stylesheet" href="../../script/flat/css/animate.css">
+<style>
+  	.top-banner {
+    		background-image:url('../../script/flat/image/main/banner-top.jpg');
+    		height:100px;
+    		-webkit-background-size: cover;
+		    -moz-background-size: cover;
+		    -o-background-size: cover;
+		    background-size: cover;
+		    position:relative;
+    	}
+    	.user-info {
+    		position:absolute;
+    		bottom:-45px;
+    		left:25px;
+    	}
+    	.user-img {
+    		border:3px #ffffff solid;
+    		border-radius:50px;
+    		height:90px;
+    		width:90px;
+    		-webkit-background-size: cover;
+		    background-size: cover;
+    		overflow:hidden;
+    		-webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+			box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+			float:left;
+			margin-right:10px;
+    	}
+    	.user-img img {
+    		height:90px;
+    		width:90px;
+    	}
+    	.user-name {
+    		font-size:20px;
+    		color:#ffffff;
+    		line-height:50px;
+    	}
+    	.user-detail {
+    		font-size:14px;
+    	}
+    	.v-grid {
+    		border-left:1px solid #cccccc;
+    		margin:40px 0 0 70px ;
+    		padding:10px 0;
+    	}
+    	.grid-cell{
+    		position:relative;
+    		width:100%;
+    		margin:0px 0 20px 0;
+    	}
+    	.grid-cell .dot{
+    		height:10px;
+    		width:10px;
+    		border-radius:10px;
+    		position:absolute;
+    		left:-5px;
+    		top:25px;
+    	}
+    	.grid-cell:active .grid-icon {
+    		opacity:0.7;
+    	}
+    	.grid-icon {
+    		border-radius:50px;
+			width:65px;
+			height:65px;
+			position:relative;
+			text-align:center;
+			color:#ffffff;
+			float:left;
+			margin:0 10px 0 30px;
+    	}
+    	.grid-icon span {
+    		line-height:70px;
+    	}
+    	.grid-icon .tip {
+    		position:absolute;
+    		right:-3px;
+    		top:-3px;
+    		border-radius:30px;
+    		color:#ffffff;
+    		width:20px;
+    		height:20px;
+    		line-height:20px;
+    		text-align:center;
+    	}
+    	.grid-name {
+    		float:left;
+    		margin-top:10px;
+    		text-align:left;
+    	}
+    	.grid-name .large-text {
+    		font-size:20px;
+    		color:#aaaaaa;
+    	}
+    	.grid-name .small-text {
+    		font-size:14px;
+    		color:#cccccc;
+    	}
+    	#grid1{
+    		-webkit-animation-delay:600ms;
+			-ms-animation-delay:600ms;
+			animation-delay:600ms;
+    	}
+    	#grid2{
+    		-webkit-animation-delay:700ms;
+			-ms-animation-delay:700ms;
+			animation-delay:700ms;
+    	}
+    	#grid3{
+    		-webkit-animation-delay:800ms;
+			-ms-animation-delay:800ms;
+			animation-delay:800ms;
+    	}
+    	#grid4{
+    		-webkit-animation-delay:900ms;
+			-ms-animation-delay:900ms;
+			animation-delay:900ms;
+    	}
+    	#grid5{
+    		-webkit-animation-delay:1000ms;
+			-ms-animation-delay:1000ms;
+			animation-delay:1000ms;
+    	}
+    	#grid6{
+    		-webkit-animation-delay:1100ms;
+			-ms-animation-delay:1100ms;
+			animation-delay:1100ms;
+    	}
+</style>
+</head>
+<body>
+
+<div id="section_container">
+	<section id="animate" class="active">
+	   <header>
+		    <div class="titlebar">
+		    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+		    	<h1>主页</h1>
+		    </div>
+		</header>
+	    <article class="active" data-scroll="true" style="top:44px;bottom:0px">
+	    <div class="scroller">
+	    	<div class="top-banner">
+		    	<div class="user-info">
+		    		<div class="user-img rollIn animated" style="background-image:url('../../script/flat/image/main/user-pic.jpg')">
+		    		</div>
+		    		<div class="fadeInRight animated" style="float:left;">
+			    		<div class="user-name">
+			    			张三
+			    		</div>
+			    		<div class="user-detail">
+			    			业务产品部  - UED
+			    		</div>
+		    		</div>
+		    	</div>
+		    </div>
+		    <div class="v-grid animated fadeInUp" id="grid_container">
+		    	<div class="grid-cell animated fadeInRight" id="grid1">
+		    		<div class="dot bg-peter-river" style="background-color:red;"></div>
+		    		<div class="grid-icon bg-peter-river">
+						<span class="iconline-mail" style="font-size:30px;"></span>
+						<span class="tip bg-pomegranate">8</span>
+					</div>
+					<div class="grid-name animated fadeInRight">
+						<label class="large-text">邮件</label>
+						<br />
+						<label class="small-text">E-mail</label>
+					</div>
+					<div class="clearfix"></div>
+		    	</div>
+		    	<div class="grid-cell animated fadeInRight" id="grid2">
+		    		<div class="dot bg-orange"></div>
+		    		<div class="grid-icon bg-orange">
+						<span class="iconline-notebook" style="font-size:30px;"></span>
+					</div>
+					<div class="grid-name animated fadeInRight">
+						<label class="large-text">通讯录</label>
+						<br />
+						<label class="small-text">Contacts</label>
+					</div>
+					<div class="clearfix"></div>
+		    	</div>
+		    	<div class="grid-cell animated fadeInRight" id="grid3">
+		    		<div class="dot bg-turquoise"></div>
+		    		<div class="grid-icon bg-turquoise">
+						<span class="iconline-file" style="font-size:30px;"></span>
+						<span class="tip bg-pomegranate">18</span>
+					</div>
+					<div class="grid-name">
+						<label class="large-text">公文审批</label>
+						<br />
+						<label class="small-text">Document Approval</label>
+					</div>
+					<div class="clearfix"></div>
+		    	</div>
+		    	<div class="grid-cell animated fadeInRight" id="grid4">
+		    		<div class="dot bg-alizarin"></div>
+		    		<div class="grid-icon bg-alizarin">
+						<span class="iconline-map-location" style="font-size:30px;"></span>
+					</div>
+					<div class="grid-name">
+						<label class="large-text">地图定位</label>
+						<br />
+						<label class="small-text">Location</label>
+					</div>
+					<div class="clearfix"></div>
+		    	</div>
+		    	<div class="grid-cell animated fadeInRight" id="grid5">
+		    		<div class="dot bg-emerland"></div>
+		    		<div class="grid-icon bg-emerland">
+						<span class="iconline-setting" style="font-size:30px;"></span>
+					</div>
+					<div class="grid-name">
+						<label class="large-text">设置</label>
+						<br />
+						<label class="small-text">Settings</label>
+					</div>
+					<div class="clearfix"></div>
+		    	</div>
+		    	<div class="grid-cell animated fadeInRight" id="grid6">
+		    		<div class="dot bg-wisteria"></div>
+		    		<div class="grid-icon bg-wisteria">
+						<span class="iconline-chart-pie" style="font-size:30px;"></span>
+					</div>
+					<div class="grid-name">
+						<label class="large-text">数据分析</label>
+						<br />
+						<label class="small-text">Statistics</label>
+					</div>
+					<div class="clearfix"></div>
+		    	</div>
+		    	<div class="clearfix"></div>
+		    </div>
+	    </div>
+	    </article>
+	</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+
+<!-- UI界面 -->
+<script type="text/javascript" src="../../script/flat/js/jquery.js"></script>
+<script type="text/javascript" src="../../script/flat/js/h5.base.js"></script>
+
+<script>
+function setGridHeight(){
+	var cHeight = $(window).height();
+    var headerHeight = $("header").height();
+    var bannerHeight = $(".top-banner").height();
+    var gridContainerHeight = cHeight - headerHeight - bannerHeight - 42;
+    $("#grid_container").css("min-height" , gridContainerHeight);
+}
+setGridHeight();
+</script>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>列表</title>
+<style>
+	[class^="topic"]{
+		position:fixed;
+		color:white;
+		width:100%;
+		height:80px;
+		opacity:1;
+		top:40%;
+	}
+	.topic-forward{
+		-webkit-animation:animate-topic 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	.topic-backward{
+		-webkit-animation:animate-topic-back 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	.title{
+		position:absolute;top:0;font-size:40px;text-align:center;width:100%;
+	}
+	[class^="subtitle"]{
+		position:absolute;bottom:0;font-size:14px;text-align:center;width:100%;opacity:0;
+	}
+	.subtitle-forward{
+		opacity:0;
+		-webkit-animation:animate-show 0.5s;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	.subtitle-backward{
+		opacity:1;
+		-webkit-animation:animate-hide 0.5s;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	
+	[class^="rdohtml"],[class^="rdocss"],[class^="rdojs"]{
+		position:absolute;
+		width:150px;
+		height:150px;
+		border-radius:150px;
+		line-height:150px;
+		text-align:center;
+		color:white;
+		font-size:30px;
+	}
+	[class^="rdohtml"]{
+		background-color:rgba(255,173,229,.7);
+		top:0;
+		left:0;
+		display:none;
+	}
+	[class^="rdocss"]{
+		background-color:rgba(184,255,74,.7);
+		top:0;right:0;
+		display:none;
+	}
+	[class^="rdojs"]{
+		background-color:rgba(54,205,255,.7);
+		left:50%;
+		-webkit-transform:translateX(-50%);
+		bottom:0;
+		display:none;
+	}
+	.rdohtml-forward{
+		display:block;
+		top:-400px;
+		left:-400px;
+		-webkit-animation:animate-html 0.5s;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	.rdohtml-backward{
+		display:block;
+		top:0;
+		left:0;
+		-webkit-animation:animate-html-back 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	.rdocss-forward{
+		display:block;
+		top:-400px;
+		right:-400px;
+		-webkit-animation:animate-css 0.5s;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	.rdocss-backward{
+		display:block;
+		top:0;
+		right:0;
+		-webkit-animation:animate-css-back 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	.rdojs-forward{
+		display:block;
+		bottom:-400px;
+		-webkit-animation:animate-js 0.5s;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	.rdojs-backward{
+		display:block;
+		bottom:0px;
+		-webkit-animation:animate-js-back 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	@-webkit-keyframes animate-topic
+	{
+		from {top:40%}
+		to {top:10%}
+	}
+	@-webkit-keyframes animate-topic-back
+	{
+		from {top:10%}
+		to {top:40%}
+	}
+	.animate-show{
+		-webkit-animation:animate-show 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	@-webkit-keyframes animate-show
+	{
+		from {opacity:0;}
+		to {opacity:1;}
+	}
+	.animate-hide{
+		-webkit-animation:animate-hide 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	@-webkit-keyframes animate-hide
+	{
+		from {opacity:1;}
+		to {opacity:0;}
+	}
+	
+	@-webkit-keyframes animate-html{
+		from {top:-400px;left:-400px;}
+		to {top:0;left:0;}
+	}
+	@-webkit-keyframes animate-html-back{
+		from {top:0;left:0;}
+		to {top:-400px;left:-400px;}
+	}
+	
+	@-webkit-keyframes animate-css{
+		from {top:-400px;right:-400px;}
+		to {top:0;right:0;}
+	}
+	@-webkit-keyframes animate-css-back{
+		from {top:0;right:0;}
+		to {top:-400px;right:-400px;}
+	}
+	
+	@-webkit-keyframes animate-js{
+		from {bottom:-400px;}
+		to {bottom:0;}
+	}
+	@-webkit-keyframes animate-js-back{
+		from {bottom:0;}
+		to {bottom:-400px;}
+	}
+	/*第二波动画*/
+	[class^="plug"]{
+		position:absolute;
+		display:none;
+	}
+	[class^="plugchat"]{
+		width:32px;
+		top:0;
+		left:124px;
+	}
+	.plugchat-forward{
+		display:block;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plugfile"]{
+		width:30px;
+		top:20px;
+		left:64px;
+	}
+	.plugfile-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plugreadmark"]{
+		width:40px;
+		top:20px;
+		right:20%;
+	}
+	.plugreadmark-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plugtel"]{
+		width:32px;
+		top:60px;
+		left:42px;
+	}
+	.plugtel-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plughome"]{
+		width:50px;
+		top:55px;
+		left:120px;
+	}
+	.plughome-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plugfriends"]{
+		width:28px;
+		top:50px;
+		right:0px;
+	}
+	.plugfriends-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plugalbum"]{
+		width:36px;
+		top:94px;
+		left:76px;
+	}
+	.plugalbum-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plugposition"]{
+		width:32px;
+		top:98px;
+		right:66px;
+	}
+	.plugposition-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plugcomments"]{
+		width:24px;
+		top:124px;
+		left:0;
+	}
+	.plugcomments-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plugearth"]{
+		width:32px;
+		top:144px;
+		left:24px;
+	}
+	.plugearth-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plugmessage"]{
+		width:32px;
+		top:130px;
+		left:124px;
+	}
+	.plugmessage-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plugimg"]{
+		width:36px;
+		top:140px;
+		right:24px;
+	}
+	.plugimg-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plugshare"]{
+		width:32px;
+		top:174px;
+		left:70px;
+	}
+	.plugshare-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	[class^="plugsearch"]{
+		width:40px;
+		top:184px;
+		right:90px;
+	}
+	.plugsearch-forward{
+		display:block;
+		-webkit-animation-delay:0.5s;
+		-webkit-animation:animate-scaleout 0.5s;
+		-webkit-animation-fill-mode:forwards;
+	}
+	@-webkit-keyframes animate-scaleout{
+		from {display:block;-webkit-transform:scale(0,0);}
+		to {-webkit-transform:scale(1,1);}
+	}
+</style>
+</head>
+<body style="padding:0;margin:0;background-color:#3498db;">
+	<div class="topic" id="topic">
+		<div class="title">Flat UI</div>
+		<div class="subtitle" id="subtitle">它是基于html | css | js轻量级webapp</div>
+		<div class="subtitle" id="subtitle2">组件齐全可扩展</div>
+	</div>
+	<!-- 三圆 -->
+	<div style="position:fixed;top:35%;left:50%;-webkit-transform:translateX(-50%);width:280px;height:250px;">
+		<div class="rdohtml" id="rdohtml">
+			HTML
+		</div>
+		<div class="rdocss" id="rdocss">
+			CSS
+		</div>
+		<div class="rdojs" id="rdojs">
+			JS
+		</div>
+	</div>
+	<!-- 丰富的组件 -->
+	<div style="position:fixed;top:35%;left:50%;-webkit-transform:translateX(-50%);width:280px;height:250px;" id="plugin">
+		<img src="../../script/flat/image/welcome/chat.png" class="plugchat" id="plugchat"/>
+		<img src="../../script/flat/image/welcome/file.png" class="plugfile" id="plugfile"/>
+		<img src="../../script/flat/image/welcome/readmark.png" class="plugreadmark" id="plugreadmark"/>
+		<img src="../../script/flat/image/welcome/tel.png" class="plugtel" id="plugtel"/>
+		<img src="../../script/flat/image/welcome/home.png" class="plughome" id="plughome"/>
+		<img src="../../script/flat/image/welcome/friends.png" class="plugfriends" id="plugfriends"/>
+		<img src="../../script/flat/image/welcome/album.png" class="plugalbum" id="plugalbum"/>
+		<img src="../../script/flat/image/welcome/position.png" class="plugposition" id="plugposition"/>
+		<img src="../../script/flat/image/welcome/comments.png" class="plugcomments" id="plugcomments"/>
+		<img src="../../script/flat/image/welcome/earth.png" class="plugearth" id="plugearth"/>
+		<img src="../../script/flat/image/welcome/message.png" class="plugmessage" id="plugmessage"/>
+		<img src="../../script/flat/image/welcome/img.png" class="plugimg" id="plugimg"/>
+		<img src="../../script/flat/image/welcome/share.png" class="plugshare" id="plugshare"/>
+		<img src="../../script/flat/image/welcome/search.png" class="plugsearch" id="plugsearch"/>
+	</div>
+	<div style="position:fixed;bottom:3%;left:50%;-webkit-transform:translatyX(-50%)" id="down"><img src="../../script/flat/image/welcome/down.png" style="width:24px;"/></div>
+	<!-- 我们致力于用户体验 -->
+	<div style="position:fixed;color:white;width:100%;text-align:center;top:10%;font-size:14px;opacity:0;" id="topic3">我们致力于用户体验</div>
+	<img style="position:fixed;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);width:180px;opacity:0;" src="../../script/flat/image/welcome/phone.png" id="phone"/>
+	<img src="../../script/flat/image/welcome/pull.png" style="position:fixed;bottom:0;left:50%;-webkit-transform:translateX(-50%);width:30px;opacity:0;" id="pull"/>
+	
+	<div style="position:fixed;bottom:0;">
+		<button onclick="oneanimateBackward()">1返回</button>
+		<button onclick="oneanimate()">1</button>
+		<button onclick="twoanimate()">2</button>
+		<button onclick="threeanimate()">3</button>
+	</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+<!-- UI界面 -->
+<script type="text/javascript" src="../../script/flat/js/jquery.js"></script>
+<script type="text/javascript" src="../../script/flat/js/h5.base.js"></script>
+<script>
+function oneanimateBackward(){
+	$('#topic').replaceClassTo("topic-backward");
+	$('#subtitle').replaceClassTo("subtitle-backward");
+	$('#rdohtml').replaceClassTo("rdohtml-backward");
+	$('#rdocss').replaceClassTo("rdocss-backward");
+	$('#rdojs').replaceClassTo("rdojs-backward");
+}
+function oneanimate(){
+	$('#subtitle2').addClass("animate-hide");
+	$('#plugin').hide();
+	
+	$('#topic').replaceClassTo("topic-forward");
+	$('#subtitle').replaceClassTo("subtitle-forward");
+	$('#rdohtml').replaceClassTo("rdohtml-forward");
+	$('#rdocss').replaceClassTo("rdocss-forward");
+	$('#rdojs').replaceClassTo("rdojs-forward");
+}
+function twoanimate(){
+	$('#phone').replaceClassTo("animate-hide");
+	$('#pull').replaceClassTo("animate-hide");
+	$('#topic3').replaceClassTo("animate-hide");
+	
+	$('#topic').show();
+	$('#plugin').show();
+	$('#down').show();
+	
+	$('#subtitle').addClass("animate-hide");
+	$('#rdohtml').addClass("animate-hide");
+	$('#rdocss').addClass("animate-hide");
+	$('#rdojs').addClass("animate-hide");
+	$('#subtitle2').replaceClassTo("subtitle-forward");
+	
+	$('#plugchat').replaceClassTo("plugchat-forward");
+	$('#plughome').replaceClassTo("plughome-forward");
+	$('#plugfile').replaceClassTo("plugfile-forward");
+	$('#plugreadmark').replaceClassTo("plugreadmark-forward");
+	$('#plugtel').replaceClassTo("plugtel-forward");
+	$('#plugfriends').replaceClassTo("plugfriends-forward");
+	$('#plugalbum').replaceClassTo("plugalbum-forward");
+	$('#plugposition').replaceClassTo("plugposition-forward");
+	$('#plugcomments').replaceClassTo("plugcomments-forward");
+	$('#plugearth').replaceClassTo("plugearth-forward");
+	$('#plugmessage').replaceClassTo("plugmessage-forward");
+	$('#plugimg').replaceClassTo("plugimg-forward");
+	$('#plugshare').replaceClassTo("plugshare-forward");
+	$('#plugsearch').replaceClassTo("plugsearch-forward");
+}
+function threeanimate(){
+	$('#topic').hide();
+	$('#plugin').hide();
+	$('#down').hide();
+	
+	$('#phone').replaceClassTo("animate-show");
+	$('#pull').replaceClassTo("animate-show");
+	$('#topic3').replaceClassTo("animate-show");
+}
+</script>
+</body>
+</html>

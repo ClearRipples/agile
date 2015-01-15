@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="../../script/flat/css/welcome.css">
+<title>列表</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+<style>
+	
+</style>
+</head>
+<body>
+<div id="section_container">
+	<section id="section_welcome" class="active">
+	   <header>
+		    <div class="titlebar">
+		    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+		    	<h1>上下滚动欢迎</h1>
+		    </div>
+		</header>
+	    <article id="banner_article" class="active" data-scroll="true" style="top:44px;bottom:0px">
+	    <div class="scroller">
+		    <!-- 可清除内容-start -->
+			<div class="box box-center box-middle" style="height:100px;width:100%;color:#ddd;font-size:16px;" id="content">
+				<span class="iconfont iconline-book" style="font-size:40px;"></span>
+				<br/>
+				<span style="margin-top:8px;">内容</span>
+			</div>
+			<!-- 可清除内容-end -->
+	    </div>
+	    </article>
+	</section>
+</div>
+<div style="padding:0;margin:0;position:fixed;left:0;top:0;background-color:#3498db;height:100%;width:100%;z-index:100;" id="welcome">
+	<div class="topic" id="topic">
+		<div class="welcome-title">Flat UI</div>
+		<div class="subtitle" id="subtitle">它是基于html | css | js轻量级webapp</div>
+	</div>
+	<!-- 三圆 -->
+	<div style="position:fixed;top:35%;left:50%;-webkit-transform:translateX(-50%);width:280px;height:250px;">
+		<div class="rdohtml" id="rdohtml">
+			HTML
+		</div>
+		<div class="rdocss" id="rdocss">
+			CSS
+		</div>
+		<div class="rdojs" id="rdojs">
+			JS
+		</div>
+	</div>
+	<!-- 丰富的组件 -->
+	<div class="topic2" id="topic2">
+		<div class="welcome-title">Flat UI</div>
+		<div class="subtitle" id="subtitle2" style="opacity:1;">组件齐全可扩展</div>
+	</div>
+	<div class="boxplug" id="boxplug">
+		<img src="../../script/flat/image/welcome/chat.png" class="plugchat" id="plugchat"/>
+		<img src="../../script/flat/image/welcome/file.png" class="plugfile" id="plugfile"/>
+		<img src="../../script/flat/image/welcome/readmark.png" class="plugreadmark" id="plugreadmark"/>
+		<img src="../../script/flat/image/welcome/tel.png" class="plugtel" id="plugtel"/>
+		<img src="../../script/flat/image/welcome/home.png" class="plughome" id="plughome"/>
+		<img src="../../script/flat/image/welcome/friends.png" class="plugfriends" id="plugfriends"/>
+		<img src="../../script/flat/image/welcome/album.png" class="plugalbum" id="plugalbum"/>
+		<img src="../../script/flat/image/welcome/position.png" class="plugposition" id="plugposition"/>
+		<img src="../../script/flat/image/welcome/comments.png" class="plugcomments" id="plugcomments"/>
+		<img src="../../script/flat/image/welcome/earth.png" class="plugearth" id="plugearth"/>
+		<img src="../../script/flat/image/welcome/message.png" class="plugmessage" id="plugmessage"/>
+		<img src="../../script/flat/image/welcome/img.png" class="plugimg" id="plugimg"/>
+		<img src="../../script/flat/image/welcome/share.png" class="plugshare" id="plugshare"/>
+		<img src="../../script/flat/image/welcome/search.png" class="plugsearch" id="plugsearch"/>
+	</div>
+	<div style="position:fixed;bottom:3%;left:50%;-webkit-transform:translate(-50%)" id="down"><img src="../../script/flat/image/welcome/down.png" style="width:24px;"/></div>
+	<!-- 我们致力于用户体验 -->
+	<div class="topic3" id="topic3">我们致力于用户体验</div>
+	<img class="pull" src="../../script/flat/image/welcome/phone.png" id="phone"/>
+	<img src="../../script/flat/image/welcome/pull.png" class="pull" id="pull"/>
+	
+	<div style="position:fixed;bottom:0;">
+		<input type="hidden" id="txt-up" value="oneanimate"/>
+		<input type="hidden" id="txt-down"/>
+	</div>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+
+<!-- UI界面 -->
+<script type="text/javascript" src="../../script/flat/js/jquery.js"></script>
+<script type="text/javascript" src="../../script/flat/js/h5.base.js"></script>
+
+<script>
+function oneanimateBackward(){
+	$('#topic').replaceClassTo("topic-backward");
+	$('#subtitle').replaceClassTo("subtitle-backward");
+	$('#rdohtml').replaceClassTo("rdohtml-backward");
+	$('#rdocss').replaceClassTo("rdocss-backward");
+	$('#rdojs').replaceClassTo("rdojs-backward");
+	
+	$('#txt-up').val('oneanimate');
+	$('#txt-down').val('oneanimateBackward');
+}
+function oneanimate(){
+	//从2跳回来，或者从1跳过来
+	if($('#boxplug').attr("class")=="boxplug-forward"||$('#boxplug').attr("class")=="boxplug-down"){
+		$('#boxplug').replaceClassTo("boxplug-backward");
+		$('#topic2').replaceClassTo("topic2-backward");
+		$('#topic').replaceClassTo("topic-down");
+		initplugs();
+	}else{
+		$('#topic').replaceClassTo("topic-forward");
+		$('#subtitle').replaceClassTo("subtitle-forward");
+	}
+	
+	//加载圆
+	$('#rdohtml').replaceClassTo("rdohtml-forward");
+	$('#rdocss').replaceClassTo("rdocss-forward");
+	$('#rdojs').replaceClassTo("rdojs-forward");
+	
+	$('#txt-up').val('twoanimate');
+	$('#txt-down').val('oneanimateBackward');
+	
+}
+function twoanimate(){
+	//从3跳回来
+	if($('#phone').attr("class")=="phone-forward"){
+		$('#down').replaceClassTo("animate-show");
+		$('#phone').replaceClassTo("phone-backward");
+		$('#pull').replaceClassTo("pull-backward");
+		$('#topic3').replaceClassTo("topic3-backward");
+		
+		$('#topic2').replaceClassTo("topic-down");
+		$('#boxplug').replaceClassTo("boxplug-down");
+		plugsload();
+	}
+	//从2跳过来
+	if($('#rdohtml').attr("class")=="rdohtml-forward"){
+		$('#rdohtml').replaceClassTo("rdohtml-backward");
+		$('#rdocss').replaceClassTo("rdocss-backward");
+		$('#rdojs').replaceClassTo("rdojs-backward");
+		$('#topic').replaceClassTo("topic-up");
+		$('#topic2').replaceClassTo("topic2-forward");
+		$('#boxplug').replaceClassTo("boxplug-forward");
+		plugsload();
+	}
+	$('#txt-up').val('threeanimate');
+	$('#txt-down').val('oneanimate');
+}
+function plugsload(){
+	$('#plugchat').replaceClassTo("plugchat-forward");
+	$('#plughome').replaceClassTo("plughome-forward");
+	$('#plugfile').replaceClassTo("plugfile-forward");
+	$('#plugreadmark').replaceClassTo("plugreadmark-forward");
+	$('#plugtel').replaceClassTo("plugtel-forward");
+	$('#plugfriends').replaceClassTo("plugfriends-forward");
+	$('#plugalbum').replaceClassTo("plugalbum-forward");
+	$('#plugposition').replaceClassTo("plugposition-forward");
+	$('#plugcomments').replaceClassTo("plugcomments-forward");
+	$('#plugearth').replaceClassTo("plugearth-forward");
+	$('#plugmessage').replaceClassTo("plugmessage-forward");
+	$('#plugimg').replaceClassTo("plugimg-forward");
+	$('#plugshare').replaceClassTo("plugshare-forward");
+	$('#plugsearch').replaceClassTo("plugsearch-forward");
+}
+function initplugs(){
+	$('#plugchat').replaceClassTo("plugchat");
+	$('#plughome').replaceClassTo("plughome");
+	$('#plugfile').replaceClassTo("plugfile");
+	$('#plugreadmark').replaceClassTo("plugreadmark");
+	$('#plugtel').replaceClassTo("plugtel");
+	$('#plugfriends').replaceClassTo("plugfriends");
+	$('#plugalbum').replaceClassTo("plugalbum");
+	$('#plugposition').replaceClassTo("plugposition");
+	$('#plugcomments').replaceClassTo("plugcomments");
+	$('#plugearth').replaceClassTo("plugearth");
+	$('#plugmessage').replaceClassTo("plugmessage");
+	$('#plugimg').replaceClassTo("plugimg");
+	$('#plugshare').replaceClassTo("plugshare");
+	$('#plugsearch').replaceClassTo("plugsearch");
+}
+function threeanimate(){
+	initplugs();
+	$('#topic2').replaceClassTo("topic-up");
+	$('#boxplug').replaceClassTo("boxplug-up");
+	$('#down').replaceClassTo("animate-hide");
+	
+	$('#phone').replaceClassTo("phone-forward");
+	$('#pull').replaceClassTo("pull-forward");
+	$('#topic3').replaceClassTo("topic3-forward");
+	
+	$('#txt-up').val('closewelcome');
+	$('#txt-down').val('twoanimate');
+}
+
+$("#welcome").swipeToUp({fun:swipeToUp});
+$("#welcome").swipeToDown({fun:swipeToDown});
+function swipeToUp(){
+	var upStr=$('#txt-up').val().toString();
+	$phone.runFunction(eval(upStr));
+}
+function swipeToDown(){
+	var downStr=$('#txt-down').val().toString();
+	$phone.runFunction(eval(downStr));
+}
+function closewelcome(){
+	$('#welcome').animate({top:'-100%'},500);
+	setTimeout(function(){$('#welcome').css("display","none")},500);
+}
+$("#welcome").mouseToUp({fun:swipeToUp});
+$("#welcome").mouseToDown({fun:swipeToDown});
+function mouseToUp(){
+    var upStr=$('#txt-up').val().toString();
+    $phone.runFunction(eval(upStr));
+}
+function mouseToDown(){
+    var downStr=$('#txt-down').val().toString();
+    $phone.runFunction(eval(downStr));
+}
+
+document.addEventListener('plusready',function(){$("#content").css("height",$phone.bodyHeight()+"px")},false);
+</script>
+</body>
+</html>

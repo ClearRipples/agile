@@ -40,7 +40,7 @@ var m = Math,
     hasTransform = vendor !== false,
     hasTransitionEnd = prefixStyle('transition') in dummyStyle,
 
-	RESIZE_EV = 'onorientationchange' in window ? 'orientationchange' : 'resize',
+	RESIZE_EV = 'resize',//'onorientationchange' in window ? 'orientationchange' : 'resize',//ex:修复android orientationchange和resize的时间差
 	START_EV = hasTouch ? 'touchstart' : 'mousedown',
 	MOVE_EV = hasTouch ? 'touchmove' : 'mousemove',
 	END_EV = hasTouch ? 'touchend' : 'mouseup',
@@ -139,7 +139,8 @@ var m = Math,
 			onDestroy: null,
 			onZoomStart: null,
 			onZoom: null,
-			onZoomEnd: null
+			onZoomEnd: null,
+			onRefreshEnd: null //ex:refresh结束后执行的函数
 		};
 
 		// User defined options
@@ -582,9 +583,11 @@ iScroll.prototype = {
 							if (that.options.preventGhostClick) { //preventGhostClick: true,
 								// prevent ghost real clicks on body
 								document.body.addEventListener('click', that._preventRealClick, true);
+								document.body.addEventListener('tap', that._preventRealClick, true);
 								// until ghost click timeout expires
 								setTimeout(function () {
 									document.body.removeEventListener('click', that._preventRealClick, true);
+									document.body.removeEventListener('tap', that._preventRealClick, true);
 								}, that.options.ghostClickTimeout);
 							}
 							
@@ -1002,6 +1005,8 @@ iScroll.prototype = {
 			that.scroller.style[transitionDuration] = '0';
 			that._resetPos(400);
 		}
+		
+		if (that.options.onRefreshEnd) that.options.onRefreshEnd.call(that);//ex:refreshend事件触发
 	},
 
 	scrollTo: function (x, y, time, relative) {

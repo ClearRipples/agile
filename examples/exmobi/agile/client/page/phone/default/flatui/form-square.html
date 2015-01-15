@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>框形表单</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+<link rel="stylesheet" href="../../script/flat/css/iconform.css">
+</head>
+<body>
+<div id="section_container">
+<section id="index_section" class="active" data-transition="slideDown">
+	<header>
+	    <div class="titlebar">
+	    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+	    	<h1>框形表单</h1>
+	    </div>
+	</header>
+	
+	<article class="active" data-scroll="true" style="top:44px;bottom:0px;">
+	<div class="scroller">
+		<form autocomplete="off" oninput="range_output.value=parseInt(range.value)" class="form-square">
+			<label class="label-left" for="user">正则</label>
+			<label class="label-right">
+		    	<input id="user" type="text" pattern="^[a-zA-z][a-zA-Z0-9_]{2,9}$" title="英文数字下滑线" required/>
+		    </label>
+		
+			<label class="label-left" for="email">邮箱</label>
+			<label class="label-right">
+		    	<input id="email" type="email" placeholder="邮箱" autocomplete="on" required/>
+		    </label>
+		    
+		    <label class="label-left" style="height:80px;">爱好</label>
+		    <label class="label-right" style="height:80px;">
+		    	<a href="#" data-role="checkbox">
+		    		<input type="checkbox" id="baskball"/>
+		  			<label for="baskball" class="black">篮球</label>
+		  		</a>
+		  		<a href="#" data-role="checkbox">
+		  			<input type="checkbox" id="football"/>
+		  			<label for="football" class="black">足球</label>
+		  		</a>
+		  		<a href="#" data-role="checkbox">
+		    		<input type="checkbox" id="pingpang"/>
+		  			<label for="pingpang" class="black">乒乓球</label>
+		  		</a>
+		  		<a href="#" data-role="checkbox">
+		  			<input type="checkbox" id="badminton"/>
+		  			<label for="badminton" class="black">羽毛球</label>
+		  		</a>
+		    </label>
+		    
+		    
+		    <label class="label-left" for="number">数字</label>
+		    <label class="label-right">
+		    	<input id="number" type="number" min="0" max="120" step="1" value="20"/>
+		    </label>
+		    
+		    <label class="label-left" for="phone">手机</label>
+		    <label class="label-right">
+		    	<input id="phone" type="number" value="13066889988" onBlur="jQuery('#phone_output').val(jQuery('#phone').mobileISP())"/>
+		    </label>
+		    
+		    <label class="label-left hint"></label>
+		    <label class="label-right">
+		    	<output for="phone" id="phone_output">此手机号为移动号</output>
+		    </label>
+		    
+		    <label class="label-left" for="date">时间</label>
+		    <div data-role="time" class="label-right">
+		  		<label>请选择时间</label>
+		  		<input type="hidden"/>
+		  	</div>
+		    
+		    <label class="label-left" for="date">扫描</label>
+		    <div data-role="barcode" class="label-right">
+		  		<label>请扫描条形码</label>
+		  		<input type="hidden"/>
+		  	</div>
+		    
+		    <label class="label-left" for="date">日期</label>
+		    <div data-role="date" class="label-right">
+		  		<label>请选择日期</label>
+		  		<input type="hidden"/>
+		  	</div>
+		    
+		    <!-- <label class="label-left" for="week">h5周</label>
+		    <label class="label-right">
+		    	<input id="week" type="week"/>
+		    </label>
+		    
+		    <label class="label-left" for="url">链接</label>
+		    <label class="label-right">
+		    	<input id="url" type="url" list="url_list"/>
+		    </label>
+		    
+		    <datalist id="url_list">
+		        <option label="W3School" value="http://www.w3school.com.cn" />
+		        <option label="Google" value="http://www.google.com" />
+		        <option label="Microsoft" value="http://www.microsoft.com" />
+		    </datalist>
+		    
+		    <label class="label-left" for="range">范围</label>
+		    <label class="label-right">
+		    	<input id="range" type="range" value="0" step="20" style="width:80%;vertical-align:middle;"/><output for="range" id="range_output" style="width:20%;text-align:center;display:inline-block;">0</output>
+		    </label>
+		    
+		    <label class="label-left" for="month">h5月</label>
+		    <label class="label-right">
+		    	<input id="month" type="month"/>
+		    </label>
+		    
+		    <label class="label-left" for="date">h5日期</label>
+		    <label class="label-right">
+		    	<input id="date" type="date" min="2014-09-14"/>
+		    </label>
+		    
+		    <label class="label-left" for="time">h5时间</label>
+		    <label class="label-right">
+		    	<input id="time" type="time"/>
+		    </label>
+		    
+		    <label class="label-left" for="datetime">h5日期时间</label>
+		    <label class="label-right">
+		    	<input id="datetime" type="datetime-local"/>
+		    </label>
+		    
+		    <label class="label-left" for="search">搜索</label>
+		    <label class="label-right">
+		    	<input id="search" type="search"/>
+		    </label>
+		    
+		    <label class="label-left" for="color">颜色</label>
+		    <label class="label-right">
+		    	<input id="color" type="color"/>
+		    </label> -->
+		    <div class="clearfix"></div>
+		</form>
+		
+		<div class="card noborder">
+			<button class="submit width-full">提交</button>
+		</div>
+	</div>
+	</article>
+</section>
+</div>
+<!-- UI界面 -->
+<script type="text/javascript" src="../../script/flat/js/jquery.js"></script>
+<script type="text/javascript" src="../../script/flat/js/h5.base.js"></script>
+<script>
+$.noConflict();
+jQuery(document).ready(function($){
+	$("#phone_output").val($("#phone").mobileISP());
+	$("#email").addEmailHelp([{domain: '@nj.fiberhome.com.cn', label: '烽火邮箱'},{domain: '@baidu.com', label: '百度邮箱'}]);
+});
+</script>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+</body>
+</html>

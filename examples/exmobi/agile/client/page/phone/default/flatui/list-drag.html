@@ -1,0 +1,71 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+<title>列表</title>
+<link rel="stylesheet" href="../../script/flat/css/flat.css">
+<link rel="stylesheet" href="../../script/flat/css/iconline.css">
+
+</head>
+<body>
+<div id="section_container">
+<section id="index_section" class="active" data-transition="slideDown">
+	<header>
+	    <div class="titlebar">
+	    	<a data-target="close" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+	    	<h1>刷新列表</h1>
+	    </div>
+	</header>
+	
+	<article id="down_article" class="active" style="top:44px;bottom:0px;" data-articleload="showUp()">
+	<div class="scroller">
+		<ul class="listitem" id="pull_ul">
+	        <li>标题标题标题标题<small>副标题副标题副标题副标题副标题副标题副标题副标题副标题副标题</small></li>
+	        <li>标题标题标题标题<small>副标题副标题副标题副标题副标题副标题副标题副标题副标题副标题</small></li>
+	        <li>标题标题标题标题<small>副标题副标题副标题副标题副标题副标题副标题副标题副标题副标题</small></li>
+	        <li>标题标题标题标题<small>副标题副标题副标题副标题副标题副标题副标题副标题副标题副标题</small></li>
+	        <li>标题标题标题标题<small>副标题副标题副标题副标题副标题副标题副标题副标题副标题副标题</small></li>
+	        <li>标题标题标题标题<small>副标题副标题副标题副标题副标题副标题副标题副标题副标题副标题</small></li>
+	        <li>标题标题标题标题<small>副标题副标题副标题副标题副标题副标题副标题副标题副标题副标题</small></li>
+	        <li>标题标题标题标题<small>副标题副标题副标题副标题副标题副标题副标题副标题副标题副标题</small></li>
+	        <li>标题标题标题标题<small>副标题副标题副标题副标题副标题副标题副标题副标题副标题副标题</small></li>
+	        <li>标题标题标题标题<small>副标题副标题副标题副标题副标题副标题副标题副标题副标题副标题</small></li>
+	    </ul>
+	</div>
+	</article>
+</section>
+</div>
+<!--- exmobijs --->
+<script type="text/javascript" src="../../script/exmobijs/bridge.js"></script>
+<!-- agile -->
+<script type="text/javascript" src="../../script/agile/js/zepto.js"></script>
+<script type="text/javascript" src="../../script/agile/js/iscroll.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.js"></script>
+<script type="text/javascript" src="../../script/agile/js/agile.exmobi.js"></script>
+<script type="text/javascript" src="../../script/agile/js/touch2mouse.js"></script>
+<script type="text/javascript" src="../../script/agile/js/template-native.js"></script>
+<script type="text/javascript" src="../../script/app/app.js"></script>
+<script>
+var li = '<li>新数据<small>新数据新数据新数据</small></li>';
+
+function showUp(){	
+	A.Refresh({
+        selector : '#down_article',
+        type : 'pullDown',
+        refreshTip : '<span id="refresh_time" class="sliver">更新于：从未更新</span>',
+        callback : function(){
+            var scroll = this;
+            setTimeout(function () {
+                $('#pull_ul').append(li);
+                $('#refresh_time').html('更新于：'+A.Util.formatDate(new Date(),'MM-dd hh:mm'));
+                scroll.refresh();
+                $native.toast('更新成功');
+            }, 2000);
+        }
+    });
+
+}
+</script>
+</body>
+</html>
